@@ -31,7 +31,27 @@ class Contact():
     def __init__(self, name, last_name):
         self.name = name
         self.last_name = last_name
+
+class Field: # Mega parent
+    """
+    Można się teraz odnieść do settera za pomocą @Field.value.setter.
+    Należy tylko do klasy dziedziczącej (child) w nawiasie nazwę klasy przekazującej (parent).
+    Np. class Name(Field):
+    """
+    def __init__(self, input_value = None):
+        self.value = input_value
+
+    @property # makes life so much easier
+    def value(self):
+        return self.internal_value
     
+    @value.setter # Można się odwwołaać do tego settera w swojej klasie za pomocą @Field.value.setter i zrobić overide.
+    def value(self, input_value):
+        self.internal_value = input_value
+
+class Name():
+    pass
+
 class Phone():
     pass
 
