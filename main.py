@@ -70,8 +70,3 @@ if __name__ == '__main__':
     main()
 
 
-
-
-
-# my comment
-# my comment2
