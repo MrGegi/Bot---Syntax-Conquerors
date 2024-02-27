@@ -24,13 +24,14 @@ class AddressBook(UserDict):
     def __init__(self):
         self.contacts = {}
 
-    def add_contact(self, name, last_name):
-        address_book.contacts[name + ' ' + last_name] = Contact(name, last_name)
+    def add_contact(self, name, last_name, phone_number):
+        address_book.contacts[name + ' ' + last_name] = Contact(name, last_name, phone_number)
 
 class Contact():
-    def __init__(self, name, last_name):
+    def __init__(self, name, last_name, phone_number):
         self.name = name
         self.last_name = last_name
+        self.phone_number = phone_number
 
 class Field: # Mega parent
     """
