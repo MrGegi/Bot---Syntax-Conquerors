@@ -1,21 +1,59 @@
 # Bot - Syntax Conquerors
 
+# OPERATIONS = {
+#     'accepted_commands':accepted_commands,
+#     'hello': hello,
+#     'create_contact': create_contact,
+#     'add_phone': add_phone,
+#     'change_phone_num': change_phone_num,
+#     'show_contact': show_contact,
+#     'delete_phone': delete_phone,
+#     'set_birthday' : set_birthday,
+#     'days_to_birthday': days_to_birthday,
+#     'iterator': iterator,
+#     'show_all': show_all,
+#     'find_contact' : find_contact,
+#     'good_bye': end_program, 
+#     'close': end_program, 
+#     'exit': end_program, 
+#     '.': end_program, 
+# }
+
 class AddressBook():
+    pass
 
 class Contact():
+    pass
     
 class Name():
-class Phone():
-class Address():
-class Email():
-class Birthday():
+    pass
 
+class Phone():
+    pass
+
+class Address():
+    pass
+
+class Email():
+    pass
+
+class Birthday():
+    pass
 
 class Notebook():
+    pass
     
 class Note():
-class Tag():
+    pass
 
+class Tag():
+    pass
+
+def changelog():
+    """
+    Need somewhere to keep up with the changes.
+    """
+    pass
 
 def documentation():
     """Function Description
@@ -35,21 +73,3 @@ if __name__ == '__main__':
 
 
 
-# OPERATIONS = {
-#     'accepted_commands':accepted_commands,
-#     'hello': hello,
-#     'create_contact': create_contact,
-#     'add_phone': add_phone,
-#     'change_phone_num': change_phone_num,
-#     'show_contact': show_contact,
-#     'delete_phone': delete_phone,
-#     'set_birthday' : set_birthday,
-#     'days_to_birthday': days_to_birthday,
-#     'iterator': iterator,
-#     'show_all': show_all,
-#     'find_contact' : find_contact,
-#     'good_bye': end_program, 
-#     'close': end_program, 
-#     'exit': end_program, 
-#     '.': end_program, 
-# }
