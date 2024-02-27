@@ -1,3 +1,4 @@
+from collections import UserDict
 # Bot - Syntax Conquerors
 
 # OPERATIONS = {
@@ -19,15 +20,18 @@
 #     '.': end_program, 
 # }
 
-class AddressBook():
-    pass
+class AddressBook(UserDict):
+    def __init__(self):
+        self.contacts = {}
+
+    def add_contact(self, name, last_name):
+        address_book.contacts[name + ' ' + last_name] = Contact(name, last_name)
 
 class Contact():
-    pass
+    def __init__(self, name, last_name):
+        self.name = name
+        self.last_name = last_name
     
-class Name():
-    pass
-
 class Phone():
     pass
 
@@ -49,6 +53,13 @@ class Note():
 class Tag():
     pass
 
+
+
+address_book = AddressBook()
+
+
+
+
 def changelog():
     """
     Need somewhere to keep up with the changes.
@@ -65,6 +76,7 @@ def documentation():
 
 def main():
     print('')
+    
 
 if __name__ == '__main__':
     main()
