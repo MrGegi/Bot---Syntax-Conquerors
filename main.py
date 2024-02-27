@@ -52,8 +52,27 @@ class Field: # Mega parent
 class Name():
     pass
 
-class Phone():
-    pass
+class Phone(Field):
+    @Field.value.setter
+    def value(self, input_value: str):
+        if input_value and not self._validate_phone_format(input_value):
+            raise ValueError("Błędny format numeru telefonu. Powinien być w formie XXX-XXX-XXX.")
+        self.internal_value = input_value
+
+    def _validate_phone_format(self, phone_number: str) -> bool:
+        # Sprawdzenie, czy długość numeru telefonu wynosi 11 znaków (wliczając myślniki)
+        if len(phone_number) != 11:
+            return False
+        
+        # Sprawdzenie, czy znaki na odpowiednich pozycjach są cyframi
+        if not (phone_number[0:3].isdigit() and phone_number[4:7].isdigit() and phone_number[8:].isdigit()):
+            return False
+        
+        # Sprawdzenie, czy myślniki znajdują się na właściwych pozycjach
+        if phone_number[3] != '-' or phone_number[7] != '-':
+            return False
+        
+        return True
 
 class Address():
     pass
