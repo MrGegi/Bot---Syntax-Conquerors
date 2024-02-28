@@ -89,6 +89,19 @@ class Note():
 class Tag():
     pass
 
+def input_error(func):
+    """
+    Use as decorator @input_error before function to gracefully handle raised exceptions.
+    By default, if the raised error is unknown it will gracefully return last __traceback__ line number, exception type and it's string.
+    """
+    def gracefull_error_handling(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as raised_exception:
+            line_number = (lambda traceback: traceback.tb_lineno if not traceback.tb_next else traceback.tb_next.tb_lineno)(raised_exception.__traceback__)
+            return f"Unhandled exception >> Line:{line_number} Type:{type(raised_exception).__name__} Str:{str(raised_exception)}"
+    return gracefull_error_handling
+
 def input_error():
     return
 
