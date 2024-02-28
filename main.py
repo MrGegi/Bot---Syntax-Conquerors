@@ -29,8 +29,8 @@ class AddressBook(UserDict):
 
 class Contact():
     def __init__(self, name, last_name):
-        self.name = name
-        self.last_name = last_name
+        self.name = Name(name)
+        self.last_name = Name(last_name)
 
 class Field: # Parent
     """
@@ -78,23 +78,30 @@ class Note():
 class Tag():
     pass
 
+address_book = AddressBook()
 def changelog():
     """
     Need somewhere to keep up with the changes.
     """
     pass
 
-def documentation():
-    """Function Description
-    Lets keep documenation up to date.
-    """
-    my_code = 0 # remember to comment important parts of your code
-    return 'good luck and have fun'
+def test_contacts():  
+    """Function fills up addres book with random contacts for debugging purposes"""
 
-address_book = AddressBook()
+    random_contacts = [
+        {'name': 'Zbyszek', 'last name': 'Kowalski', 'phone': '606505404', 'email': 'zbyszek.kowalski@gmail.com', 'birthday': '20 5 1990'},
+        {'name': 'Rychu', 'last name': 'Nowak', 'phone': '546859652', 'email': 'rychu.nowak@gmail.com', 'birthday': '10 11 1995'}
+        ]
+    
+    for person in random_contacts: # add random contacts to
+        address_book.add_contact(person['name'], person['last name'])
+    
+    for contact_name in address_book.contacts:
+        print(f'Name: {address_book.contacts[contact_name].name.value}')
+        print(f'Last Name: {address_book.contacts[contact_name].last_name.value}')
 
 def main():
-    print('')
-    
+    test_contacts()    
+
 if __name__ == '__main__':
     main()
