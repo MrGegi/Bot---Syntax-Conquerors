@@ -68,7 +68,7 @@ class Birthday:
         self.month = month
         self.year = year
 
-    def wishing(self, name):
+    def birthday(self, name):
         today = datetime.now()
         current_day = today.day
         current_month = today.month
