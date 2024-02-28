@@ -73,13 +73,6 @@ class Note():
 class Tag():
     pass
 
-
-
-address_book = AddressBook()
-
-
-
-
 def changelog():
     """
     Need somewhere to keep up with the changes.
@@ -93,6 +86,7 @@ def documentation():
     my_code = 0 # remember to comment important parts of your code
     return 'good luck and have fun'
 
+address_book = AddressBook()
 
 def main():
     print('')
