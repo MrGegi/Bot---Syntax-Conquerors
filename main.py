@@ -33,7 +33,7 @@ class Contact():
         self.last_name = last_name
         self.phone_number = phone_number
 
-class Field: # Mega parent
+class Field(): # Mega parent
     """
     Można się teraz odnieść do settera za pomocą @Field.value.setter.
     Należy tylko do klasy dziedziczącej (child) w nawiasie nazwę klasy przekazującej (parent).
@@ -93,13 +93,6 @@ class Note():
 class Tag():
     pass
 
-
-
-address_book = AddressBook()
-
-
-
-
 def changelog():
     """
     Need somewhere to keep up with the changes.
@@ -113,12 +106,10 @@ def documentation():
     my_code = 0 # remember to comment important parts of your code
     return 'good luck and have fun'
 
+address_book = AddressBook()
 
 def main():
     print('')
     
-
 if __name__ == '__main__':
     main()
-
-
