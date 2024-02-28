@@ -127,9 +127,6 @@ def input_error(func):
             return f"Unhandled exception >> Line:{line_number} Type:{type(raised_exception).__name__} Str:{str(raised_exception)}"
     return gracefull_error_handling
 
-def input_error():
-    return
-
 def changelog():
     """
     Need somewhere to keep up with the changes.
@@ -162,7 +159,7 @@ def test_contacts(address_book: AddressBook):
         {'name': 'Piotr', 'last name': 'Kowalczyk', 'phone': '506499840', 'email': 'piotr.kowalczyk@outlook.com', 'birthday': '16 5 1962'}
         ]
     
-    for person in random_contacts: # add random contacts to
+    for person in random_contacts:
         address_book.add_contact(person['name'], person['last name'])
     
     for contact_name in address_book.contacts:
