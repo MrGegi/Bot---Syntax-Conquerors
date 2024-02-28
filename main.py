@@ -24,21 +24,15 @@ class AddressBook(UserDict):
     def __init__(self):
         self.contacts = {}
 
-    def add_contact(self, name, last_name):
-        address_book.contacts[name + ' ' + last_name] = Contact(name, last_name)
-        
-    def add_phone(self, name, last_name, number):
-        if name + ' ' + last_name in self.contacts:
-            self.contacts[name + ' ' + last_name].add_phone(number)
+    def add_contact(self, name, last_name, phone):
+        address_book.contacts[name + ' ' + last_name] = Contact(name, last_name, phone)
+
             
 class Contact():
-    def __init__(self, name, last_name):
+    def __init__(self, name, last_name, phone):
         self.name = Name(name)
         self.last_name = Name(last_name)
-        self.phones = []
-    
-    def add_phone(self, number):
-        self.phones.append(Phone(number))
+        self.phone = Phone(phone)
 
 class Field(): # Mega parent
     """
@@ -65,6 +59,8 @@ class Phone(Field):
     def value(self, number):
         if not number.strip().isdigit():
             raise ValueError("Numer telefonu musi składać się tylko z cyfr.")
+        if len(number) != 9:
+            raise ValueError("Numer telefonu musi składać się z 9 cyfr.")
         self.internal_value = number
 
 class Address():
@@ -101,17 +97,14 @@ def test_contacts():
     
     for person in random_contacts: # add random contacts to
         address_book.add_contact(person['name'], person['last name'])
-        address_book.add_phone(person['name'], person['last name'], person['phone'])
+        
 
-    for contact_name, contact in address_book.contacts.items():
+    for contact in address_book.contacts.items():
         print(f'Name: {contact.name.value}')
         print(f'Last Name: {contact.last_name.value}')
-        print('Phone numbers:')
-        for phone in contact.phones:
-            print(f' - {phone.value}')
 
 def main():
-    test_contacts()    
+    
 
 if __name__ == '__main__':
     main()
