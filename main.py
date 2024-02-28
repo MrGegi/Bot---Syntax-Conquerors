@@ -49,8 +49,13 @@ class Field(): # Mega parent
     def value(self, input_value):
         self.internal_value = input_value
 
-class Name():
-    pass
+class Name(Field): # Przykład jak można użyć dekoratora @property do wprowadzenia warunków do settera dla Name.
+    
+    @Field.value.setter
+    def value (self, name):
+        if not name:
+            raise ValueError("class_Name-def_value:name_cannot_be_empty") # Ta wiadomość idzie do @input_error Jeśli funkcja handler używa tego gettera do wysłania wartości do obiektu.
+        self.internal_value = name
 
 class Phone():
     pass
@@ -86,17 +91,24 @@ def changelog():
     """
     pass
 
-def documentation():
-    """Function Description
-    Lets keep documenation up to date.
-    """
-    my_code = 0 # remember to comment important parts of your code
-    return 'good luck and have fun'
 
+def test_contacts():  
+    """Function fills up addres book with random contacts for debugging purposes"""
+
+    random_contacts = [
+        {'name': 'Zbyszek', 'last name': 'Kowalski', 'phone': '606505404', 'email': 'zbyszek.kowalski@gmail.com', 'birthday': '20 5 1990'},
+        {'name': 'Rychu', 'last name': 'Nowak', 'phone': '546859652', 'email': 'rychu.nowak@gmail.com', 'birthday': '10 11 1995'}
+        ]
+    
+    for person in random_contacts: # add random contacts to
+        address_book.add_contact(person['name'], person['last name'])
+    
+    for contact_name in address_book.contacts:
+        print(f'Name: {address_book.contacts[contact_name].name.value}')
+        print(f'Last Name: {address_book.contacts[contact_name].last_name.value}')
 
 def main():
-    print('')
-    
+    test_contacts()    
 
 if __name__ == '__main__':
     main()
