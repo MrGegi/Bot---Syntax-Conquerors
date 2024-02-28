@@ -30,10 +30,10 @@ class AddressBook(UserDict):
 
 class Contact():
     def __init__(self, name, last_name):
-        self.name = name
-        self.last_name = last_name
+        self.name = Name(name)
+        self.last_name = Name(last_name)
 
-class Field: # Mega parent
+class Field: # Parent
     """
     Można się teraz odnieść do settera za pomocą @Field.value.setter.
     Należy tylko do klasy dziedziczącej (child) w nawiasie nazwę klasy przekazującej (parent).
@@ -42,13 +42,21 @@ class Field: # Mega parent
     def __init__(self, input_value = None):
         self.value = input_value
 
-    @property # makes life so much easier
+    @property # # Dzieki temu możesz używać dodatkowych funkcj dekoratora klasy takich jak .setter ponizej. Dlatego - makes life so much easier :)
     def value(self):
         return self.internal_value
     
     @value.setter # Można się odwwołaać do tego settera w swojej klasie za pomocą @Field.value.setter i zrobić overide.
     def value(self, input_value):
         self.internal_value = input_value
+
+class Name(Field): # Przykład jak można użyć dekoratora @property do wprowadzenia warunków do settera dla Name.
+    
+    @Field.value.setter
+    def value (self, name):
+        if not name:
+            raise ValueError("class_Name-def_value:name_cannot_be_empty") # Ta wiadomość idzie do @input_error Jeśli funkcja handler używa tego gettera do wysłania wartości do obiektu.
+        self.internal_value = name
 
 class Phone():
     pass
@@ -92,32 +100,30 @@ class Note():
 class Tag():
     pass
 
-
-
 address_book = AddressBook()
-
-
-
-
 def changelog():
     """
     Need somewhere to keep up with the changes.
     """
     pass
 
-def documentation():
-    """Function Description
-    Lets keep documenation up to date.
-    """
-    my_code = 0 # remember to comment important parts of your code
-    return 'good luck and have fun'
+def test_contacts():  
+    """Function fills up addres book with random contacts for debugging purposes"""
 
+    random_contacts = [
+        {'name': 'Zbyszek', 'last name': 'Kowalski', 'phone': '606505404', 'email': 'zbyszek.kowalski@gmail.com', 'birthday': '20 5 1990'},
+        {'name': 'Rychu', 'last name': 'Nowak', 'phone': '546859652', 'email': 'rychu.nowak@gmail.com', 'birthday': '10 11 1995'}
+        ]
+    
+    for person in random_contacts: # add random contacts to
+        address_book.add_contact(person['name'], person['last name'])
+    
+    for contact_name in address_book.contacts:
+        print(f'Name: {address_book.contacts[contact_name].name.value}')
+        print(f'Last Name: {address_book.contacts[contact_name].last_name.value}')
 
 def main():
-    print('')
-    
+    test_contacts()    
 
 if __name__ == '__main__':
     main()
-
-
