@@ -1,4 +1,5 @@
 from collections import UserDict
+import Levenshtein as l
 # Bot - Syntax Conquerors
 
 
@@ -149,8 +150,37 @@ OPERATIONS = {
 def handler_command(base_command=None, command=None, address_book = address_book):
     return OPERATIONS[base_command](command, address_book)
 
-def main():
-    test_contacts()   
+
+def parse_command(command):
+    commands = ["read", "write", "update", "delete"]
+    if command in commands:
+        return f"executing {command}..."
+    distances = [
+        (l.distance(c, command), c)
+        for c in commands
+    ]
+    pair = sorted(distances)[0]
+    potential_command = pair[1]
+    return f"{command} is not recognized, did you mean {potential_command}?"
+
+
+def get_handler(base_command, command, address_book):
+    handler = handler_command(base_command, command, address_book)
+    if isinstance(handler, str): # jeżeli chcemy wyświetlić wynik działania funkcji, których wynik działania funkcji powinien być w str (np. show_contact)
+        print(handler)
+    else: # wywołanie funkcji, które nie wyświetlają output (np. add_phone)
+        handler
+
+def levenshtein_method(base_command, command):
+    distances = [
+                (l.distance(command, base_command), command)
+                for command in OPERATIONS.keys()
+                ]
+    closest_command_with_distance = sorted(distances)[0]
+    potential_command = closest_command_with_distance[1]
+    print(f"{command} is not recognized, did you mean {potential_command}?")
+
+def input_parser():
     print(accepted_commands(OPERATIONS, address_book))
     while True:
         command = input('Write your command: ').lower().strip().split()
@@ -159,13 +189,16 @@ def main():
         except IndexError('Error, main(), not writted command'):
             continue
 
-        handler = handler_command(base_command, command, address_book)
-        if isinstance(handler, str): # jeżeli chcemy wyświetlić wynik działania funkcji, których wynik działania funkcji powinien być w str (np. show_contact)
-            print(handler)
-        else: # wywołanie funkcji, które nie wyświetlają output (np. add_phone)
-            handler
- 
+        if base_command in OPERATIONS.keys():
+            get_handler(base_command, command, address_book)
 
+        else:
+            levenshtein_method(base_command, command)
+
+def main():
+    test_contacts()   
+    input_parser()
+ 
 if __name__ == '__main__':
     main()
 
