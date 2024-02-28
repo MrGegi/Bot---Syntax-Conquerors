@@ -81,11 +81,12 @@ class Email(Field):
         result = re.findall(patern_email,email)
 
         if result != []:
-            end_text = print('Adress mail has correct format.')
+            end_text = 'Adress mail has correct format.'
             self.__name  = email
         else:
-            end_text = print("Wrong mail format!")
+            end_text = "Wrong mail format!"
         print(end_text)
+        # print(result)
         return
 
 class Birthday():
