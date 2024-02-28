@@ -64,7 +64,7 @@ class Email():
 
 class Birthday:
     def __init__(self, birthday):
-        self.birthday = birthday
+        self.birthday = date(int(year_of_birth), int(month_of_birth), int(day_of_birth))
 
     def wishing(self, name):
         today = date.today()
