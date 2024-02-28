@@ -32,7 +32,7 @@ class Contact():
         self.name = Name(name)
         self.last_name = Name(last_name)
 
-class Field(): # Mega parent
+class Field: # Parent
     """
     Można się teraz odnieść do settera za pomocą @Field.value.setter.
     Należy tylko do klasy dziedziczącej (child) w nawiasie nazwę klasy przekazującej (parent).
@@ -41,7 +41,7 @@ class Field(): # Mega parent
     def __init__(self, input_value = None):
         self.value = input_value
 
-    @property # makes life so much easier
+    @property # # Dzieki temu możesz używać dodatkowych funkcj dekoratora klasy takich jak .setter ponizej. Dlatego - makes life so much easier :)
     def value(self):
         return self.internal_value
     
@@ -78,19 +78,12 @@ class Note():
 class Tag():
     pass
 
-
-
 address_book = AddressBook()
-
-
-
-
 def changelog():
     """
     Need somewhere to keep up with the changes.
     """
     pass
-
 
 def test_contacts():  
     """Function fills up addres book with random contacts for debugging purposes"""
@@ -112,5 +105,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
