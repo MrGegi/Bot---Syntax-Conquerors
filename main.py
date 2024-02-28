@@ -55,8 +55,10 @@ class Phone():
 class Address():
     pass
 
-class Email():
-    pass
+class Email(Field):
+    def __init__(self, input_value,email):
+        super().__init__(input_value)
+        self.email = email
 
 class Birthday():
     pass
