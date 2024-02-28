@@ -20,8 +20,6 @@ from collections import UserDict
 #     '.': end_program, 
 # }
 
-# tes
-
 class AddressBook(UserDict):
     def __init__(self):
         self.contacts = {}
