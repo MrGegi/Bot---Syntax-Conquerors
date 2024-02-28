@@ -29,8 +29,8 @@ class AddressBook(UserDict):
 
 class Contact():
     def __init__(self, name, last_name):
-        self.name = name
-        self.last_name = last_name
+        self.name = Name(name)
+        self.last_name = Name(last_name)
 
 class Field(): # Mega parent
     """
