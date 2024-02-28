@@ -63,30 +63,27 @@ class Email():
     pass
 
 class Birthday:
-    def __init__(self, day, month, year):
-        self.day = day
-        self.month = month
-        self.year = year
+    def __init__(self, birthday):
+        self.birthday = birthday
 
-    def birthday(self, name):
-        today = datetime.now()
-        current_day = today.day
-        current_month = today.month
+    def wishing(self, name):
+        today = date.today()
         current_year = today.year
 
-        age = today.year - self.year
+        age = current_year - self.birthday.year
 
-        next_birthday = datetime(current_year, self.month, self.day)
+        next_birthday = date(current_year, self.birthday.month, self.birthday.day)
 
         if next_birthday < today:
-            next_birthday = datetime(current_year + 1, self.month, self.day)
+            next_birthday = date(current_year + 1, self.birthday.month, self.birthday.day)
 
         time_delta = next_birthday - today
 
-        if current_day == self.day and current_month == self.month:
-            return(f"{name}, wszystkiego najlepszego z okazji {age} urodzin!")
+        if today == self.birthday:
+            return f"{name}, wszystkiego najlepszego z okazji {age} urodzin!"
         else:
-            return(f"Twoje urodziny są za {time_delta.days} dni.")
+            return f"Twoje urodziny są za {time_delta.days} dni."
+
 
 class Notebook():
     pass
