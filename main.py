@@ -1,25 +1,7 @@
 from collections import UserDict
 import re
+import Levenshtein as l
 # Bot - Syntax Conquerors
-
-# OPERATIONS = {
-#     'accepted_commands':accepted_commands,
-#     'hello': hello,
-#     'create_contact': create_contact,
-#     'add_phone': add_phone,
-#     'change_phone_num': change_phone_num,
-#     'show_contact': show_contact,
-#     'delete_phone': delete_phone,
-#     'set_birthday' : set_birthday,
-#     'days_to_birthday': days_to_birthday,
-#     'iterator': iterator,
-#     'show_all': show_all,
-#     'find_contact' : find_contact,
-#     'good_bye': end_program, 
-#     'close': end_program, 
-#     'exit': end_program, 
-#     '.': end_program, 
-# }
 
 class AddressBook(UserDict):
     def __init__(self):
@@ -32,6 +14,27 @@ class Contact():
     def __init__(self, name, last_name):
         self.name = Name(name)
         self.last_name = Name(last_name)
+        self.address = ''
+        self.note = ''
+
+    def add_address(self, address):
+        self.address = Address(address).value
+
+    def remove_address(self):
+        self.address = ''
+
+    def change_address(self, address):
+        self.address = Address(address).value
+
+
+    def add_notebook(self, note):
+        self.note = Notebook(note).value
+
+    def remove_notebook(self):
+        self.note = ''
+
+    def change_notebook(self, note):
+        self.note = Notebook(note).value
 
 class Field:
     """
@@ -72,8 +75,10 @@ class Name(Field):
 class Phone():
     pass
 
-class Address():
-    pass
+class Address(Field):
+    @Field.value.setter
+    def value(self, address: str):
+        self.internal_value = address
 
 class Email(Field):
     
@@ -105,14 +110,25 @@ class Email(Field):
 class Birthday():
     pass
 
-class Notebook():
-    pass
+class Notebook(Field):
+    @Field.value.setter
+    def value(self, note: str):
+        self.internal_value = note
     
 class Note():
     pass
 
 class Tag():
     pass
+
+ address_book = AddressBook()
+
+def accepted_commands(command, contacts):
+    commands = (list(OPERATIONS.keys()))
+    message = ''
+    for command in commands:
+        message += f'"{command}" '  
+    return f"Accepted commands: {message}"
 
 def input_error(func):
     """
@@ -165,10 +181,80 @@ def test_contacts(address_book: AddressBook):
     for contact_name in address_book.contacts:
         print(f'Name: {address_book.contacts[contact_name].name.value}')
         print(f'Last Name: {address_book.contacts[contact_name].last_name.value}')
+def end_program(command, address_book):
+    print('Good bye')
+    exit()
+
+OPERATIONS = {
+    'accepted_commands':accepted_commands,
+    # 'hello': hello,
+    # 'create_contact': create_contact,
+    # 'add_phone': add_phone,
+    # 'change_phone_num': change_phone_num,
+    # 'show_contact': show_contact,
+    # 'delete_phone': delete_phone,
+    # 'set_birthday' : set_birthday,
+    # 'days_to_birthday': days_to_birthday,
+    # 'iterator': iterator,
+    # 'show_all': show_all,
+    # 'find_contact' : find_contact,
+    'good_bye': end_program, 
+    'close': end_program, 
+    'exit': end_program, 
+    '.': end_program, 
+}
+
+def handler_command(base_command=None, command=None, address_book = address_book):
+    return OPERATIONS[base_command](command, address_book)
+
+
+def parse_command(command):
+    commands = ["read", "write", "update", "delete"]
+    if command in commands:
+        return f"executing {command}..."
+    distances = [
+        (l.distance(c, command), c)
+        for c in commands
+    ]
+    pair = sorted(distances)[0]
+    potential_command = pair[1]
+    return f"{command} is not recognized, did you mean {potential_command}?"
+
+
+def get_handler(base_command, command, address_book):
+    handler = handler_command(base_command, command, address_book)
+    if isinstance(handler, str): # jeżeli chcemy wyświetlić wynik działania funkcji, których wynik działania funkcji powinien być w str (np. show_contact)
+        print(handler)
+    else: # wywołanie funkcji, które nie wyświetlają output (np. add_phone)
+        handler
+
+def levenshtein_method(base_command, command):
+    distances = [
+                (l.distance(command, base_command), command)
+                for command in OPERATIONS.keys()
+                ]
+    closest_command_with_distance = sorted(distances)[0]
+    potential_command = closest_command_with_distance[1]
+    print(f"{command} is not recognized, did you mean {potential_command}?")
+
+def input_parser():
+    print(accepted_commands(OPERATIONS, address_book))
+    while True:
+        command = input('Write your command: ').lower().strip().split()
+        try:
+            base_command = command[0]
+        except IndexError('Error, main(), not writted command'):
+            continue
+
+        if base_command in OPERATIONS.keys():
+            get_handler(base_command, command, address_book)
+
+        else:
+            levenshtein_method(base_command, command)
 
 def main():
-    address_book = AddressBook()
-    test_contacts(address_book)    
-
+    test_contacts()   
+    input_parser()
+ 
 if __name__ == '__main__':
     main()
