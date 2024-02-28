@@ -32,6 +32,7 @@ class Contact():
         self.name = Name(name)
         self.last_name = Name(last_name)
         self.address = ''
+        self.note = ''
 
     def add_address(self, address):
         self.address = Address(address).value
@@ -41,6 +42,16 @@ class Contact():
 
     def change_address(self, address):
         self.address = Address(address).value
+
+
+    def add_notebook(self, note):
+        self.note = Notebook(note).value
+
+    def remove_notebook(self):
+        self.note = ''
+
+    def change_notebook(self, note):
+        self.note = Notebook(note).value
 
 class Field: # Parent
     """
@@ -81,8 +92,10 @@ class Email():
 class Birthday():
     pass
 
-class Notebook():
-    pass
+class Notebook(Field):
+    @Field.value.setter
+    def value(self, note: str):
+        self.internal_value = note
     
 class Note():
     pass
@@ -117,3 +130,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
