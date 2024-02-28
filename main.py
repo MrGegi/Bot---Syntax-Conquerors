@@ -1,24 +1,7 @@
 from collections import UserDict
 # Bot - Syntax Conquerors
 
-# OPERATIONS = {
-#     'accepted_commands':accepted_commands,
-#     'hello': hello,
-#     'create_contact': create_contact,
-#     'add_phone': add_phone,
-#     'change_phone_num': change_phone_num,
-#     'show_contact': show_contact,
-#     'delete_phone': delete_phone,
-#     'set_birthday' : set_birthday,
-#     'days_to_birthday': days_to_birthday,
-#     'iterator': iterator,
-#     'show_all': show_all,
-#     'find_contact' : find_contact,
-#     'good_bye': end_program, 
-#     'close': end_program, 
-#     'exit': end_program, 
-#     '.': end_program, 
-# }
+
 
 class AddressBook(UserDict):
     def __init__(self):
@@ -103,6 +86,21 @@ class Note():
 class Tag():
     pass
 
+def accepted_commands(command, contacts):
+    commands = (list(OPERATIONS.keys()))
+    message = ''
+    for command in commands:
+        message += f'"{command}" '  
+    return f"Accepted commands: {message}"
+
+
+
+
+
+
+
+
+
 address_book = AddressBook()
 def changelog():
     """
@@ -125,8 +123,48 @@ def test_contacts():
         print(f'Name: {address_book.contacts[contact_name].name.value}')
         print(f'Last Name: {address_book.contacts[contact_name].last_name.value}')
 
+def end_program(command, address_book):
+    print('Good bye')
+    exit()
+
+OPERATIONS = {
+    'accepted_commands':accepted_commands,
+    # 'hello': hello,
+    # 'create_contact': create_contact,
+    # 'add_phone': add_phone,
+    # 'change_phone_num': change_phone_num,
+    # 'show_contact': show_contact,
+    # 'delete_phone': delete_phone,
+    # 'set_birthday' : set_birthday,
+    # 'days_to_birthday': days_to_birthday,
+    # 'iterator': iterator,
+    # 'show_all': show_all,
+    # 'find_contact' : find_contact,
+    'good_bye': end_program, 
+    'close': end_program, 
+    'exit': end_program, 
+    '.': end_program, 
+}
+
+def handler_command(base_command=None, command=None, address_book = address_book):
+    return OPERATIONS[base_command](command, address_book)
+
 def main():
-    test_contacts()    
+    test_contacts()   
+    print(accepted_commands(OPERATIONS, address_book))
+    while True:
+        command = input('Write your command: ').lower().strip().split()
+        try:
+            base_command = command[0]
+        except IndexError('Error, main(), not writted command'):
+            continue
+
+        handler = handler_command(base_command, command, address_book)
+        if isinstance(handler, str): # jeżeli chcemy wyświetlić wynik działania funkcji, których wynik działania funkcji powinien być w str (np. show_contact)
+            print(handler)
+        else: # wywołanie funkcji, które nie wyświetlają output (np. add_phone)
+            handler
+ 
 
 if __name__ == '__main__':
     main()
