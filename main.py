@@ -76,7 +76,9 @@ class Email(Field):
     
     @email.setter
     def email(self, email):
-    # Sprawdzenie czy format maila jest prawidłowy 
+        
+        """Sprawdzenie czy format maila jest prawidłowy"""
+
         patern_email = r"^([A-Za-z0-9]+ |[A-Za-z0-9][A-Za-z0-9\.\_]+[A-Za-z0-9])@([A-Za-z0-9]+|[A-Za-z0-9\_\-]+[A-Za-z0-9])\.([a-z]{,3}|[a-z]{3}\.[a-z]{2})$"
         result = re.findall(patern_email,email)
 
