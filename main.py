@@ -53,13 +53,11 @@ class Name():
     pass
 
 class Phone(Field):
-    def __init__(self, number):
-        if not isinstance(number, (int, float)):
-            raise ValueError("Number telefonu musi być wartością numeryczną.")
-        if len(str(number)) != 9:
-            raise ValueError("Numer telefonu musi składać się z 9 cyfr.")
-        super().__init__(number)
-        self.number = number
+    @Field.value.setter
+    def value(self, number):
+        if not number.strip().isdigit():
+            raise ValueError("Numer telefonu musi składać się tylko z cyfr.")
+        self.internal_value = number
 
 class Address():
     pass
