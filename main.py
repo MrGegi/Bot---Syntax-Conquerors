@@ -97,14 +97,13 @@ def test_contacts():
     
     for person in random_contacts: # add random contacts to
         address_book.add_contact(person['name'], person['last name'])
-        
-
-    for contact in address_book.contacts.items():
-        print(f'Name: {contact.name.value}')
-        print(f'Last Name: {contact.last_name.value}')
-
-def main():
     
+    for contact_name in address_book.contacts:
+        print(f'Name: {address_book.contacts[contact_name].name.value}')
+        print(f'Last Name: {address_book.contacts[contact_name].last_name.value}')
+       
+def main():
+    test_contacts()    
 
 if __name__ == '__main__':
     main()
