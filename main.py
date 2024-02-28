@@ -32,7 +32,7 @@ class Contact():
         self.name = name
         self.last_name = last_name
 
-class Field(): # Mega parent
+class Field(): # Parent
     """
     Można się teraz odnieść do settera za pomocą @Field.value.setter.
     Należy tylko do klasy dziedziczącej (child) w nawiasie nazwę klasy przekazującej (parent).
@@ -41,13 +41,21 @@ class Field(): # Mega parent
     def __init__(self, input_value = None):
         self.value = input_value
 
-    @property # makes life so much easier
+    @property # # Dzieki temu możesz używać dodatkowych funkcj dekoratora klasy takich jak .setter ponizej. Dlatego - makes life so much easier :)
     def value(self):
         return self.internal_value
     
     @value.setter # Można się odwwołaać do tego settera w swojej klasie za pomocą @Field.value.setter i zrobić overide.
     def value(self, input_value):
         self.internal_value = input_value
+
+class Name(Field): # Przykład jak można użyć dekoratora @property do wprowadzenia warunków do settera dla Name.
+    
+    @Field.value.setter
+    def value (self, name):
+        if not name:
+            raise ValueError("class_Name-def_value:name_cannot_be_empty") # Ta wiadomość idzie do @input_error Jeśli funkcja handler używa tego gettera do wysłania wartości do obiektu.
+        self.internal_value = name
 
 class Phone():
     pass
