@@ -56,8 +56,7 @@ class Address():
     pass
 
 class Email(Field):
-    def __init__(self, input_value,email):
-        super().__init__(input_value)
+    def __init__(self,email=''):
         self.email = email
 
 class Birthday():
