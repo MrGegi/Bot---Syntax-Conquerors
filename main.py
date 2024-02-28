@@ -1,4 +1,5 @@
 from collections import UserDict
+from datetime import datetime
 # Bot - Syntax Conquerors
 
 # OPERATIONS = {
@@ -62,7 +63,30 @@ class Email():
     pass
 
 class Birthday():
-    pass
+    def __init__(self, day, month, year):
+        self.day = day
+        self.month = month
+        self.year = year
+
+    def wishing(self, name):
+        today = datetime.now()
+        current_day = today.day
+        current_month = today.month
+        current_year = today.year
+
+        age = today.year - self.year
+
+        next_birthday = datetime(current_year, self.month, self.day)
+
+        if next_birthday < today:
+            next_birthday = datetime(current_year + 1, self.month, self.day)
+
+        time_delta = next_birthday - today
+
+        if current_day == self.day and current_month == self.month:
+            print(f"{name}, wszystkiego najlepszego z okazji {age} urodzin!")
+        else:
+            print(f"Twoje urodziny są za {time_delta.days} dni.")
 
 class Notebook():
     pass
