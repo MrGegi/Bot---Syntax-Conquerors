@@ -25,14 +25,14 @@ class AddressBook(UserDict):
         self.contacts = {}
 
     def add_contact(self, name, last_name):
-        address_book.contacts[name + ' ' + last_name] = Contact(name, last_name)
+        self.contacts[name + ' ' + last_name] = Contact(name, last_name)
 
 class Contact():
     def __init__(self, name, last_name):
         self.name = Name(name)
         self.last_name = Name(last_name)
 
-class Field: # Parent
+class Field:
     """
     Można się teraz odnieść do settera za pomocą @Field.value.setter.
     Należy tylko do klasy dziedziczącej (child) w nawiasie nazwę klasy przekazującej (parent).
@@ -41,20 +41,31 @@ class Field: # Parent
     def __init__(self, input_value = None):
         self.value = input_value
 
-    @property # # Dzieki temu możesz używać dodatkowych funkcj dekoratora klasy takich jak .setter ponizej. Dlatego - makes life so much easier :)
+    @property
     def value(self):
         return self.internal_value
+    """
+    Dzieki @property można używać dodatkowych funkcj dekoratora klasy takich jak .setter ponizej.
+    """
     
-    @value.setter # Można się odwwołaać do tego settera w swojej klasie za pomocą @Field.value.setter i zrobić overide.
+    @value.setter
     def value(self, input_value):
         self.internal_value = input_value
+    """
+    Można się odwwołaać do tego settera w swojej klasie za pomocą @Field.value.setter i zrobić overide.
+    """
 
-class Name(Field): # Przykład jak można użyć dekoratora @property do wprowadzenia warunków do settera dla Name.
-    
+class Name(Field):
+    """
+    Przykład jak można użyć dekoratora @property do wprowadzenia warunków do settera dla Name.
+    """
     @Field.value.setter
     def value (self, name):
         if not name:
-            raise ValueError("class_Name-def_value:name_cannot_be_empty") # Ta wiadomość idzie do @input_error Jeśli funkcja handler używa tego gettera do wysłania wartości do obiektu.
+            raise ValueError("class_Name-def_value:name_cannot_be_empty")
+        """
+        Ta wiadomość idzie do @input_error Jeśli funkcja handler używa tego settera do wysłania wartości do obiektu.
+        """
         self.internal_value = name
 
 class Phone():
@@ -78,14 +89,16 @@ class Note():
 class Tag():
     pass
 
-address_book = AddressBook()
+def input_error():
+    return
+
 def changelog():
     """
     Need somewhere to keep up with the changes.
     """
     pass
 
-def test_contacts():  
+def test_contacts(address_book: AddressBook):  
     """Function fills up addres book with random contacts for debugging purposes"""
 
     random_contacts = [
@@ -101,7 +114,8 @@ def test_contacts():
         print(f'Last Name: {address_book.contacts[contact_name].last_name.value}')
 
 def main():
-    test_contacts()    
+    address_book = AddressBook()
+    test_contacts(address_book)    
 
 if __name__ == '__main__':
     main()
