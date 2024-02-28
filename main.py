@@ -62,7 +62,7 @@ class Address():
 class Email():
     pass
 
-class Birthday():
+class Birthday:
     def __init__(self, day, month, year):
         self.day = day
         self.month = month
@@ -84,9 +84,9 @@ class Birthday():
         time_delta = next_birthday - today
 
         if current_day == self.day and current_month == self.month:
-            print(f"{name}, wszystkiego najlepszego z okazji {age} urodzin!")
+            return(f"{name}, wszystkiego najlepszego z okazji {age} urodzin!")
         else:
-            print(f"Twoje urodziny są za {time_delta.days} dni.")
+            return(f"Twoje urodziny są za {time_delta.days} dni.")
 
 class Notebook():
     pass
