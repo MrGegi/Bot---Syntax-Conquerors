@@ -32,7 +32,7 @@ class Contact():
         self.name = name
         self.last_name = last_name
 
-class Field(): # Parent
+class Field: # Parent
     """
     Można się teraz odnieść do settera za pomocą @Field.value.setter.
     Należy tylko do klasy dziedziczącej (child) w nawiasie nazwę klasy przekazującej (parent).
