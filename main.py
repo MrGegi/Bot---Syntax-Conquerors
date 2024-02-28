@@ -49,9 +49,6 @@ class Field: # Mega parent
     def value(self, input_value):
         self.internal_value = input_value
 
-class Name():
-    pass
-
 class Phone():
     pass
 
