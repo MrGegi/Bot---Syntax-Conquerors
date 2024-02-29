@@ -196,7 +196,7 @@ def change_phone_num():
     name = input("Enter the contact's name and surename: ")
     new_phone = input("Enter the new phone number: ")
     if name in address_book.contacts:
-        address_book.contacts[name].change_phone_num(new_phone)
+        address_book.contacts[name].change_phone(new_phone)
         print(f"Phone number changed for {name}.")
     else:
         print("Contact not found.")
