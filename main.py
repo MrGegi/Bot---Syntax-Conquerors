@@ -193,7 +193,7 @@ def load_from_file():
         with open('address_book.py',"rb") as fh:
             address_book  = pickle.load(fh)
     except FileNotFoundError:
-        print('File has not been found. Now creating new adressbook')
+        print('File has not been found!')
     return address_book
 
 def end_program(command, address_book):
