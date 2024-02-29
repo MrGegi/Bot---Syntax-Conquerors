@@ -190,6 +190,14 @@ def save_to_file():
         pickle.dump(address_book, fh)
         print('File saved')
 
+def load_from_file():
+    try:
+        with open('bot_save.txt',"rb") as fh:
+            address_book  = pickle.load(fh)
+    except FileNotFoundError:
+        print('File has not been found!')
+    return address_book     
+
 def end_program():
     print('Good bye')
     save_to_file()
