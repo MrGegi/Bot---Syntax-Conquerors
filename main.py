@@ -205,7 +205,6 @@ def input_parser():
 
 def main():
     test_contacts(address_book)
-    print('Type "help" to see a list of commands')
     while True:  
         function_to_execute = input_parser()
         function_to_execute()
