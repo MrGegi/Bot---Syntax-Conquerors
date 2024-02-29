@@ -187,7 +187,7 @@ def add_phone():
     name = input("Enter the contact's name and surename: ")
     phone = input("Enter the phone number: ")
     if name in address_book.contacts:
-        address_book.contacts[name ].add_phone(phone)
+        address_book.contacts[name].add_phone(phone)
         print(f"Phone number: {phone} added to contact {name}.")
     else:
         print("Contact not found.")
