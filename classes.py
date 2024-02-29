@@ -16,13 +16,23 @@ class Contact():
         self.note = ''
         
     def add_phone(self, phone):
-        self.phone = Phone(phone)
+        try:
+            self.phone = Phone(phone)
+            return True
+        except ValueError as e:
+            print(e)
+            return False
         
     def delete_phone(self):
         self.phone = None   
 
     def change_phone(self, new_phone):
-        self.phone = Phone(new_phone)
+        try:
+            self.phone = Phone(new_phone)
+            return True
+        except ValueError as e:
+            print(e)
+            return False
         
     def add_address(self, address):
         self.address = Address(address).value
