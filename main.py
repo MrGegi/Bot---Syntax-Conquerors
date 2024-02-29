@@ -201,7 +201,7 @@ def input_parser():
     if command in commands:
         return commands[command]  
     else:
-        return unknown_command()
+        return unknown_command
 
 def main():
     test_contacts(address_book)
