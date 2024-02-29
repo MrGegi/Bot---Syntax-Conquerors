@@ -178,7 +178,7 @@ def end_program():
     exit()
 
 def unknown_command():
-    print('Unknown command')    
+    print('Unknown command')
 
 def input_parser():
     """Functions runs in a while loop, takes input from user and returns apropiate functions
@@ -201,13 +201,16 @@ def input_parser():
     if command in commands:
         return commands[command]  
     else:
-        return unknown_command
+        return unknown_command()
 
 def main():
     test_contacts(address_book)
     while True:  
         function_to_execute = input_parser()
-        function_to_execute()
+        try:
+            function_to_execute()
+        except:
+            continue
  
 if __name__ == '__main__':
     main()
