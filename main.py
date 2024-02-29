@@ -7,21 +7,24 @@ class AddressBook(UserDict):
     def __init__(self):
         self.contacts = {}
 
-    def add_contact(self, name, last_name, phone):
-        self.contacts[name + ' ' + last_name] = Contact(name, last_name, phone)
+    def add_contact(self, name, last_name):
+        self.contacts[name + ' ' + last_name] = Contact(name, last_name)
 
 class Contact():
-    def __init__(self, name, last_name, phone):
+    def __init__(self, name, last_name):
         self.name = Name(name)
         self.last_name = Name(last_name)
-        self.phone = Phone(phone)
+        self.phone = ''
         self.address = ''
         self.note = ''
-
-    def remove_phone(self):
+        
+    def add_phone(self, phone):
+        self.phone = Phone(phone)
+        
+    def delete_phone(self):
         self.phone = ''   
 
-    def edit_phone(self, new_phone):
+    def change_phone_num(self, new_phone):
         self.phone = new_phone
 
     def add_address(self, address):
@@ -189,16 +192,9 @@ def test_contacts(address_book: AddressBook):
         ]
     
     for person in random_contacts:
-        address_book.add_contact(person['name'], person['last name'], person['phone'])
+        address_book.add_contact(person['name'], person['last name'])
     
-    for contact_name in address_book.contacts:
-        contact = address_book.contacts[contact_name]
-        print(f'Name: {contact.name.value}')
-        print(f'Last Name: {contact.last_name.value}')
-        if contact.phone:
-            print(f'Phone: {contact.phone.value}')  # Sprawdzanie, czy numer telefonu został ustawiony
-        else:
-            print('No phone number added')
+
             
 def end_program(command, address_book):
     print('Good bye')
