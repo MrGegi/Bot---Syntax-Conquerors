@@ -5,6 +5,7 @@ import pickle
 
 address_book = AddressBook()
 
+
 def input_error(func):
     """
     Use as decorator @input_error before function to gracefully handle raised exceptions.

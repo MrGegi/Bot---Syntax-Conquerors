@@ -2,7 +2,6 @@ from collections import UserDict
 import re
 import pickle
 
-
 class AddressBook(UserDict):
     def __init__(self):
         self.contacts = {}
