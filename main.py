@@ -185,6 +185,49 @@ def test_contacts(address_book: AddressBook):
         print(f'Last Name: {address_book.contacts[contact_name].last_name.value}')
         print(f'Phone: {address_book.contacts[contact_name].phone.value}')
 
+def add_phone():
+    name = input("Enter the contact's name: ")
+    last_name = input("Enter the contact's last name: ")
+    phone = input("Enter the phone number: ")
+    if name + ' ' + last_name in address_book.contacts:
+        address_book.contacts[name + ' ' + last_name].add_phone(phone)
+        print(f"Phone number: {phone} added to contact {name} {last_name}.")
+    else:
+        print("Contact not found.")
+
+def change_phone_num():
+    name = input("Enter the contact's name: ")
+    last_name = input("Enter the contact's last name: ")
+    new_phone = input("Enter the new phone number: ")
+    if name + ' ' + last_name in address_book.contacts:
+        address_book.contacts[name + ' ' + last_name].change_phone_num(new_phone)
+        print(f"Phone number changed for {name} {last_name}.")
+    else:
+        print("Contact not found.")
+
+def find_contact():
+    name = input("Enter the contact's name: ")
+    last_name = input("Enter the contact's last name: ")
+    if name + ' ' + last_name in address_book.contacts:
+        contact = address_book.contacts[name + ' ' + last_name]
+        print(f"Name: {contact.name.value}")
+        print(f"Last Name: {contact.last_name.value}")
+        if contact.phone:
+            print(f"Phone: {contact.phone.value}")
+        else:
+            print("No phone number added")
+    else:
+        print("Contact not found.")
+
+def delete_phone():
+    name = input("Enter the contact's name: ")
+    last_name = input("Enter the contact's last name: ")
+    if name + ' ' + last_name in address_book.contacts:
+        address_book.contacts[name + ' ' + last_name].delete_phone()
+        print(f"Phone number deleted for {name} {last_name}.")
+    else:
+        print("Contact not found.")
+
 def save_to_file():
     with open('bot_save.txt', "wb") as fh:
         pickle.dump(address_book, fh)
@@ -203,14 +246,14 @@ def input_parser():
     commands = {
     # 'add contact': add_contact,
     # 'add note': add_note,
-    # 'add phone': add_phone,
-    # 'change phone': change_phone_num,
+    'add phone': add_phone,
+    'change phone': change_phone_num,
     # 'show contact': show_contact,
-    # 'delete phone': delete_phone,
+    'delete phone': delete_phone,
     # 'add birthday' : set_birthday,
     # 'birthday': days_to_birthday,
     # 'show all': show_all,
-    # 'find contact' : find_contact,
+    'find contact' : find_contact,
     'save': save_to_file,
     'exit': end_program, 
 }
