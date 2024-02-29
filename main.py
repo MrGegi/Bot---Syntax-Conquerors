@@ -184,9 +184,8 @@ def test_contacts(address_book: AddressBook):
         print(f'Last Name: {address_book.contacts[contact_name].last_name.value}')
 
 def save_to_file():
-    if address_book :
-        with open('address_book.py', "wb") as fh:
-            pickle.dump(address_book, fh)
+    with open('address_book.py', "wb") as fh:
+        pickle.dump(address_book, fh)
 
 def load_from_file():
     try:
@@ -270,7 +269,7 @@ def input_parser():
             levenshtein_method(base_command, command)
 
 def main():
-    test_contacts()   
+    # test_contacts()   
     input_parser()
     load_from_file()
  
