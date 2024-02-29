@@ -192,6 +192,7 @@ def save_to_file():
 
 def end_program():
     print('Good bye')
+    save_to_file()
     exit()
 
 def unknown_command():
