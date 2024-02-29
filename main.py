@@ -13,7 +13,6 @@ class Contact():
     def __init__(self, name, last_name):
         self.name = Name(name)
         self.last_name = Name(last_name)
-        self.phone = ''
         self.address = ''
         self.note = ''
         
@@ -21,10 +20,10 @@ class Contact():
         self.phone = Phone(phone)
         
     def delete_phone(self):
-        self.phone = ''   
+        self.phone = None   
 
     def change_phone_num(self, new_phone):
-        self.phone = new_phone
+        self.phone = Phone(new_phone)
         
     def add_address(self, address):
         self.address = Address(address).value
