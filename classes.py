@@ -1,6 +1,7 @@
 from collections import UserDict
 import re
 import pickle
+from datetime import datetime
 
 class AddressBook(UserDict):
     def __init__(self):
@@ -14,6 +15,7 @@ class Contact():
         self.name = Name(name)
         self.address = ''
         self.note = ''
+        self.birthday = ''
         
     def add_phone(self, phone):
         self.phone = Phone(phone)
@@ -42,6 +44,24 @@ class Contact():
 
     def change_notebook(self, note):
         self.note = Notebook(note).value
+    
+    
+    def add_birthday(self, birthday):
+        self.birthday = Birthday(birthday)
+
+    @property
+    def days_to_birthday(self):
+        if self.birthday.value:
+            today = datetime.today()
+            birthday_date = datetime.strptime(self.birthday.value, "%Y-%m-%d")
+            upcoming_birthday_date = datetime(today.year, birthday_date.month, birthday_date.day)
+            if today > upcoming_birthday_date:
+                upcoming_birthday_date = datetime(today.year + 1, birthday_date.month, birthday_date.day)
+            delta = upcoming_birthday_date - today
+            return delta.days
+        else:
+            print("it doesnt see any value")
+            return None
 
 class Field:
     """
@@ -50,6 +70,7 @@ class Field:
     Np. class Name(Field):
     """
     def __init__(self, input_value = None):
+        self.internal_value = None
         self.value = input_value
 
     @property
@@ -120,8 +141,12 @@ class Email(Field):
         # print(result)
         return
 
-class Birthday():
-    pass
+class Birthday(Field):
+    @Field.value.setter
+    def value(self, input_value: str):
+        if input_value and not datetime.strptime(input_value, "%Y-%m-%d"):
+            raise ValueError("Wrong date format. Expected YYYY-MM-DD.")
+        self.internal_value = input_value
 
 class Notebook(Field):
     @Field.value.setter
