@@ -1,5 +1,6 @@
 from collections import UserDict
 import re
+import pickle
 
 class AddressBook(UserDict):
     def __init__(self):
@@ -167,6 +168,11 @@ def test_contacts(address_book: AddressBook):
         print(f'Name: {address_book.contacts[contact_name].name.value}')
         print(f'Last Name: {address_book.contacts[contact_name].last_name.value}')
 
+def save_to_file():
+    with open('bot_save.txt', "wb") as fh:
+        pickle.dump(address_book, fh)
+        print('File saved')
+
 def end_program():
     print('Good bye')
     exit()
@@ -187,17 +193,19 @@ def input_parser():
     # 'birthday': days_to_birthday,
     # 'show all': show_all,
     # 'find contact' : find_contact,
+    'save': save_to_file,
     'exit': end_program, 
 }
-    command = input('Input your command: ').lower()
+    command = input('Enter your command: ').lower()
 
     if command in commands:
-        return commands[command]    
+        return commands[command]  
     else:
         return unknown_command
 
 def main():
     test_contacts(address_book)
+    print('Type "help" to see a list of commands')
     while True:  
         function_to_execute = input_parser()
         function_to_execute()
