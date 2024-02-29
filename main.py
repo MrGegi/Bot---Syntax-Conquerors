@@ -22,7 +22,7 @@ class Contact():
     def delete_phone(self):
         self.phone = None   
 
-    def change_phone_num(self, new_phone):
+    def change_phone(self, new_phone):
         self.phone = Phone(new_phone)
         
     def add_address(self, address):
@@ -178,10 +178,12 @@ def test_contacts(address_book: AddressBook):
     
     for person in random_contacts:
         address_book.add_contact(person['name'], person['last name'])
+        address_book.contacts[person['name'] + ' ' + person['last name']].add_phone(person['phone'])
     
     for contact_name in address_book.contacts:
         print(f'Name: {address_book.contacts[contact_name].name.value}')
         print(f'Last Name: {address_book.contacts[contact_name].last_name.value}')
+        print(f'Phone: {address_book.contacts[contact_name].phone.value}')
 
 def save_to_file():
     with open('bot_save.txt', "wb") as fh:
@@ -199,7 +201,8 @@ def input_parser():
     """Functions runs in a while loop, takes input from user and returns apropiate functions
     """
     commands = {
-    # 'create contact': create_contact,
+    # 'add contact': add_contact,
+    # 'add note': add_note,
     # 'add phone': add_phone,
     # 'change phone': change_phone_num,
     # 'show contact': show_contact,
