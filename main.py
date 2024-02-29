@@ -1,6 +1,7 @@
 from collections import UserDict
 import re
 import Levenshtein as l
+import pickle
 # Bot - Syntax Conquerors
 
 class AddressBook(UserDict):
@@ -121,7 +122,7 @@ class Note():
 class Tag():
     pass
 
- address_book = AddressBook()
+address_book = AddressBook()
 
 def accepted_commands(command, contacts):
     commands = (list(OPERATIONS.keys()))
@@ -181,8 +182,23 @@ def test_contacts(address_book: AddressBook):
     for contact_name in address_book.contacts:
         print(f'Name: {address_book.contacts[contact_name].name.value}')
         print(f'Last Name: {address_book.contacts[contact_name].last_name.value}')
+
+def save_to_file():
+    if address_book :
+        with open('address_book.py', "wb") as fh:
+            pickle.dump(address_book, fh)
+
+def load_from_file():
+    try:
+        with open('address_book.py',"rb") as fh:
+            address_book  = pickle.load(fh)
+    except FileNotFoundError:
+        print('File has not been found. Now creating new adressbook')
+    return address_book
+
 def end_program(command, address_book):
     print('Good bye')
+    save_to_file()
     exit()
 
 OPERATIONS = {
@@ -198,6 +214,7 @@ OPERATIONS = {
     # 'iterator': iterator,
     # 'show_all': show_all,
     # 'find_contact' : find_contact,
+    'save' : save_to_file,
     'good_bye': end_program, 
     'close': end_program, 
     'exit': end_program, 
@@ -255,6 +272,7 @@ def input_parser():
 def main():
     test_contacts()   
     input_parser()
+    load_from_file()
  
 if __name__ == '__main__':
     main()
