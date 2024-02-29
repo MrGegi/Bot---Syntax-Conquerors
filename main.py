@@ -6,13 +6,12 @@ class AddressBook(UserDict):
     def __init__(self):
         self.contacts = {}
 
-    def add_contact(self, name, last_name):
-        self.contacts[name + ' ' + last_name] = Contact(name, last_name)
+    def add_contact(self, name):
+        self.contacts[name] = Contact(name)
 
 class Contact():
-    def __init__(self, name, last_name):
+    def __init__(self, name):
         self.name = Name(name)
-        self.last_name = Name(last_name)
         self.address = ''
         self.note = ''
         
@@ -177,41 +176,36 @@ def test_contacts(address_book: AddressBook):
         ]
     
     for person in random_contacts:
-        address_book.add_contact(person['name'], person['last name'])
-        address_book.contacts[person['name'] + ' ' + person['last name']].add_phone(person['phone'])
+        address_book.add_contact(person['name'])
+        address_book.contacts[person['name']].add_phone(person['phone'])
     
     for contact_name in address_book.contacts:
         print(f'Name: {address_book.contacts[contact_name].name.value}')
-        print(f'Last Name: {address_book.contacts[contact_name].last_name.value}')
-        print(f'Phone: {address_book.contacts[contact_name].phone.value}')
+      
 
 def add_phone():
-    name = input("Enter the contact's name: ")
-    last_name = input("Enter the contact's last name: ")
+    name = input("Enter the contact's name and surename: ")
     phone = input("Enter the phone number: ")
-    if name + ' ' + last_name in address_book.contacts:
-        address_book.contacts[name + ' ' + last_name].add_phone(phone)
-        print(f"Phone number: {phone} added to contact {name} {last_name}.")
+    if name in address_book.contacts:
+        address_book.contacts[name ].add_phone(phone)
+        print(f"Phone number: {phone} added to contact {name}.")
     else:
         print("Contact not found.")
 
 def change_phone_num():
-    name = input("Enter the contact's name: ")
-    last_name = input("Enter the contact's last name: ")
+    name = input("Enter the contact's name and surename: ")
     new_phone = input("Enter the new phone number: ")
-    if name + ' ' + last_name in address_book.contacts:
-        address_book.contacts[name + ' ' + last_name].change_phone_num(new_phone)
-        print(f"Phone number changed for {name} {last_name}.")
+    if name in address_book.contacts:
+        address_book.contacts[name].change_phone_num(new_phone)
+        print(f"Phone number changed for {name}.")
     else:
         print("Contact not found.")
 
 def find_contact():
-    name = input("Enter the contact's name: ")
-    last_name = input("Enter the contact's last name: ")
-    if name + ' ' + last_name in address_book.contacts:
-        contact = address_book.contacts[name + ' ' + last_name]
+    name = input("Enter the contact's name and surename: ")
+    if name in address_book.contacts:
+        contact = address_book.contacts[name]
         print(f"Name: {contact.name.value}")
-        print(f"Last Name: {contact.last_name.value}")
         if contact.phone:
             print(f"Phone: {contact.phone.value}")
         else:
@@ -220,11 +214,10 @@ def find_contact():
         print("Contact not found.")
 
 def delete_phone():
-    name = input("Enter the contact's name: ")
-    last_name = input("Enter the contact's last name: ")
-    if name + ' ' + last_name in address_book.contacts:
-        address_book.contacts[name + ' ' + last_name].delete_phone()
-        print(f"Phone number deleted for {name} {last_name}.")
+    name = input("Enter the contact's name and surename: ")
+    if name in address_book.contacts:
+        address_book.contacts[name].delete_phone()
+        print(f"Phone number deleted for {name}.")
     else:
         print("Contact not found.")
 
