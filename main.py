@@ -50,6 +50,7 @@ def test_contacts(address_book: AddressBook):
     
     for contact_name in address_book.contacts:
         print(f'Name: {address_book.contacts[contact_name].name.value}')
+        print(f'Name: {address_book.contacts[contact_name].phone.value}')
       
 
 def add_phone():
