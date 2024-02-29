@@ -187,13 +187,13 @@ def save_to_file():
     with open('address_book.py', "wb") as fh:
         pickle.dump(address_book, fh)
 
-def load_from_file():
-    try:
-        with open('address_book.py',"rb") as fh:
-            address_book  = pickle.load(fh)
-    except FileNotFoundError:
-        print('File has not been found!')
-    return address_book
+# def load_from_file():
+#     try:
+#         with open('address_book.py',"rb") as fh:
+#             address_book  = pickle.load(fh)
+#     except FileNotFoundError:
+#         print('File has not been found!')
+#     return address_book
 
 def end_program(command, address_book):
     print('Good bye')
@@ -269,9 +269,9 @@ def input_parser():
             levenshtein_method(base_command, command)
 
 def main():
-    # test_contacts()   
+    test_contacts(address_book)   
     input_parser()
-    load_from_file()
+    # load_from_file()
  
 if __name__ == '__main__':
     main()
