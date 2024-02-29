@@ -13,9 +13,19 @@ class Contact():
     def __init__(self, name, last_name):
         self.name = Name(name)
         self.last_name = Name(last_name)
+        self.phone = ''
         self.address = ''
         self.note = ''
+        
+    def add_phone(self, phone):
+        self.phone = Phone(phone)
+        
+    def delete_phone(self):
+        self.phone = ''   
 
+    def change_phone_num(self, new_phone):
+        self.phone = new_phone
+        
     def add_address(self, address):
         self.address = Address(address).value
 
@@ -71,8 +81,14 @@ class Name(Field):
         """
         self.internal_value = name
 
-class Phone():
-    pass
+class Phone(Field):
+    @Field.value.setter
+    def value(self, number):
+        if not number.strip().isdigit():
+            raise ValueError("Numer telefonu musi składać się tylko z cyfr.")
+        if len(number) != 9:
+            raise ValueError("Numer telefonu musi składać się z 9 cyfr.")
+        self.internal_value = number
 
 class Address(Field):
     @Field.value.setter
