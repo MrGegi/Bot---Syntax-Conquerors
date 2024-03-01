@@ -45,7 +45,7 @@ def test_contacts(address_book: AddressBook):
     for person in random_contacts:
         address_book.add_contact(person['name'])
         address_book.contacts[person['name']].add_phone(person['phone'])
-        address_book.contacts[person['name']].add_birthday(person['birthday'])
+        # address_book.contacts[person['name']].add_birthday(person['birthday'])
     
     for contact_name in address_book.contacts:
         print(f'Name: {address_book.contacts[contact_name].name.value}')
@@ -97,17 +97,20 @@ def delete_phone():
         print("Contact not found.")
 
 def save_to_file():
-    with open('bot_save.txt', "wb") as fh:
+    with open('bot_save.bin', "wb") as fh:
         pickle.dump(address_book, fh)
-        print('File saved')
+    print('File has been saved')
+
 
 def load_from_file():
+    global address_book
     try:
-        with open('bot_save.txt',"rb") as fh:
-            address_book  = pickle.load(fh)
+        with open('bot_save.bin',"rb") as fh:
+            address_book = pickle.load(fh)
+            print('The adress_book has been loaded from file')
     except FileNotFoundError:
-        print('File has not been found!')
-    return address_book     
+        print("File with address_book doesn't exist yet!")
+    return address_book
 
 def end_program():
     save_to_file()
@@ -157,6 +160,7 @@ def input_parser():
     'birthday': days_to_birthday,
     # 'show all': show_all,
     'find contact' : find_contact,
+    'load' : load_from_file,
     'save': save_to_file,
     'exit': end_program, 
 }
@@ -168,6 +172,7 @@ def input_parser():
         return unknown_command
 
 def main():
+    load_from_file()
     test_contacts(address_book)
     while True:
         function_to_execute = input_parser()
