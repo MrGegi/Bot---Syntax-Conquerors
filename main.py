@@ -46,11 +46,13 @@ def test_contacts(address_book: AddressBook):
         address_book.add_contact(person['name'])
         address_book.contacts[person['name']].add_phone(person['phone'])
         address_book.contacts[person['name']].add_birthday(person['birthday'])
+        address_book.contacts[person['name']].add_email(person['email'])
     
     for contact_name in address_book.contacts:
         print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
         print(f'Phone: {address_book.contacts[contact_name].phone.value}', end="  ")
-        print(f'Birthday: {address_book.contacts[contact_name].birthday.value}')
+        print(f'Birthday: {address_book.contacts[contact_name].birthday.value}', end="  ")
+        print(f'Email: {address_book.contacts[contact_name].email.value}')
       
 
 def add_phone():
@@ -78,14 +80,12 @@ def change_phone_num():
         print("Contact not found.")
 
 def find_contact():
-    name = input("Enter the contact's name and surename: ")
-    if name in address_book.contacts:
-        contact = address_book.contacts[name]
-        print(f"Name: {contact.name.value}")
-        if contact.phone:
-            print(f"Phone: {contact.phone.value}")
-        else:
-            print("No phone number added")
+    contact_name = input("Enter the contact's name and surename: ")
+    if contact_name in address_book.contacts:
+        print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
+        print(f'Phone: {address_book.contacts[contact_name].phone.value}', end="  ")
+        print(f'Birthday: {address_book.contacts[contact_name].birthday.value}', end="  ")
+        print(f'Email: {address_book.contacts[contact_name].email.value}')
     else:
         print("Contact not found.")
 
@@ -173,7 +173,45 @@ def show_all():
         for contact_name in address_book.contacts:
             print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
             print(f'Phone: {address_book.contacts[contact_name].phone.value}', end="  ")
-            print(f'Birthday: {address_book.contacts[contact_name].birthday.value}')
+            print(f'Birthday: {address_book.contacts[contact_name].birthday.value}', end="  ")
+            print(f'Email: {address_book.contacts[contact_name].email.value}')
+
+def add_email():
+    name = input("Enter the contact's name and surname: ")
+    if not name in address_book.contacts:
+        print(f'There is no contact {name}')
+        return
+    email = input("Enter the email: ")
+    try:
+        address_book.contacts[name].add_email(email)
+        if address_book.contacts[name].email.value:
+            print(f"{email} was added to contact {name}.")
+    except:
+        return
+    
+def change_email():
+    name = input("Enter the contact's name and surname: ")
+    if not name in address_book.contacts:
+        print(f'There is no contact {name}')
+        return
+    if not address_book.contacts[name].email.value:
+        print(f"Contact {name} doesnt have a email yet. However we can proceed.")
+    email = input("Enter the email: ")
+    try:
+        address_book.contacts[name].add_email(email)
+        if address_book.contacts[name].email.value == email:
+            print(f"{email} was changed for contact {name}.")
+    except:
+        return
+    
+def delete_email():
+    name = input("Enter the contact's name and surname: ")
+    if not name in address_book.contacts:
+        print(f'There is no contact {name}')
+        return
+    address_book.contacts[name].remove_email()
+    print(f'Email deleted')
+
 
 def input_parser():
     """Functions runs in a while loop, takes input from user and returns apropiate functions
@@ -181,13 +219,14 @@ def input_parser():
     commands = {
     'add contact': add_contact,
     'delete contact': delete_contact,
-    # 'add note': add_note,
     'add phone': add_phone,
     'change phone': change_phone_num,
-    # 'show contact': show_contact,
     'delete phone': delete_phone,
     'add birthday' : set_birthday,
     'birthday': days_to_birthday,
+    'add email': add_email,
+    'change email': change_email,
+    'delete email': delete_email,
     'show all': show_all,
     'find contact' : find_contact,
     'save': save_to_file,
