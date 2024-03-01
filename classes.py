@@ -14,7 +14,7 @@ class Contact():
         self.name = Name(name)
         self.address = ''
         self.note = ''
-        self.birthday = ''
+        # self.birthday = ''
         
     def add_phone(self, phone):
         try:
@@ -69,7 +69,7 @@ class Contact():
             delta = upcoming_birthday_date - today
             return delta.days
         else:
-            print("it doesnt see any value")
+            print("class_Contact:method_days_to_birthday=no_value")
             return None
 
 class Field:
@@ -112,10 +112,10 @@ class Name(Field):
 class Phone(Field):
     @Field.value.setter
     def value(self, number):
-        if not number.strip().isdigit():
-            raise ValueError("Number can contain digits only.")
-        if len(number) != 9:
-            raise ValueError("Number must be 9 digits long.")
+        if number:
+            number = number.strip()
+            if not number.isdigit() or len(number) != 9:
+                raise ValueError("Number must be 9 digits long and contain digits only.")
         self.internal_value = number
 
 class Address(Field):
@@ -153,8 +153,8 @@ class Email(Field):
 class Birthday(Field):
     @Field.value.setter
     def value(self, input_value: str):
-        if input_value and not datetime.strptime(input_value, "%Y-%m-%d"):
-            raise ValueError("Wrong date format. Expected YYYY-MM-DD.")
+        # if input_value and not datetime.strptime(input_value, "%Y-%m-%d"):
+        #     raise ValueError("Wrong date format. Expected YYYY-MM-DD.")
         self.internal_value = input_value
 
 class Notebook(Field):
