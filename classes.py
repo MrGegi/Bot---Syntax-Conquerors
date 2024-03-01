@@ -103,7 +103,7 @@ class Name(Field):
     @Field.value.setter
     def value (self, name):
         if not name:
-            raise ValueError("class_Name-def_value:name_cannot_be_empty")
+            raise ValueError("class_Name-def_value:name_cannot_be_empty")       
         """
         Ta wiadomość idzie do @input_error Jeśli funkcja handler używa tego settera do wysłania wartości do obiektu.
         """
