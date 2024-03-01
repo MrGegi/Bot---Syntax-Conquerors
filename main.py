@@ -1,6 +1,4 @@
-from collections import UserDict
 from classes import *
-import re
 import pickle
 
 address_book = AddressBook()

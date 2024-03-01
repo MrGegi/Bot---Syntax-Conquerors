@@ -1,6 +1,5 @@
 from collections import UserDict
 import re
-import pickle
 
 class AddressBook(UserDict):
     def __init__(self):
@@ -93,9 +92,9 @@ class Phone(Field):
     @Field.value.setter
     def value(self, number):
         if not number.strip().isdigit():
-            raise ValueError("Numer telefonu musi składać się tylko z cyfr.")
+            raise ValueError("Number can contain digits only.")
         if len(number) != 9:
-            raise ValueError("Numer telefonu musi składać się z 9 cyfr.")
+            raise ValueError("Number must be 9 digits long.")
         self.internal_value = number
 
 class Address(Field):
