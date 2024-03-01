@@ -160,7 +160,6 @@ def input_parser():
     'birthday': days_to_birthday,
     # 'show all': show_all,
     'find contact' : find_contact,
-    'load' : load_from_file,
     'save': save_to_file,
     'exit': end_program, 
 }
