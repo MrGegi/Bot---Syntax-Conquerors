@@ -1,6 +1,5 @@
 from classes import *
 import pickle
-from sys import exit
 
 address_book = AddressBook()
 
@@ -105,7 +104,6 @@ def save_to_file():
 def end_program():
     save_to_file()
     print('Good bye')
-    exit()
 
 def add_contact():    
     name = input("Enter the contact's name and surname: ")
@@ -167,12 +165,12 @@ def main():
         function_to_execute = input_parser()
         try:
             if function_to_execute == end_program:
-                break  # Exit the loop when end_program() is called
+                end_program()
+                break
             else:
                 function_to_execute()
         except:
             continue
-    function_to_execute()
            
  
 if __name__ == '__main__':
