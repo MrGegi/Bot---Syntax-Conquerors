@@ -165,6 +165,7 @@ def main():
         function_to_execute = input_parser()
         try:
             if function_to_execute == end_program:
+                end_program()
                 break
             else:
                 function_to_execute()
