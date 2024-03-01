@@ -10,11 +10,12 @@ class AddressBook(UserDict):
         self.contacts[name] = Contact(name)
 
 class Contact():
-    def __init__(self, name):
+    def __init__(self, name, phone=None, address=None, email=None, birthday=None):
         self.name = Name(name)
-        self.address = ''
-        self.note = ''
-        # self.birthday = ''
+        self.phone = Phone(phone)
+        self.address = Address(address)
+        self.email = Email(email)
+        self.birthday = Birthday(birthday)
         
     def add_phone(self, phone):
         try:
@@ -73,11 +74,6 @@ class Contact():
             return None
 
 class Field:
-    """
-    Można się teraz odnieść do settera za pomocą @Field.value.setter.
-    Należy tylko do klasy dziedziczącej (child) w nawiasie nazwę klasy przekazującej (parent).
-    Np. class Name(Field):
-    """
     def __init__(self, input_value = None):
         self.internal_value = None
         self.value = input_value
@@ -85,28 +81,16 @@ class Field:
     @property
     def value(self):
         return self.internal_value
-    """
-    Dzieki @property można używać dodatkowych funkcj dekoratora klasy takich jak .setter ponizej.
-    """
     
     @value.setter
     def value(self, input_value):
         self.internal_value = input_value
-    """
-    Można się odwwołaać do tego settera w swojej klasie za pomocą @Field.value.setter i zrobić overide.
-    """
 
 class Name(Field):
-    """
-    Przykład jak można użyć dekoratora @property do wprowadzenia warunków do settera dla Name.
-    """
     @Field.value.setter
     def value (self, name):
         if not name:
             raise ValueError("class_Name-def_value:name_cannot_be_empty")       
-        """
-        Ta wiadomość idzie do @input_error Jeśli funkcja handler używa tego settera do wysłania wartości do obiektu.
-        """
         self.internal_value = name
 
 class Phone(Field):
@@ -123,17 +107,8 @@ class Address(Field):
     def value(self, address: str):
         self.internal_value = address
 
-class Email(Field):
-    
-    def __init__(self, email=''):
-       self.__name = None
-       self.email = email
-
-    @property
-    def email(self):
-        return self.__name
-    
-    @email.setter
+class Email(Field): 
+    @Field.value.setter
     def email(self, email):
         
         """Sprawdzenie czy format maila jest prawidłowy"""
@@ -153,8 +128,6 @@ class Email(Field):
 class Birthday(Field):
     @Field.value.setter
     def value(self, input_value: str):
-        # if input_value and not datetime.strptime(input_value, "%Y-%m-%d"):
-        #     raise ValueError("Wrong date format. Expected YYYY-MM-DD.")
         self.internal_value = input_value
 
 class Notebook(Field):

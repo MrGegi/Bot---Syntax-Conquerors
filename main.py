@@ -45,7 +45,7 @@ def test_contacts(address_book: AddressBook):
     for person in random_contacts:
         address_book.add_contact(person['name'])
         address_book.contacts[person['name']].add_phone(person['phone'])
-        # address_book.contacts[person['name']].add_birthday(person['birthday'])
+        address_book.contacts[person['name']].add_birthday(person['birthday'])
     
     for contact_name in address_book.contacts:
         print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
@@ -169,6 +169,12 @@ def days_to_birthday():
         print(f"{address_book.contacts[contact_name].name.value} was born on {address_book.contacts[contact_name].birthday.value}. {countdown}days left till his birthday.")
     return
 
+def show_all():
+        for contact_name in address_book.contacts:
+            print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
+            print(f'Phone: {address_book.contacts[contact_name].phone.value}', end="  ")
+            print(f'Birthday: {address_book.contacts[contact_name].birthday.value}')
+
 def input_parser():
     """Functions runs in a while loop, takes input from user and returns apropiate functions
     """
@@ -182,7 +188,7 @@ def input_parser():
     'delete phone': delete_phone,
     'add birthday' : set_birthday,
     'birthday': days_to_birthday,
-    # 'show all': show_all,
+    'show all': show_all,
     'find contact' : find_contact,
     'save': save_to_file,
     'exit': end_program, 
