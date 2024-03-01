@@ -195,7 +195,7 @@ def input_parser():
         return unknown_command
 
 def main():
-    address_book = load_from_file()
+    # address_book = load_from_file()
     test_contacts(address_book)
     while True:
         function_to_execute = input_parser()
