@@ -5,6 +5,7 @@ from datetime import datetime
 class AddressBook(UserDict):
     def __init__(self):
         self.contacts = {}
+        self.notebook = Notebook()
 
     def add_contact(self, name):
         self.contacts[name] = Contact(name)
@@ -13,12 +14,12 @@ class Contact():
     def __init__(self, name):
         self.name = Name(name)
         self.address = ''
-        self.note = ''
         self.birthday = ''
         
     def add_phone(self, phone):
         try:
             self.phone = Phone(phone)
+            print(self.phone)
             return True
         except ValueError as e:
             print(e)
@@ -43,17 +44,6 @@ class Contact():
 
     def change_address(self, address):
         self.address = Address(address).value
-
-
-    def add_notebook(self, note):
-        self.note = Notebook(note).value
-
-    def remove_notebook(self):
-        self.note = ''
-
-    def change_notebook(self, note):
-        self.note = Notebook(note).value
-    
     
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
@@ -157,13 +147,97 @@ class Birthday(Field):
             raise ValueError("Wrong date format. Expected YYYY-MM-DD.")
         self.internal_value = input_value
 
-class Notebook(Field):
+class Notebook(UserDict):
+    num_of_notes = 0
+    def __init__(self):
+        self.notes = []
     @Field.value.setter
     def value(self, note: str):
         self.internal_value = note
-    
-class Note():
-    pass
 
-class Tag():
-    pass
+
+    
+    def add_note(self, note):
+        try:
+            Notebook.num_of_notes += 1
+            self.num_of_note = Notebook.num_of_notes
+            self.data[self.num_of_note] = Note(note)
+            print(self.data)
+            return True
+        except ValueError as e:
+            print(e)
+            return False
+        
+    def show_notes(self):
+        print('control show all a')
+        all_notes = ''
+        for num_of_note, note in self.data.items():
+            print('control show all a')
+            all_notes += f'Number of note: {str(num_of_note):<10} Note: {note}\n'
+        return all_notes
+        # print('c')
+        # try:
+        #     print ('a')
+        #     for note in self.notes:
+        #         print(note)
+            
+        #     return True
+        # except ValueError as e:
+        #     print('b')
+        #     print(e)
+        #     return False
+
+        # except ValueError as e:
+        #     print(e)
+        #     return False
+        
+        # self.note = {Tag(tag):Note(note)})
+        # self.note = Note(note)
+        # Notebook.num_of_notes += 1
+        # self.num_of_note = Notebook.num_of_notes
+        # self.numered_note = {self.num_of_note:self.note}
+        # self.notes.append(self.numered_note)
+
+        
+        
+        
+
+
+    def remove_all_notes(self):
+        self.note = ''
+
+    def change_notebook(self, note):
+        self.note = Notebook(note).value
+
+    def show_notes(self):
+        for note in self.notes:
+            print(note.values())
+            print('zzz')
+    
+class Note(Field):
+    @Field.value.setter
+
+    def value(self, note):
+        if note == '':
+            raise ValueError("Note must include any characters")
+        self.internal_value = note
+
+    
+
+# class Tag(Notebook):
+#     def __init__(self, tag):
+#         self.value = tag
+
+#     @property
+#     def value(self, tag):
+#         self.tag = tag
+#         return self.tag
+#     @Field.value.setter
+#     def value(self):
+#         self.internal_value = self.tag
+
+
+
+# my_notes = AddressBook()
+# my_notes.notebook.add_notebook('ala ma kota', ['kot', 'ala'])
+# my_notes.notebook.show_notes()
