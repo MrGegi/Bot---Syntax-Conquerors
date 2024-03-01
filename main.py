@@ -22,7 +22,7 @@ def test_contacts(address_book: AddressBook):
     random_contacts = [
         {'name': 'Zbyszek Kowalski', 'phone': '606505404', 'email': 'zbyszek.kowalski@gmail.com', 'birthday': '20 5 1990'},
         {'name': 'Rychu Nowak', 'phone': '546859652', 'email': 'rychu.nowak@gmail.com', 'birthday': '10 11 1995'},
-        #{'name': 'Jan', 'last name': 'Wójcik', 'phone': '524835658', 'email': 'jan.wójcik@gmail.com', 'birthday': '5 9 1965'},
+        # {'name': 'Jan', 'last name': 'Wójcik', 'phone': '524835658', 'email': 'jan.wójcik@gmail.com', 'birthday': '5 9 1965'},
         # {'name': 'Adam', 'last name': 'Kowalczyk', 'phone': '044175272', 'email': 'adam.kowalczyk@yahoo.com', 'birthday': '20 9 1985'},
         # {'name': 'Tomasz', 'last name': 'Wójcik', 'phone': '523544638', 'email': 'tomasz.wójcik@yahoo.com', 'birthday': '3 8 1973'},
         # {'name': 'Tomasz', 'last name': 'Kowalczyk', 'phone': '346595089', 'email': 'tomasz.kowalczyk@yahoo.com', 'birthday': '18 7 1978'},
@@ -45,6 +45,7 @@ def test_contacts(address_book: AddressBook):
     for person in random_contacts:
         address_book.add_contact(person['name'])
         address_book.contacts[person['name']].add_phone(person['phone'])
+        address_book.contacts[person['name']].add_birthday(person['birthday'])
     
     for contact_name in address_book.contacts:
         print(f'Name: {address_book.contacts[contact_name].name.value}')
@@ -108,6 +109,12 @@ def end_program():
 def unknown_command():
     print('Unknown command')
 
+def days_to_birthday():
+    for contact_name in address_book.contacts:
+        countdown = address_book.contacts[contact_name].days_to_birthday
+        print(f"{address_book.contacts[contact_name].name.value} was born on {address_book.contacts[contact_name].birthday.value}. {countdown}days left till his birthday.")
+    return
+
 def input_parser():
     """Functions runs in a while loop, takes input from user and returns apropiate functions
     """
@@ -119,7 +126,7 @@ def input_parser():
     # 'show contact': show_contact,
     'delete phone': delete_phone,
     # 'add birthday' : set_birthday,
-    # 'birthday': days_to_birthday,
+    'birthday': days_to_birthday,
     # 'show all': show_all,
     'find contact' : find_contact,
     'save': save_to_file,
