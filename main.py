@@ -144,13 +144,41 @@ def days_to_birthday():
         print(f"{address_book.contacts[contact_name].name.value} was born on {address_book.contacts[contact_name].birthday.value}. {countdown}days left till his birthday.")
     return
 
+def add_note():
+    note = input("Enter the note text: ")
+    address_book.notebook.add_note(note)
+    # tag = input("Enter tags")
+
+def show_notes():
+    print('List of notes: \n', address_book.notebook.show_notes())
+
+def edit_note():
+    if not address_book.notebook.data:
+        print('Notebook is empty')
+    else:
+        show_notes()
+        num_of_note = input('Enter number of note: ')
+        address_book.notebook.edit_note(num_of_note)
+
+def remove_note():
+    if not address_book.notebook.data:
+        print('Notebook is empty')
+    else:
+        show_notes()
+        num_of_note = input('Enter number of note or write "all" to remove all notes: ')
+        address_book.notebook.remove_note(num_of_note)
+
+
 def input_parser():
     """Functions runs in a while loop, takes input from user and returns apropiate functions
     """
     commands = {
     'add contact': add_contact,
     'delete contact': delete_contact,
-    # 'add note': add_note,
+    'add note': add_note,
+    'show notes':show_notes,
+    'edit note': edit_note,
+    'remove note': remove_note,
     'add phone': add_phone,
     'change phone': change_phone_num,
     # 'show contact': show_contact,
