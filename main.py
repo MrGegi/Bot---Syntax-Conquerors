@@ -106,6 +106,26 @@ def end_program():
     save_to_file()
     exit()
 
+def add_contact():    
+    name = input("Enter the contact's name and surname: ")
+    if name in address_book.contacts:
+        print("A contact with this name already exists.")
+    else:
+        try:
+            address_book.contacts[name] = Contact(name)
+        except Exception as e:
+            print(e)
+        if name in address_book.contacts:
+                print(f"Contact {name} was added.")
+
+def delete_contact():
+    name = input("Enter the contact's name and surname you'd like to delete: ")
+    if name in address_book.contacts:
+        address_book.contacts.pop(name)
+        print(f'Contact {name} deleted.')
+    else:
+        print(f'There is no contact {name}')
+
 def unknown_command():
     print('Unknown command')
 
@@ -119,7 +139,8 @@ def input_parser():
     """Functions runs in a while loop, takes input from user and returns apropiate functions
     """
     commands = {
-    # 'add contact': add_contact,
+    'add contact': add_contact,
+    'delete contact': delete_contact,
     # 'add note': add_note,
     'add phone': add_phone,
     'change phone': change_phone_num,
