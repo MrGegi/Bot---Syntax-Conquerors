@@ -1,5 +1,6 @@
 from classes import *
 import pickle
+from sys import exit
 
 address_book = AddressBook()
 
@@ -102,8 +103,8 @@ def save_to_file():
         print('File saved')
 
 def end_program():
-    print('Good bye')
     save_to_file()
+    print('Good bye')
     exit()
 
 def add_contact():    
