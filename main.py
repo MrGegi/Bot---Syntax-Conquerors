@@ -20,8 +20,8 @@ def test_contacts(address_book: AddressBook):
     """Function fills up addres book with random contacts for debugging purposes"""
 
     random_contacts = [
-        {'name': 'Zbyszek Kowalski', 'phone': '606505404', 'email': 'zbyszek.kowalski@gmail.com', 'birthday': '20 5 1990'},
-        {'name': 'Rychu Nowak', 'phone': '546859652', 'email': 'rychu.nowak@gmail.com', 'birthday': '10 11 1995'},
+        {'name': 'Zbyszek Kowalski', 'phone': '606505404', 'email': 'zbyszek.kowalski@gmail.com', 'birthday': '1990-5-20'},
+        {'name': 'Rychu Nowak', 'phone': '546859652', 'email': 'rychu.nowak@gmail.com', 'birthday': '1995-3-26'},
         # {'name': 'Jan', 'last name': 'Wójcik', 'phone': '524835658', 'email': 'jan.wójcik@gmail.com', 'birthday': '5 9 1965'},
         # {'name': 'Adam', 'last name': 'Kowalczyk', 'phone': '044175272', 'email': 'adam.kowalczyk@yahoo.com', 'birthday': '20 9 1985'},
         # {'name': 'Tomasz', 'last name': 'Wójcik', 'phone': '523544638', 'email': 'tomasz.wójcik@yahoo.com', 'birthday': '3 8 1973'},
