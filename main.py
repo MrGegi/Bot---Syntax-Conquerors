@@ -1,6 +1,4 @@
-from collections import UserDict
 from classes import *
-import re
 import pickle
 
 address_book = AddressBook()
@@ -22,9 +20,9 @@ def test_contacts(address_book: AddressBook):
     """Function fills up addres book with random contacts for debugging purposes"""
 
     random_contacts = [
-        {'name': 'Zbyszek', 'last name': 'Kowalski', 'phone': '606505404', 'email': 'zbyszek.kowalski@gmail.com', 'birthday': '1990-5-20'},
-        {'name': 'Rychu', 'last name': 'Nowak', 'phone': '546859652', 'email': 'rychu.nowak@gmail.com', 'birthday': '1995-11-10'},
-        #{'name': 'Jan', 'last name': 'Wójcik', 'phone': '524835658', 'email': 'jan.wójcik@gmail.com', 'birthday': '5 9 1965'},
+        {'name': 'Zbyszek Kowalski', 'phone': '606505404', 'email': 'zbyszek.kowalski@gmail.com', 'birthday': '20 5 1990'},
+        {'name': 'Rychu Nowak', 'phone': '546859652', 'email': 'rychu.nowak@gmail.com', 'birthday': '10 11 1995'},
+        # {'name': 'Jan', 'last name': 'Wójcik', 'phone': '524835658', 'email': 'jan.wójcik@gmail.com', 'birthday': '5 9 1965'},
         # {'name': 'Adam', 'last name': 'Kowalczyk', 'phone': '044175272', 'email': 'adam.kowalczyk@yahoo.com', 'birthday': '20 9 1985'},
         # {'name': 'Tomasz', 'last name': 'Wójcik', 'phone': '523544638', 'email': 'tomasz.wójcik@yahoo.com', 'birthday': '3 8 1973'},
         # {'name': 'Tomasz', 'last name': 'Kowalczyk', 'phone': '346595089', 'email': 'tomasz.kowalczyk@yahoo.com', 'birthday': '18 7 1978'},
@@ -58,8 +56,12 @@ def add_phone():
     name = input("Enter the contact's name and surename: ")
     phone = input("Enter the phone number: ")
     if name in address_book.contacts:
-        address_book.contacts[name].add_phone(phone)
-        print(f"Phone number: {phone} added to contact {name}.")
+        if address_book.contacts[name].phone:
+            print(f"A phone number already exists for the contact {name}.")
+        elif address_book.contacts[name].add_phone(phone):
+            print(f"Phone number: {phone} added to contact {name}.")
+        else:
+            print("Failed to add phone number.")
     else:
         print("Contact not found.")
 
@@ -67,8 +69,10 @@ def change_phone_num():
     name = input("Enter the contact's name and surename: ")
     new_phone = input("Enter the new phone number: ")
     if name in address_book.contacts:
-        address_book.contacts[name].change_phone(new_phone)
-        print(f"Phone number changed for {name}.")
+        if address_book.contacts[name].change_phone(new_phone):
+            print(f"Phone number changed for {name}.")
+        else:
+            print("Failed to change phone number.")
     else:
         print("Contact not found.")
 
