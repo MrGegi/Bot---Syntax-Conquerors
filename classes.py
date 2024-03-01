@@ -1,6 +1,6 @@
 from collections import UserDict
 import re
-import pickle
+from datetime import datetime
 
 class AddressBook(UserDict):
     def __init__(self):
@@ -14,15 +14,26 @@ class Contact():
         self.name = Name(name)
         self.address = ''
         self.note = ''
+        self.birthday = ''
         
     def add_phone(self, phone):
-        self.phone = Phone(phone)
+        try:
+            self.phone = Phone(phone)
+            return True
+        except ValueError as e:
+            print(e)
+            return False
         
     def delete_phone(self):
         self.phone = None   
 
     def change_phone(self, new_phone):
-        self.phone = Phone(new_phone)
+        try:
+            self.phone = Phone(new_phone)
+            return True
+        except ValueError as e:
+            print(e)
+            return False
         
     def add_address(self, address):
         self.address = Address(address).value
@@ -42,6 +53,24 @@ class Contact():
 
     def change_notebook(self, note):
         self.note = Notebook(note).value
+    
+    
+    def add_birthday(self, birthday):
+        self.birthday = Birthday(birthday)
+
+    @property
+    def days_to_birthday(self):
+        if self.birthday.value:
+            today = datetime.today()
+            birthday_date = datetime.strptime(self.birthday.value, "%Y-%m-%d")
+            upcoming_birthday_date = datetime(today.year, birthday_date.month, birthday_date.day)
+            if today > upcoming_birthday_date:
+                upcoming_birthday_date = datetime(today.year + 1, birthday_date.month, birthday_date.day)
+            delta = upcoming_birthday_date - today
+            return delta.days
+        else:
+            print("it doesnt see any value")
+            return None
 
 class Field:
     """
@@ -50,6 +79,7 @@ class Field:
     Np. class Name(Field):
     """
     def __init__(self, input_value = None):
+        self.internal_value = None
         self.value = input_value
 
     @property
@@ -73,7 +103,7 @@ class Name(Field):
     @Field.value.setter
     def value (self, name):
         if not name:
-            raise ValueError("class_Name-def_value:name_cannot_be_empty")
+            raise ValueError("class_Name-def_value:name_cannot_be_empty")       
         """
         Ta wiadomość idzie do @input_error Jeśli funkcja handler używa tego settera do wysłania wartości do obiektu.
         """
@@ -83,9 +113,9 @@ class Phone(Field):
     @Field.value.setter
     def value(self, number):
         if not number.strip().isdigit():
-            raise ValueError("Numer telefonu musi składać się tylko z cyfr.")
+            raise ValueError("Number can contain digits only.")
         if len(number) != 9:
-            raise ValueError("Numer telefonu musi składać się z 9 cyfr.")
+            raise ValueError("Number must be 9 digits long.")
         self.internal_value = number
 
 class Address(Field):
@@ -120,8 +150,12 @@ class Email(Field):
         # print(result)
         return
 
-class Birthday():
-    pass
+class Birthday(Field):
+    @Field.value.setter
+    def value(self, input_value: str):
+        if input_value and not datetime.strptime(input_value, "%Y-%m-%d"):
+            raise ValueError("Wrong date format. Expected YYYY-MM-DD.")
+        self.internal_value = input_value
 
 class Notebook(Field):
     @Field.value.setter
