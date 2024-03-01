@@ -149,95 +149,60 @@ class Birthday(Field):
 
 class Notebook(UserDict):
     num_of_notes = 0
-    def __init__(self):
-        self.notes = []
-    @Field.value.setter
-    def value(self, note: str):
-        self.internal_value = note
 
-
-    
     def add_note(self, note):
         try:
             Notebook.num_of_notes += 1
             self.num_of_note = Notebook.num_of_notes
-            self.data[self.num_of_note] = Note(note)
-            print(self.data)
+            self.data[self.num_of_note] = Note(note).internal_value
             return True
+        
         except ValueError as e:
             print(e)
             return False
         
     def show_notes(self):
-        print('control show all a')
         all_notes = ''
         for num_of_note, note in self.data.items():
-            print('control show all a')
-            all_notes += f'Number of note: {str(num_of_note):<10} Note: {note}\n'
+            all_notes += f'Number of note: {str(num_of_note):<2} Note: {str(note)}\n'
         return all_notes
-        # print('c')
-        # try:
-        #     print ('a')
-        #     for note in self.notes:
-        #         print(note)
+    
+    def edit_note(self, num_of_note):
+        if num_of_note not in str(self.data.keys()):
+            print('Number of note doesn\'t exists')
+            return False
+        else:
+            try:
+                note = input('Enter new note text: ')
+                self.data[self.num_of_note] = Note(note).internal_value
+                return True
             
-        #     return True
-        # except ValueError as e:
-        #     print('b')
-        #     print(e)
-        #     return False
-
-        # except ValueError as e:
-        #     print(e)
-        #     return False
-        
-        # self.note = {Tag(tag):Note(note)})
-        # self.note = Note(note)
-        # Notebook.num_of_notes += 1
-        # self.num_of_note = Notebook.num_of_notes
-        # self.numered_note = {self.num_of_note:self.note}
-        # self.notes.append(self.numered_note)
-
-        
-        
-        
-
+            except ValueError as e:
+                print(e)
+                return False
+            
+    def remove_note(self, num_of_note):
+        if num_of_note == 'all':
+            self.data.clear()
+            return True
+    
+        elif num_of_note not in str(self.data.keys()):
+            print('Number of note doesn\'t exists')
+            return False
+        else:
+            self.data.pop(int(num_of_note))
+            return True
 
     def remove_all_notes(self):
         self.note = ''
 
     def change_notebook(self, note):
         self.note = Notebook(note).value
-
-    def show_notes(self):
-        for note in self.notes:
-            print(note.values())
-            print('zzz')
     
 class Note(Field):
     @Field.value.setter
-
+    
     def value(self, note):
         if note == '':
             raise ValueError("Note must include any characters")
         self.internal_value = note
-
-    
-
-# class Tag(Notebook):
-#     def __init__(self, tag):
-#         self.value = tag
-
-#     @property
-#     def value(self, tag):
-#         self.tag = tag
-#         return self.tag
-#     @Field.value.setter
-#     def value(self):
-#         self.internal_value = self.tag
-
-
-
-# my_notes = AddressBook()
-# my_notes.notebook.add_notebook('ala ma kota', ['kot', 'ala'])
-# my_notes.notebook.show_notes()
