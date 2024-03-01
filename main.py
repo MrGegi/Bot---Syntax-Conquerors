@@ -103,7 +103,6 @@ def save_to_file():
 
 
 def load_from_file():
-    global address_book
     try:
         with open('bot_save.bin',"rb") as fh:
             address_book = pickle.load(fh)
@@ -171,7 +170,7 @@ def input_parser():
         return unknown_command
 
 def main():
-    load_from_file()
+    address_book = load_from_file()
     test_contacts(address_book)
     while True:
         function_to_execute = input_parser()
