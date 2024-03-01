@@ -163,12 +163,17 @@ def input_parser():
 
 def main():
     test_contacts(address_book)
-    while True:  
+    while True:
         function_to_execute = input_parser()
         try:
-            function_to_execute()
+            if function_to_execute == end_program:
+                break  # Exit the loop when end_program() is called
+            else:
+                function_to_execute()
         except:
             continue
+    function_to_execute()
+           
  
 if __name__ == '__main__':
     main()
