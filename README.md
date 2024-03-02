@@ -7,7 +7,7 @@ TO START :
 5. Write in terminal: clean_folder -  z setup wyjąć nazwę komendy!
 
 
-_________________________________________PROJECT DESCRIPTION____________________________________________
+_________________________________________BOT DESCRIPTION____________________________________________
 
 The project is a console assistant bot that recognizes commands entered from the keyboard and reacts in accordance with the entered command.
 
@@ -15,7 +15,11 @@ The bot terminates after the user enters the 'exit' command.
 
 The bot saves the list of contacts in the "bot_save.bin" file, which is created when it finishes working.
 
-The 
+The the bot starts working it loads the list of contacts from the "bot_save.bin" file.
+
+The bot shows how many days are left until the selected contact's birthday.
+
+The bot checks whether the phone number entered by the user into the contact book składa się z tylko i wyłącznie z 9 cyft.
 
 The bot checks whether the e-mail address entered into the contact book has the correct format.
 
@@ -39,6 +43,7 @@ The bot checks whether the e-mail address entered into the contact book has the 
         4. The fourth part of the email address may consist of:
         - two or three lowercase letters of the Latin alphabet [a-z]
         - dot character at least once (for example: .com.pl or .pl)
+
 
 The bot only accepts commends presented below:
 
