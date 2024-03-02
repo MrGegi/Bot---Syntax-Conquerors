@@ -23,13 +23,15 @@ def input_error(func):
             return func(*args, **kwargs)
         except Exception as raised_exception:
             line_number = (lambda traceback: traceback.tb_lineno if not traceback.tb_next else traceback.tb_next.tb_lineno)(raised_exception.__traceback__)
-            return f"Unhandled exception >> Line:{line_number} Type:{type(raised_exception).__name__} Str:{str(raised_exception)}"
+            print(f"Unhandled exception >> Line:{line_number} Type:{type(raised_exception).__name__} Str:{str(raised_exception)}")
+            return 
     return gracefull_error_handling
 
 def test_contacts(address_book: AddressBook):  
     """Function fills up addres book with random contacts for debugging purposes"""
 
     random_contacts = [
+        # {'name': 'NAME', 'phone': 'PHONE', 'email': 'EMAIL', 'birthday': 'BIRTHDAY', "address": "ADDRESS"},
         {'name': 'zbyszek kowalski', 'phone': '606505404', 'email': 'zbyszek.kowalski@gmail.com', 'birthday': '1990-5-20'},
         {'name': 'rychu nowak', 'phone': '546859652', 'email': 'rychu.nowak@gmail.com', 'birthday': None},
         {'name': 'adam nowak', 'phone': None, 'email': 'adam.nowak@outlook.com', 'birthday': '1973-1-26'},
@@ -58,11 +60,11 @@ def test_contacts(address_book: AddressBook):
         address_book.contacts[person['name']].add_email(person['email'])
         address_book.contacts[person['name']].add_birthday(person['birthday'])
 
-    for contact_name in address_book.contacts:
-        print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
-        print(f'Phone: {address_book.contacts[contact_name].phone.value}', end="  ")
-        print(f'Email: {address_book.contacts[contact_name].email.value}', end="  ")
-        print(f'Birthday: {address_book.contacts[contact_name].birthday.value}')
+    # for contact_name in address_book.contacts:
+    #     print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
+    #     print(f'Phone: {address_book.contacts[contact_name].phone.value}', end="  ")
+    #     print(f'Email: {address_book.contacts[contact_name].email.value}', end="  ")
+    #     print(f'Birthday: {address_book.contacts[contact_name].birthday.value}')
       
 
 def add_phone():
@@ -170,11 +172,19 @@ def days_to_birthday():
     return
 
 def show_all():
-        for contact_name in address_book.contacts:
-            print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
-            print(f'Phone: {address_book.contacts[contact_name].phone.value}', end="  ")
-            print(f'Birthday: {address_book.contacts[contact_name].birthday.value}', end="  ")
-            print(f'Email: {address_book.contacts[contact_name].email.value}')
+    width = 154
+    print("\n+" + "-" * width + "+")
+    print('|{:^30}|{:^30}|{:^30}|{:^30}|{:^30}|'.format("NAME", "PHONE", "EMAIL", "BIRHDAY", "ADDRESS"))
+    print("+" + "-" * width + "+")
+    for contact_name in address_book.contacts:
+        contact = address_book.contacts[contact_name]
+        format_value = lambda x: x if x is not None else "---"
+        print('|{:^30}'.format(format_value(contact.name.value)), end="")
+        print('|{:^30}'.format(format_value(contact.phone.value)), end="")
+        print('|{:^30}'.format(format_value(contact.email.value)), end="")
+        print('|{:^30}'.format(format_value(contact.birthday.value)), end="")
+        print('|{:^30}|'.format(format_value(contact.address.value)), end="\n")
+    print("+" + "-" * width + "+\n")
 
 def add_email():
     name = input("Enter the contact's name and surname: ")

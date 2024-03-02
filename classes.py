@@ -27,8 +27,8 @@ class Contact():
             print(e)
             return False
         
-    def delete_phone(self):
-        self.phone = None   
+    def delete_phone(self, phone=None):
+        self.phone = Phone(None)   
 
     def change_phone(self, new_phone):
         try:
