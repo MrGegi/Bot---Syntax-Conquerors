@@ -27,6 +27,7 @@ def input_error(func):
             return 
     return gracefull_error_handling
 
+@input_error
 def test_contacts(address_book: AddressBook):  
     """Function fills up addres book with random contacts for debugging purposes"""
 
