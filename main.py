@@ -1,7 +1,9 @@
 from classes import *
 import pickle
 from utilities import *
+# from sorting_module import sort
 
+#tu raczej powinno być command.keys() - nie trzeba wówczas ręcznie przepisywać funkcji
 available_commands = '''
     add contact
     delete_contact
@@ -310,11 +312,6 @@ def delete_address():
     address_book.contacts[name].remove_address()
     print(f'Address deleted')
 
-def add_note():
-    note = input("Enter the note text: ")
-    address_book.notebook.add_note(note)
-    # tag = input("Enter tags")
-
 def show_notes():
     print('List of notes: \n', address_book.notebook.show_notes())
 
@@ -339,29 +336,13 @@ def add_note():
     tags = input("Enter tags: ")
     address_book.notebook.add_note(note, tags)
 
-def show_notes():
-    print('List of notes: \n', address_book.notebook.show_notes())
-
 def search_note_by_tags():
     searched_tags = input("Enter tags: ")
     print(address_book.notebook.search_note_by_tags(searched_tags))
 
-def edit_note():
-    if not address_book.notebook.data:
-        print('Notebook is empty')
-    else:
-        show_notes()
-        num_of_note = input('Enter number of note: ')
-        address_book.notebook.edit_note(num_of_note)
-
-def remove_note():
-    if not address_book.notebook.data:
-        print('Notebook is empty')
-    else:
-        show_notes()
-        num_of_note = input('Enter number of note or write "all" to remove all notes: ')
-        address_book.notebook.remove_note(num_of_note)
-
+# def sort_folder():
+#     path_to_folder = input(" Enter path to folder that should be sorted")
+#     sort(path_to_folder)
 def accepted_commands():
     print(available_commands)
 
@@ -390,6 +371,7 @@ def input_parser():
     'delete address': delete_address,
     'show all': show_all,
     'find contact' : find_contact,
+    # 'sort folder': sort_folder,
     'save': save_to_file,
     'exit': end_program,
     'help': accepted_commands, 
