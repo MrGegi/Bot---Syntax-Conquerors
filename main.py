@@ -61,11 +61,11 @@ def test_contacts(address_book: AddressBook):
     """Function fills up addres book with random contacts for debugging purposes"""
 
     random_contacts = [
-        {'name': 'adam wójcik', 'phone': '206947535', 'email': 'adam.wojcik@yahoo.com', 'birthday': '1981-5-12', 'address': 'sosnowiec 57/10'},
-        {'name': 'tomasz kowalczyk', 'phone': '521861174', 'email': 'tomasz.kowalczyk@outlook.com', 'birthday': '1966-6-5', 'address': 'krakow 42/8'},
-        {'name': 'jan kowalczyk', 'phone': None, 'email': 'jan.kowalczyk@outlook.com', 'birthday': '1960-9-9', 'address': 'warszawa 51/9'},
-        {'name': 'andrzej kowalski', 'phone': '065754408', 'email': None, 'birthday': '1983-11-21', 'address': 'warszawa 37/16'},
-        {'name': 'tomasz nowak', 'phone': '046952319', 'email': 'tomasz.nowak@yahoo.com', 'birthday': None, 'address': 'krakow 33/7'},
+        {'name': 'adam wójcik', 'phone': '206947535', 'email': 'adam.wojcik@yahoo.com', 'birthday': '1981-5-12', 'address': 'sosnowiec ladna 57/10'},
+        {'name': 'tomasz kowalczyk', 'phone': '521861174', 'email': 'tomasz.kowalczyk@outlook.com', 'birthday': '1966-6-5', 'address': 'sosnowiec sloneczna 57/10'},
+        {'name': 'jan kowalczyk', 'phone': None, 'email': 'jan.kowalczyk@outlook.com', 'birthday': '1960-9-9', 'address': 'radom polna 57/10'},
+        {'name': 'andrzej kowalski', 'phone': '065754408', 'email': None, 'birthday': '1983-11-21', 'address': 'warszawa ladna 57/10'},
+        {'name': 'tomasz nowak', 'phone': '046952319', 'email': 'tomasz.nowak@yahoo.com', 'birthday': None, 'address': 'sosnowiec kolorowa 57/10'},
         # {'name': 'adam kamiński', 'phone': '659435166', 'email': 'adam.kaminski@gmail.com', 'birthday': '1968-3-26', 'address': None},
         # {'name': 'piotr nowak', 'phone': '678910629', 'email': 'piotr.nowak@yahoo.com', 'birthday': '1971-3-24', 'address': 'poznan 13/3'},
         # {'name': 'adam kowalski', 'phone': '324844741', 'email': 'adam.kowalski@outlook.com', 'birthday': '1991-3-4', 'address': 'krakow 26/10'},
@@ -88,7 +88,7 @@ def test_contacts(address_book: AddressBook):
         address_book.contacts[person['name']].add_phone(person['phone'])
         address_book.contacts[person['name']].add_email(person['email'])
         address_book.contacts[person['name']].add_birthday(person['birthday'])
-        address_book.contacts[person['name']].add_address(person['address'])
+        address_book.contacts[person['name']].add_address(person['address'].title())
 
     # for contact_name in address_book.contacts:
     #     print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
@@ -272,9 +272,12 @@ def add_address():
     if not name in address_book.contacts:
         print(f'There is no contact {name}')
         return
-    address = input("Enter the address: ")
+    city = input("City: ")
+    street = input("Street: ")
+    number = input("House and flat number: ")
+    address = city + ' ' + street + ' ' + number
     try:
-        address_book.contacts[name].add_address(address)
+        address_book.contacts[name].add_address(address.title())
         if address_book.contacts[name].address.value:
             print(f"{address} was added to contact {name}.")
     except:
@@ -287,10 +290,13 @@ def change_address():
         return
     if not address_book.contacts[name].address.value:
         print(f"Contact {name} doesnt have a email yet. However we can proceed.")
-    address = input("Enter the address: ")
+    city = input("City: ")
+    street = input("Street: ")
+    number = input("House and flat number: ")
+    address = city + ' ' + street + ' ' + number
     try:
-        address_book.contacts[name].add_address(address)
-        if address_book.contacts[name].address.value == address:
+        address_book.contacts[name].add_address(address.title())
+        if address_book.contacts[name].address.value == address.title():
             print(f"{address} was changed for contact {name}.")
     except:
         return

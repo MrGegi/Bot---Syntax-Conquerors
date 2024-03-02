@@ -13,7 +13,7 @@ The project is a console assistant bot that recognizes commands entered from the
 
 The the bot starts working it loads the list of contacts from the "bot_save.bin" file.
 
-The bot allows you to enter and save information such as: Name, Surname, telephone number, e-mail address and date of birth into the contact list and notes.
+The bot allows you to enter and save information such as: Name, Surname, phone number, e-mail address and date of birth into the contact list and notes.
 
 The bot allows you to search, edit and delete the information you enter.
 
