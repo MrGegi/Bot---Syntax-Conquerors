@@ -2,6 +2,15 @@ from classes import *
 import pickle
 
 address_book = AddressBook()
+LOGO = """
+@@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@     @@@  @@@ @@@ @@@ 
+@@@     @@@  @@@          @@@          @@@  @@@              @@@      @@@     @@@  @@@ @   @@@      @@@     
+@@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@  @@@ @@@ @@@      @@@      @@@ @@@ @@@  @@@ @@@ @@@      @@@     
+@@@     @@@          @@@          @@@  @@@          @@@      @@@      @@@     @@@  @@@   @ @@@      @@@     
+@@@     @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@  @@@ @@@ @@@      @@@      @@@     @@@  @@@     @@@      @@@     
+
+                                                                                    by Syntax Conquerors
+"""
 
 def input_error(func):
     """
@@ -269,6 +278,7 @@ def input_parser():
         return unknown_command
 
 def main():
+    print(LOGO)
     # address_book = load_from_file()
     test_contacts(address_book)
     while True:
