@@ -11,22 +11,24 @@ class AddressBook(UserDict):
         self.contacts[name] = Contact(name)
 
 class Contact():
-    def __init__(self, name):
+    def __init__(self, name, phone=None, address=None, email=None, birthday=None):
         self.name = Name(name)
-        self.address = ''
-        self.birthday = ''
+        self.phone = Phone(phone)
+        self.address = Address(address)
+        self.email = Email(email)
+        self.birthday = Birthday(birthday)
         
     def add_phone(self, phone):
         try:
             self.phone = Phone(phone)
-            print(self.phone)
+            # print(self.phone)
             return True
         except ValueError as e:
             print(e)
             return False
         
-    def delete_phone(self):
-        self.phone = None   
+    def delete_phone(self, phone=None):
+        self.phone = Phone(None)   
 
     def change_phone(self, new_phone):
         try:
@@ -36,14 +38,17 @@ class Contact():
             print(e)
             return False
         
+    def add_email(self, email):
+        self.email = Email(email)
+
+    def remove_email(self, email=None):
+        self.email = Email(email)
+        
     def add_address(self, address):
-        self.address = Address(address).value
+        self.address = Address(address)
 
-    def remove_address(self):
-        self.address = ''
-
-    def change_address(self, address):
-        self.address = Address(address).value
+    def remove_address(self, address = None):
+        self.address = Address(address)
     
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
@@ -63,11 +68,6 @@ class Contact():
             return None
 
 class Field:
-    """
-    Można się teraz odnieść do settera za pomocą @Field.value.setter.
-    Należy tylko do klasy dziedziczącej (child) w nawiasie nazwę klasy przekazującej (parent).
-    Np. class Name(Field):
-    """
     def __init__(self, input_value = None):
         self.internal_value = None
         self.value = input_value
@@ -75,76 +75,51 @@ class Field:
     @property
     def value(self):
         return self.internal_value
-    """
-    Dzieki @property można używać dodatkowych funkcj dekoratora klasy takich jak .setter ponizej.
-    """
     
     @value.setter
     def value(self, input_value):
         self.internal_value = input_value
-    """
-    Można się odwwołaać do tego settera w swojej klasie za pomocą @Field.value.setter i zrobić overide.
-    """
 
 class Name(Field):
-    """
-    Przykład jak można użyć dekoratora @property do wprowadzenia warunków do settera dla Name.
-    """
     @Field.value.setter
     def value (self, name):
         if not name:
             raise ValueError("class_Name-def_value:name_cannot_be_empty")       
-        """
-        Ta wiadomość idzie do @input_error Jeśli funkcja handler używa tego settera do wysłania wartości do obiektu.
-        """
         self.internal_value = name
 
 class Phone(Field):
     @Field.value.setter
     def value(self, number):
-        if not number.strip().isdigit():
-            raise ValueError("Number can contain digits only.")
-        if len(number) != 9:
-            raise ValueError("Number must be 9 digits long.")
+        if number:
+            number = number.strip()
+            if not number.isdigit() or len(number) != 9:
+                raise ValueError("Number must be 9 digits long and contain digits only.")
         self.internal_value = number
 
 class Address(Field):
     @Field.value.setter
-    def value(self, address: str):
+    def value(self, address):
+        if address:
+            if len(address) > 40:
+                print('Adress can be 30 characters long')
+                raise ValueError
         self.internal_value = address
 
-class Email(Field):
-    
-    def __init__(self, email=''):
-       self.__name = None
-       self.email = email
-
-    @property
-    def email(self):
-        return self.__name
-    
-    @email.setter
-    def email(self, email):
-        
-        """Sprawdzenie czy format maila jest prawidłowy"""
-
-        patern_email = r"^([A-Za-z0-9]+ |[A-Za-z0-9][A-Za-z0-9\.\_]+[A-Za-z0-9])@([A-Za-z0-9]+|[A-Za-z0-9\_\-]+[A-Za-z0-9])\.([a-z]{,3}|[a-z]{3}\.[a-z]{2})$"
-        result = re.findall(patern_email,email)
-
-        if result != []:
-            end_text = 'Adress mail has correct format.'
-            self.__name  = email
-        else:
-            end_text = "Wrong mail format!"
-        print(end_text)
-        # print(result)
-        return
+class Email(Field): 
+    @Field.value.setter
+    def value(self, email):
+        if email:
+            """Check email format"""
+            patern_email = r"^([A-Za-z0-9]+ |[A-Za-z0-9][A-Za-z0-9\.\_]+[A-Za-z0-9])@([A-Za-z0-9]+|[A-Za-z0-9\_\-]+[A-Za-z0-9])\.([a-z]{,3}|[a-z]{3}\.[a-z]{2})$"
+            result = re.findall(patern_email,email)
+            if result == []:
+                print('Wrong mail format!')
+                raise ValueError
+            self.internal_value = email
 
 class Birthday(Field):
     @Field.value.setter
     def value(self, input_value: str):
-        if input_value and not datetime.strptime(input_value, "%Y-%m-%d"):
-            raise ValueError("Wrong date format. Expected YYYY-MM-DD.")
         self.internal_value = input_value
 
 class Notebook(UserDict):

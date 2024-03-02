@@ -1,7 +1,17 @@
 from classes import *
 import pickle
+from utilities import *
 
-address_book = AddressBook()
+address_book = load_from_file()
+LOGO = """
+@@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@     @@@  @@@ @@@ @@@ 
+@@@     @@@  @@@          @@@          @@@  @@@              @@@      @@@     @@@  @@@ @   @@@      @@@     
+@@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@  @@@ @@@ @@@      @@@      @@@ @@@ @@@  @@@ @@@ @@@      @@@     
+@@@     @@@          @@@          @@@  @@@          @@@      @@@      @@@     @@@  @@@   @ @@@      @@@     
+@@@     @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@  @@@ @@@ @@@      @@@      @@@     @@@  @@@     @@@      @@@     
+
+                                                                                    by Syntax Conquerors
+"""
 
 def input_error(func):
     """
@@ -13,50 +23,56 @@ def input_error(func):
             return func(*args, **kwargs)
         except Exception as raised_exception:
             line_number = (lambda traceback: traceback.tb_lineno if not traceback.tb_next else traceback.tb_next.tb_lineno)(raised_exception.__traceback__)
-            return f"Unhandled exception >> Line:{line_number} Type:{type(raised_exception).__name__} Str:{str(raised_exception)}"
+            print(f"Unhandled exception >> Line:{line_number} Type:{type(raised_exception).__name__} Str:{str(raised_exception)}")
+            return 
     return gracefull_error_handling
 
+@input_error
 def test_contacts(address_book: AddressBook):  
     """Function fills up addres book with random contacts for debugging purposes"""
 
     random_contacts = [
-        {'name': 'Zbyszek Kowalski', 'phone': '606505404', 'email': 'zbyszek.kowalski@gmail.com', 'birthday': '1990-5-20'},
-        {'name': 'Rychu Nowak', 'phone': '546859652', 'email': 'rychu.nowak@gmail.com', 'birthday': '1995-3-26'},
-        # {'name': 'Jan', 'last name': 'Wójcik', 'phone': '524835658', 'email': 'jan.wójcik@gmail.com', 'birthday': '5 9 1965'},
-        # {'name': 'Adam', 'last name': 'Kowalczyk', 'phone': '044175272', 'email': 'adam.kowalczyk@yahoo.com', 'birthday': '20 9 1985'},
-        # {'name': 'Tomasz', 'last name': 'Wójcik', 'phone': '523544638', 'email': 'tomasz.wójcik@yahoo.com', 'birthday': '3 8 1973'},
-        # {'name': 'Tomasz', 'last name': 'Kowalczyk', 'phone': '346595089', 'email': 'tomasz.kowalczyk@yahoo.com', 'birthday': '18 7 1978'},
-        # {'name': 'Andrzej', 'last name': 'Kowalski', 'phone': '270767747', 'email': 'andrzej.kowalski@yahoo.com', 'birthday': '6 8 1968'},
-        # {'name': 'Adam', 'last name': 'Nowak', 'phone': '587868953', 'email': 'adam.nowak@outlook.com', 'birthday': '1 7 1985'},
-        # {'name': 'Adam', 'last name': 'Kowalski', 'phone': '603277494', 'email': 'adam.kowalski@yahoo.com', 'birthday': '17 4 1961'},
-        # {'name': 'Tomasz', 'last name': 'Wójcik', 'phone': '114714793', 'email': 'tomasz.wójcik@outlook.com', 'birthday': '5 8 1985'},
-        # {'name': 'Andrzej', 'last name': 'Wójcik', 'phone': '819552896', 'email': 'andrzej.wójcik@outlook.com', 'birthday': '24 7 1964'},
-        # {'name': 'Andrzej', 'last name': 'Kamiński', 'phone': '497654652', 'email': 'andrzej.kamiński@gmail.com', 'birthday': '3 10 1982'},
-        # {'name': 'Adam', 'last name': 'Nowak', 'phone': '133258442', 'email': 'adam.nowak@outlook.com', 'birthday': '23 1 1980'},
-        # {'name': 'Tomasz', 'last name': 'Wójcik', 'phone': '313774876', 'email': 'tomasz.wójcik@yahoo.com', 'birthday': '1 1 1962'},
-        # {'name': 'Jan', 'last name': 'Wójcik', 'phone': '096489389', 'email': 'jan.wójcik@outlook.com', 'birthday': '4 4 1991'},
-        # {'name': 'Piotr', 'last name': 'Kamiński', 'phone': '809172250', 'email': 'piotr.kamiński@outlook.com', 'birthday': '25 8 1963'},
-        # {'name': 'Adam', 'last name': 'Nowak', 'phone': '491249850', 'email': 'adam.nowak@outlook.com', 'birthday': '16 5 1965'},
-        # {'name': 'Jan', 'last name': 'Kamiński', 'phone': '818690456', 'email': 'jan.kamiński@yahoo.com', 'birthday': '20 7 1995'},
-        # {'name': 'Jan', 'last name': 'Kowalski', 'phone': '441151946', 'email': 'jan.kowalski@gmail.com', 'birthday': '30 3 1986'},
-        # {'name': 'Piotr', 'last name': 'Kowalczyk', 'phone': '506499840', 'email': 'piotr.kowalczyk@outlook.com', 'birthday': '16 5 1962'}
-        ]
-    
+        {'name': 'adam wójcik', 'phone': '206947535', 'email': 'adam.wójcik@yahoo.com', 'birthday': '1981-5-12', 'address': 'sosnowiec 57/10'},
+        {'name': 'tomasz kowalczyk', 'phone': '521861174', 'email': 'tomasz.kowalczyk@outlook.com', 'birthday': '1966-6-5', 'address': 'krakow 42/8'},
+        {'name': 'jan kowalczyk', 'phone': None, 'email': 'jan.kowalczyk@outlook.com', 'birthday': '1960-9-9', 'address': 'warszawa 51/9'},
+        {'name': 'andrzej kowalski', 'phone': '065754408', 'email': None, 'birthday': '1983-11-21', 'address': 'warszawa 37/16'},
+        {'name': 'tomasz nowak', 'phone': '046952319', 'email': 'tomasz.nowak@yahoo.com', 'birthday': None, 'address': 'krakow 33/7'},
+        {'name': 'adam kamiński', 'phone': '659435166', 'email': 'adam.kamiński@gmail.com', 'birthday': '1968-3-26', 'address': None},
+        # {'name': 'piotr nowak', 'phone': '678910629', 'email': 'piotr.nowak@yahoo.com', 'birthday': '1971-3-24', 'address': 'poznan 13/3'},
+        # {'name': 'adam kowalski', 'phone': '324844741', 'email': 'adam.kowalski@outlook.com', 'birthday': '1991-3-4', 'address': 'krakow 26/10'},
+        # {'name': 'adam kamiński', 'phone': '453802562', 'email': 'adam.kamiński@yahoo.com', 'birthday': '1980-9-22', 'address': 'warszawa 76/18'},
+        # {'name': 'tomasz kowalczyk', 'phone': '164015881', 'email': 'tomasz.kowalczyk@outlook.com', 'birthday': '2002-1-3', 'address': 'sosnowiec 74/10'},
+        # {'name': 'jan kowalczyk', 'phone': '915881994', 'email': 'jan.kowalczyk@yahoo.com', 'birthday': '1964-3-23', 'address': 'sosnowiec 100/11'},
+        # {'name': 'andrzej nowak', 'phone': '529363681', 'email': 'andrzej.nowak@gmail.com', 'birthday': '1999-2-8', 'address': 'krakow 13/1'},
+        # {'name': 'andrzej kowalski', 'phone': '771463826', 'email': 'andrzej.kowalski@yahoo.com', 'birthday': '1966-12-22', 'address': 'warszawa 18/2'},
+        # {'name': 'adam kowalczyk', 'phone': '635549242', 'email': 'adam.kowalczyk@gmail.com', 'birthday': '1993-3-19', 'address': 'sosnowiec 25/12'},
+        # {'name': 'tomasz kowalczyk', 'phone': '623143519', 'email': 'tomasz.kowalczyk@gmail.com', 'birthday': '1977-12-6', 'address': 'sosnowiec 37/19'},
+        # {'name': 'jan kowalski', 'phone': '483958195', 'email': 'jan.kowalski@outlook.com', 'birthday': '1972-4-17', 'address': 'krakow 84/10'},
+        # {'name': 'jan kowalski', 'phone': '039342693', 'email': 'jan.kowalski@outlook.com', 'birthday': '1981-5-3', 'address': 'poznan 97/17'},
+        # {'name': 'andrzej kamiński', 'phone': '718624235', 'email': 'andrzej.kamiński@yahoo.com', 'birthday': '1973-1-14', 'address': 'gdansk 42/6'},
+        # {'name': 'tomasz kowalczyk', 'phone': '052130035', 'email': 'tomasz.kowalczyk@gmail.com', 'birthday': '1964-8-14', 'address': 'krakow 17/6'},
+        # {'name': 'andrzej kowalczyk', 'phone': '087189332', 'email': 'andrzej.kowalczyk@outlook.com', 'birthday': '1967-3-27', 'address': 'gdansk 11/1'},
+    ]
+
     for person in random_contacts:
         address_book.add_contact(person['name'])
         address_book.contacts[person['name']].add_phone(person['phone'])
-        # address_book.contacts[person['name']].add_birthday(person['birthday'])
-    
-    for contact_name in address_book.contacts:
-        print(f'Name: {address_book.contacts[contact_name].name.value}')
-        print(f'Name: {address_book.contacts[contact_name].phone.value}')
+        address_book.contacts[person['name']].add_email(person['email'])
+        address_book.contacts[person['name']].add_birthday(person['birthday'])
+        address_book.contacts[person['name']].add_address(person['address'])
+
+    # for contact_name in address_book.contacts:
+    #     print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
+    #     print(f'Phone: {address_book.contacts[contact_name].phone.value}', end="  ")
+    #     print(f'Email: {address_book.contacts[contact_name].email.value}', end="  ")
+    #     print(f'Birthday: {address_book.contacts[contact_name].birthday.value}')
       
 
 def add_phone():
     name = input("Enter the contact's name and surename: ")
     phone = input("Enter the phone number: ")
     if name in address_book.contacts:
-        if address_book.contacts[name].phone:
+        if address_book.contacts[name].phone.value:
             print(f"A phone number already exists for the contact {name}.")
         elif address_book.contacts[name].add_phone(phone):
             print(f"Phone number: {phone} added to contact {name}.")
@@ -77,14 +93,20 @@ def change_phone_num():
         print("Contact not found.")
 
 def find_contact():
-    name = input("Enter the contact's name and surename: ")
-    if name in address_book.contacts:
-        contact = address_book.contacts[name]
-        print(f"Name: {contact.name.value}")
-        if contact.phone:
-            print(f"Phone: {contact.phone.value}")
-        else:
-            print("No phone number added")
+    contact_name = input("Enter the contact's name and surename: ")
+    if contact_name in address_book.contacts:
+        width = 154
+        print("\n+" + "-" * width + "+")
+        print('|{:^30}|{:^30}|{:^30}|{:^30}|{:^30}|'.format("NAME", "PHONE", "EMAIL", "BIRTHDAY", "ADDRESS"))
+        print("+" + "-" * width + "+")
+        contact = address_book.contacts[contact_name]
+        format_value = lambda x: x if x is not None else "---"
+        print('|{:^30}'.format(format_value(contact.name.value.title())), end="")
+        print('|{:^30}'.format(format_value(contact.phone.value)), end="")
+        print('|{:^30}'.format(format_value(contact.email.value)), end="")
+        print('|{:^30}'.format(format_value(contact.birthday.value)), end="")
+        print('|{:^30}|'.format(format_value(contact.address.value)), end="\n")
+        print("+" + "-" * width + "+\n")
     else:
         print("Contact not found.")
 
@@ -100,16 +122,6 @@ def save_to_file():
     with open('bot_save.bin', "wb") as fh:
         pickle.dump(address_book, fh)
     print('File has been saved')
-
-
-def load_from_file():
-    try:
-        with open('bot_save.bin',"rb") as fh:
-            address_book = pickle.load(fh)
-            print('The adress_book has been loaded from file')
-    except FileNotFoundError:
-        print("File with address_book doesn't exist yet!")
-    return address_book
 
 def end_program():
     save_to_file()
@@ -138,11 +150,122 @@ def delete_contact():
 def unknown_command():
     print('Unknown command')
 
+def set_birthday():
+    name = input("Enter the contact's name and surename: ").lower()
+    if name in address_book.contacts:
+        if not address_book.contacts[name].birthday.value:
+            while True:
+                year = input("Enter the contact's year of birth: ")
+                month = input("Enter the contact's month of birth: ")
+                day = input("Enter the contact's day of birth: ")
+                try:
+                    year = int(year)
+                    month = int(month)
+                    day = int(day)
+                    date = datetime(year, month, day)
+                    birthday_to_add = date.strftime('%Y-%m-%d')
+                    break
+                except ValueError:
+                    print("Invalid data. Please enter a valid date.")
+            address_book.contacts[name].add_birthday(birthday_to_add)
+            print(f"Birthday date ({birthday_to_add}) added to contact {name}")
+        else:
+            print(f"Contact {name} already has birthday date set to {address_book.contacts[name].birthday.value}.")
+    else:
+        print("Contact not found.")
+
 def days_to_birthday():
     for contact_name in address_book.contacts:
         countdown = address_book.contacts[contact_name].days_to_birthday
         print(f"{address_book.contacts[contact_name].name.value} was born on {address_book.contacts[contact_name].birthday.value}. {countdown}days left till his birthday.")
     return
+
+def show_all():
+    width = 154
+    print("\n+" + "-" * width + "+")
+    print('|{:^30}|{:^30}|{:^30}|{:^30}|{:^30}|'.format("NAME", "PHONE", "EMAIL", "BIRTHDAY", "ADDRESS"))
+    print("+" + "-" * width + "+")
+    for contact_name in address_book.contacts:
+        contact = address_book.contacts[contact_name]
+        format_value = lambda x: x if x is not None else "---"
+        print('|{:^30}'.format(format_value(contact.name.value.title())), end="")
+        print('|{:^30}'.format(format_value(contact.phone.value)), end="")
+        print('|{:^30}'.format(format_value(contact.email.value)), end="")
+        print('|{:^30}'.format(format_value(contact.birthday.value)), end="")
+        print('|{:^30}|'.format(format_value(contact.address.value)), end="\n")
+    print("+" + "-" * width + "+\n")
+
+def add_email():
+    name = input("Enter the contact's name and surname: ")
+    if not name in address_book.contacts:
+        print(f'There is no contact {name}')
+        return
+    email = input("Enter the email: ")
+    try:
+        address_book.contacts[name].add_email(email)
+        if address_book.contacts[name].email.value:
+            print(f"{email} was added to contact {name}.")
+    except:
+        return
+    
+def change_email():
+    name = input("Enter the contact's name and surname: ")
+    if not name in address_book.contacts:
+        print(f'There is no contact {name}')
+        return
+    if not address_book.contacts[name].email.value:
+        print(f"Contact {name} doesnt have a email yet. However we can proceed.")
+    email = input("Enter the email: ")
+    try:
+        address_book.contacts[name].add_email(email)
+        if address_book.contacts[name].email.value == email:
+            print(f"{email} was changed for contact {name}.")
+    except:
+        return
+    
+def delete_email():
+    name = input("Enter the contact's name and surname: ")
+    if not name in address_book.contacts:
+        print(f'There is no contact {name}')
+        return
+    address_book.contacts[name].remove_email()
+    print(f'Email deleted')
+
+def add_address():
+    name = input("Enter the contact's name and surname: ")
+    if not name in address_book.contacts:
+        print(f'There is no contact {name}')
+        return
+    address = input("Enter the address: ")
+    try:
+        address_book.contacts[name].add_address(address)
+        if address_book.contacts[name].address.value:
+            print(f"{address} was added to contact {name}.")
+    except:
+        return
+    
+def change_address():
+    name = input("Enter the contact's name and surname: ")
+    if not name in address_book.contacts:
+        print(f'There is no contact {name}')
+        return
+    if not address_book.contacts[name].address.value:
+        print(f"Contact {name} doesnt have a email yet. However we can proceed.")
+    address = input("Enter the address: ")
+    try:
+        address_book.contacts[name].add_address(address)
+        if address_book.contacts[name].address.value == address:
+            print(f"{address} was changed for contact {name}.")
+    except:
+        return
+    
+def delete_address():
+    name = input("Enter the contact's name and surname: ")
+    if not name in address_book.contacts:
+        print(f'There is no contact {name}')
+        return
+    address_book.contacts[name].remove_address()
+    print(f'Address deleted')
 
 def add_note():
     note = input("Enter the note text: ")
@@ -181,11 +304,16 @@ def input_parser():
     'remove note': remove_note,
     'add phone': add_phone,
     'change phone': change_phone_num,
-    # 'show contact': show_contact,
     'delete phone': delete_phone,
-    # 'add birthday' : set_birthday,
+    'add birthday' : set_birthday,
     'birthday': days_to_birthday,
-    # 'show all': show_all,
+    'add email': add_email,
+    'change email': change_email,
+    'delete email': delete_email,
+    'add address': add_address,
+    'change address': change_address,
+    'delete address': delete_address,
+    'show all': show_all,
     'find contact' : find_contact,
     'save': save_to_file,
     'exit': end_program, 
@@ -198,7 +326,7 @@ def input_parser():
         return unknown_command
 
 def main():
-    address_book = load_from_file()
+    print(LOGO)
     test_contacts(address_book)
     while True:
         function_to_execute = input_parser()
