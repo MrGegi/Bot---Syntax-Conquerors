@@ -1,21 +1,21 @@
 TO START :
 
 1. Open command line (cmd ).
-2. Write in teminal: cd PROJECTS\SORT_FILES\clean_folder!!!!!!!!!!!!!!!!!!1Zmienić ścieżkę
+2. Write in teminal: cd ....................UWAGA: podać path ścieżkę !!!!!!!!1
 3. Then write in terminal : pip install -e .
 4. Push the ENTER bottom.
-5. Write in terminal: clean_folder -  z setup wyjąć nazwę komendy!
+5. Write in terminal: .............-  UWAGA: z setup wyjąć nazwę komendy!
 
 
 _________________________________________BOT DESCRIPTION____________________________________________
 
 The project is a console assistant bot that recognizes commands entered from the keyboard and reacts in accordance with the entered command.
 
-The bot terminates after the user enters the 'exit' command.
-
-The bot saves the list of contacts in the "bot_save.bin" file, which is created when it finishes working.
-
 The the bot starts working it loads the list of contacts from the "bot_save.bin" file.
+
+The bot allows you to enter and save information such as: Name, Surname, telephone number, e-mail address and date of birth into the contact list and notes.
+
+The bot allows you to search, edit and delete the information you enter.
 
 The bot shows how many days are left until the selected contact's birthday.
 
@@ -61,3 +61,7 @@ THE BOT ACCEPTS COMMANDS:
 10. 'find contact'
 11. 'save'
 12. 'exit'
+
+The bot saves the list of contacts in the "bot_save.bin" file, which is created when it finishes working.
+
+The bot terminates after the user enters the 'exit' command.
