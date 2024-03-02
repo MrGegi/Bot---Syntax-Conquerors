@@ -67,7 +67,6 @@ class Contact():
             delta = upcoming_birthday_date - today
             return delta.days
         else:
-            print("it doesnt see any value")
             return None
 
 class Field:

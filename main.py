@@ -204,10 +204,17 @@ def set_birthday():
         print("Contact not found.")
 
 def days_to_birthday():
+    width = 92
+    print("\n+" + "-" * width + "+")
+    print('|{:^30}|{:^30}|{:^30}|'.format("NAME", "BIRTHDAY", "DAYS TO BIRTHDAY"))
+    print("+" + "-" * width + "+")
     for contact_name in address_book.contacts:
-        countdown = address_book.contacts[contact_name].days_to_birthday
-        print(f"{address_book.contacts[contact_name].name.value} was born on {address_book.contacts[contact_name].birthday.value}. {countdown}days left till his birthday.")
-    return
+        contact = address_book.contacts[contact_name]
+        format_value = lambda x: x if x is not None else "---"
+        print('|{:^30}'.format(format_value(contact.name.value.title())), end="")
+        print('|{:^30}'.format(format_value(contact.birthday.value)), end="")
+        print('|{:^30}|'.format(format_value(contact.days_to_birthday)), end="\n")
+    print("+" + "-" * width + "+\n")
 
 def show_all():
     width = 154
