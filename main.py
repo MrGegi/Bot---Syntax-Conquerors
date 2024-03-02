@@ -114,7 +114,7 @@ def save_to_file():
 
 def end_program():
     save_to_file()
-    print('Good bye')
+    print('Goodbye')
 
 def add_contact():    
     name = input("Enter the contact's name and surname: ")
@@ -285,6 +285,8 @@ def input_parser():
     'find contact' : find_contact,
     'save': save_to_file,
     'exit': end_program, 
+    'end': end_program,
+    '.': end_program,
 }
     command = input('Enter your command: ').lower()
 

@@ -127,6 +127,11 @@ class Notebook(UserDict):
     def add_note(self, note):
         try:
             Notebook.num_of_notes += 1
+            while True:
+                if Notebook.num_of_notes in self.data.keys():
+                    Notebook.num_of_notes += 1
+                else:
+                    break
             self.num_of_note = Notebook.num_of_notes
             self.data[self.num_of_note] = Note(note).internal_value
             return True
@@ -148,7 +153,7 @@ class Notebook(UserDict):
         else:
             try:
                 note = input('Enter new note text: ')
-                self.data[self.num_of_note] = Note(note).internal_value
+                self.data[num_of_note] = Note(note).internal_value
                 return True
             
             except ValueError as e:
