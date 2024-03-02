@@ -133,19 +133,29 @@ class Notebook(UserDict):
             return False
         
     def show_notes(self):
+        width = 154
         all_notes = ''
+        all_notes += "\n+" + "-" * width + "+\n"
+        all_notes += '|{:^20}|{:^100}|{:^32}|\n'.format("NUMBER OF NOTE", "NOTE", "TAGS")
+        all_notes += "+" + "-" * width + "+\n"
         for num_of_note, note_and_tags in self.data.items():
             note = note_and_tags[0]
             tags = note_and_tags[1]
             str_tags = ''
             for tag in tags:
                 str_tags += f'{tag}; '
-            all_notes += f'Number of note: {str(num_of_note):<2} Note: {str(note)} Tags: {str_tags}\n'
+            all_notes += f'|{str(num_of_note):^20}|{str(note):^100}|{str_tags:^32}|\n'
+        all_notes += "+" + "-" * width + "+"
         return all_notes
     
     def search_note_by_tags(self, searched_tags):
+        width = 154
+        finded_notes_data = []
         searched_tags = Tags(searched_tags).internal_value
         finded_notes = ''
+        finded_notes += "\n+" + "-" * width + "+\n"
+        finded_notes += '|{:^20}|{:^100}|{:^32}|\n'.format("NUMBER OF NOTE", "NOTE", "TAGS")
+        finded_notes += "+" + "-" * width + "+\n"
         for num_of_note, note_and_tags in self.data.items():
             note = note_and_tags[0]
             tags = note_and_tags[1]
@@ -154,9 +164,11 @@ class Notebook(UserDict):
                 str_tags = ''
                 for tag in tags:
                     str_tags += f'{tag}; '
-                finded_notes += f'Number of note: {str(num_of_note):<2} Note: {str(note)} Tags: {str_tags}\n'
-                
-        if finded_notes == '':
+                finded_notes_data.append(num_of_note)
+                finded_notes += f'|{str(num_of_note):^20}|{str(note):^100}|{str_tags:^32}|\n'
+        
+        finded_notes += "+" + "-" * width + "+"
+        if finded_notes_data == []:
             return f'Notes not find'
         else:
             return finded_notes
