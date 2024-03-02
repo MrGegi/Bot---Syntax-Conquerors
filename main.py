@@ -1,7 +1,34 @@
 from classes import *
-import pickle
 from utilities import *
-# from sorting_module import sort
+from sorting_module import main_sorting_folder
+import pickle
+import os
+
+#tu raczej powinno być command.keys() - nie trzeba wówczas ręcznie przepisywać funkcji
+available_commands = '''
+    add contact
+    delete_contact
+    add phone
+    change phone
+    delete phone
+    add email
+    change email
+    delete email
+    add birthday
+    birthday
+    add address
+    change address
+    delete address
+    add note
+    show notes
+    edit note
+    remove note
+    show all
+    find contact
+    save
+    exit
+    help
+'''
 
 address_book = load_from_file()
 
@@ -348,11 +375,14 @@ def search_note_by_tags():
     searched_tags = input("Enter tags: ")
     print(address_book.notebook.search_note_by_tags(searched_tags))
 
-# def sort_folder():
-#     path_to_folder = input(" Enter path to folder that should be sorted")
-#     sort(path_to_folder)
-# def accepted_commands():
-#     print(available_commands)
+def sort_folder():
+    current_path = os.getcwd()
+    path_to_folder = input(" Enter path to folder that should be sorted: ")
+    main_sorting_folder(path_to_folder)
+    os.chdir(current_path)
+
+def accepted_commands():
+    print(available_commands)
 
 
 def input_parser():
@@ -379,10 +409,12 @@ def input_parser():
     'delete address': delete_address,
     'show all': show_all,
     'find contact' : find_contact,
-    # 'sort folder': sort_folder,
+    'sort folder': sort_folder,
     'save': save_to_file,
     'exit': end_program,
-    # 'help': accepted_commands, 
+    'end': end_program,
+    '.': end_program,
+    'help': accepted_commands, 
 
 }
     
