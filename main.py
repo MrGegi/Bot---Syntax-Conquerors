@@ -139,6 +139,30 @@ def delete_contact():
 def unknown_command():
     print('Unknown command')
 
+def set_birthday():
+    name = input("Enter the contact's name and surename: ").lower()
+    if name in address_book.contacts:
+        if not address_book.contacts[name].birthday.value:
+            while True:
+                year = input("Enter the contact's year of birth: ")
+                month = input("Enter the contact's month of birth: ")
+                day = input("Enter the contact's day of birth: ")
+                try:
+                    year = int(year)
+                    month = int(month)
+                    day = int(day)
+                    date = datetime(year, month, day)
+                    birthday_to_add = date.strftime('%Y-%m-%d')
+                    break
+                except ValueError:
+                    print("Invalid data. Please enter a valid date.")
+            address_book.contacts[name].add_birthday(birthday_to_add)
+            print(f"Birthday date ({birthday_to_add}) added to contact {name}")
+        else:
+            print(f"Contact {name} already has birthday date set to {address_book.contacts[name].birthday.value}.")
+    else:
+        print("Contact not found.")
+
 def days_to_birthday():
     for contact_name in address_book.contacts:
         countdown = address_book.contacts[contact_name].days_to_birthday
