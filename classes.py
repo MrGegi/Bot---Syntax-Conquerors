@@ -47,10 +47,7 @@ class Contact():
     def add_address(self, address):
         self.address = Address(address)
 
-    def remove_address(self):
-        self.address = ''
-
-    def change_address(self, address):
+    def remove_address(self, address = None):
         self.address = Address(address)
     
     def add_birthday(self, birthday):
@@ -114,7 +111,7 @@ class Email(Field):
             if result == []:
                 # print('Wrong mail format!')
                 raise ValueError("class_email:setter-regex_format_error")
-            self.internal_value = email
+        self.internal_value = email
 
 class Birthday(Field):
     @Field.value.setter
