@@ -27,8 +27,8 @@ class Contact():
             print(e)
             return False
         
-    def delete_phone(self, phone=None):
-        self.phone = Phone(None)   
+    def delete_phone(self):
+        self.phone = None   
 
     def change_phone(self, new_phone):
         try:
@@ -45,13 +45,10 @@ class Contact():
         self.email = Email(email)
         
     def add_address(self, address):
-        self.address = Address(address).value
+        self.address = Address(address)
 
-    def remove_address(self):
-        self.address = ''
-
-    def change_address(self, address):
-        self.address = Address(address).value
+    def remove_address(self, address = None):
+        self.address = Address(address)
     
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
@@ -112,9 +109,9 @@ class Email(Field):
             patern_email = r"^([A-Za-z0-9]+ |[A-Za-z0-9][A-Za-z0-9\.\_]+[A-Za-z0-9])@([A-Za-z0-9]+|[A-Za-z0-9\_\-]+[A-Za-z0-9])\.([a-z]{,3}|[a-z]{3}\.[a-z]{2})$"
             result = re.findall(patern_email,email)
             if result == []:
-                print('Wrong mail format!')
-                raise ValueError
-            self.internal_value = email
+                # print('Wrong mail format!')
+                raise ValueError("class_email:setter-regex_format_error")
+        self.internal_value = email
 
 class Birthday(Field):
     @Field.value.setter
