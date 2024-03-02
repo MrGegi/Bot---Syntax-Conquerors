@@ -45,13 +45,13 @@ class Contact():
         self.email = Email(email)
         
     def add_address(self, address):
-        self.address = Address(address).value
+        self.address = Address(address)
 
     def remove_address(self):
         self.address = ''
 
     def change_address(self, address):
-        self.address = Address(address).value
+        self.address = Address(address)
     
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
