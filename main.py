@@ -2,7 +2,32 @@ from classes import *
 import pickle
 from utilities import *
 
+available_commands = '''
+    add contact
+    delete_contact
+    add note
+    show notes
+    edit note
+    remove note
+    add phone
+    change phone
+    delete phone
+    add birthday
+    birthday
+    add email
+    change email
+    delete email
+    add address
+    change address
+    delete address
+    show all
+    find contact
+    save
+    exit
+'''
+
 address_book = load_from_file()
+
 LOGO = """
 @@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@     @@@  @@@ @@@ @@@ 
 @@@     @@@  @@@          @@@          @@@  @@@              @@@      @@@     @@@  @@@ @   @@@      @@@     
@@ -152,7 +177,7 @@ def delete_contact():
         print(f'There is no contact {name}')
 
 def unknown_command():
-    print('Unknown command')
+    print("\nUnknown command! Please choose one from the list provided below:\n" + available_commands)
 
 def set_birthday():
     name = input("Enter the contact's name and surename: ").lower()
