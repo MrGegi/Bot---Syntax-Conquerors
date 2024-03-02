@@ -84,7 +84,7 @@ class Name(Field):
     def value (self, name):
         if not name:
             raise ValueError("class_Name-def_value:name_cannot_be_empty")       
-        self.internal_value = name
+        self.internal_value = name.lower()
 
 class Phone(Field):
     @Field.value.setter
