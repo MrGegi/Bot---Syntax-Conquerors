@@ -3,7 +3,34 @@ import pickle
 from utilities import *
 # from sorting_module import sort
 
+#tu raczej powinno być command.keys() - nie trzeba wówczas ręcznie przepisywać funkcji
+available_commands = '''
+    add contact
+    delete_contact
+    add phone
+    change phone
+    delete phone
+    add email
+    change email
+    delete email
+    add birthday
+    birthday
+    add address
+    change address
+    delete address
+    add note
+    show notes
+    edit note
+    remove note
+    show all
+    find contact
+    save
+    exit
+    help
+'''
+
 address_book = load_from_file()
+
 LOGO = """
 @@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@     @@@  @@@ @@@ @@@ 
 @@@     @@@  @@@          @@@          @@@  @@@              @@@      @@@     @@@  @@@ @   @@@      @@@     
@@ -153,7 +180,7 @@ def delete_contact():
         print(f'There is no contact {name}')
 
 def unknown_command():
-    print('Unknown command')
+    print("\nUnknown command! Please choose one from the list provided below:\n" + available_commands)
 
 def set_birthday():
     name = input("Enter the contact's name and surename: ").lower()
@@ -180,10 +207,17 @@ def set_birthday():
         print("Contact not found.")
 
 def days_to_birthday():
+    width = 92
+    print("\n+" + "-" * width + "+")
+    print('|{:^30}|{:^30}|{:^30}|'.format("NAME", "BIRTHDAY", "DAYS TO BIRTHDAY"))
+    print("+" + "-" * width + "+")
     for contact_name in address_book.contacts:
-        countdown = address_book.contacts[contact_name].days_to_birthday
-        print(f"{address_book.contacts[contact_name].name.value} was born on {address_book.contacts[contact_name].birthday.value}. {countdown}days left till his birthday.")
-    return
+        contact = address_book.contacts[contact_name]
+        format_value = lambda x: x if x is not None else "---"
+        print('|{:^30}'.format(format_value(contact.name.value.title())), end="")
+        print('|{:^30}'.format(format_value(contact.birthday.value)), end="")
+        print('|{:^30}|'.format(format_value(contact.days_to_birthday)), end="\n")
+    print("+" + "-" * width + "+\n")
 
 def show_all():
     width = 154
@@ -309,6 +343,9 @@ def search_note_by_tags():
 # def sort_folder():
 #     path_to_folder = input(" Enter path to folder that should be sorted")
 #     sort(path_to_folder)
+def accepted_commands():
+    print(available_commands)
+
 
 def input_parser():
     """Functions runs in a while loop, takes input from user and returns apropiate functions
@@ -336,9 +373,9 @@ def input_parser():
     'find contact' : find_contact,
     # 'sort folder': sort_folder,
     'save': save_to_file,
-    'exit': end_program, 
-    'end': end_program,
-    '.': end_program,
+    'exit': end_program,
+    'help': accepted_commands, 
+
 }
     command = input('Enter your command: ').lower()
 
@@ -349,6 +386,7 @@ def input_parser():
 
 def main():
     print(LOGO)
+    print('Type "help" to get a command list.')
     test_contacts(address_book)
     while True:
         function_to_execute = input_parser()
