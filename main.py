@@ -39,7 +39,7 @@ LOGO = """
 @@@     @@@          @@@          @@@  @@@          @@@      @@@      @@@     @@@  @@@   @ @@@      @@@     
 @@@     @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@  @@@ @@@ @@@      @@@      @@@     @@@  @@@     @@@      @@@     
 
-                                                                                    by Syntax Conquerors
+                                                                                   by Syntax Conquerors
 """
 
 def input_error(func):
@@ -180,8 +180,10 @@ def delete_contact():
     else:
         print(f'There is no contact {name}')
 
-def unknown_command():
-    print("\nUnknown command! Please choose one from the list provided below:\n" + available_commands)
+def unknown_command(commands: dict):
+    print("\nUnknown command! Please choose one from the list provided below:\n")
+    for command in commands.keys():
+        print(f"   {command}")
 
 def set_birthday():
     name = input("Enter the contact's name and surename: ").lower()
@@ -383,12 +385,13 @@ def input_parser():
     'help': accepted_commands, 
 
 }
-    command = input('Enter your command: ').lower()
+    
+    command = input('\nEnter your command: ').lower()
 
     if command in commands:
         return commands[command]  
     else:
-        return unknown_command
+        return unknown_command(commands)
 
 def main():
     print(LOGO)
