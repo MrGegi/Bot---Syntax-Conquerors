@@ -21,7 +21,7 @@ class Contact():
     def add_phone(self, phone):
         try:
             self.phone = Phone(phone)
-            print(self.phone)
+            # print(self.phone)
             return True
         except ValueError as e:
             print(e)

@@ -41,13 +41,13 @@ def test_contacts(address_book: AddressBook):
         # {'name': 'tomasz kowalczyk', 'phone': '172712416', 'email': 'tomasz.kowalczyk@yahoo.com', 'birthday': '1991-5-26'},
         # {'name': 'adam kowalczyk', 'phone': '358341124', 'email': 'adam.kowalczyk@outlook.com', 'birthday': '1966-5-18'},
         ]
-    
+
     for person in random_contacts:
         address_book.add_contact(person['name'])
         address_book.contacts[person['name']].add_phone(person['phone'])
         address_book.contacts[person['name']].add_birthday(person['birthday'])
         address_book.contacts[person['name']].add_email(person['email'])
-    
+
     for contact_name in address_book.contacts:
         print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
         print(f'Phone: {address_book.contacts[contact_name].phone.value}', end="  ")
@@ -59,7 +59,7 @@ def add_phone():
     name = input("Enter the contact's name and surename: ")
     phone = input("Enter the phone number: ")
     if name in address_book.contacts:
-        if address_book.contacts[name].phone:
+        if address_book.contacts[name].phone.value:
             print(f"A phone number already exists for the contact {name}.")
         elif address_book.contacts[name].add_phone(phone):
             print(f"Phone number: {phone} added to contact {name}.")
