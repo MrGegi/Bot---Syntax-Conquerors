@@ -70,7 +70,7 @@ class Contact():
             delta = upcoming_birthday_date - today
             return delta.days
         else:
-            print("class_Contact:method_days_to_birthday=no_value")
+            print("it doesnt see any value")
             return None
 
 class Field:
@@ -96,10 +96,10 @@ class Name(Field):
 class Phone(Field):
     @Field.value.setter
     def value(self, number):
-        if number:
-            number = number.strip()
-            if not number.isdigit() or len(number) != 9:
-                raise ValueError("Number must be 9 digits long and contain digits only.")
+        if not number.strip().isdigit():
+            raise ValueError("Number can contain digits only.")
+        if len(number) != 9:
+            raise ValueError("Number must be 9 digits long.")
         self.internal_value = number
 
 class Address(Field):

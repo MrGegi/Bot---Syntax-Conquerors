@@ -20,26 +20,26 @@ def test_contacts(address_book: AddressBook):
     """Function fills up addres book with random contacts for debugging purposes"""
 
     random_contacts = [
-        {'name': 'zbyszek kowalski', 'phone': '606505404', 'email': 'zbyszek.kowalski@gmail.com', 'birthday': '1990-5-20'},
-        {'name': 'rychu nowak', 'phone': '546859652', 'email': 'rychu.nowak@gmail.com', 'birthday': None},
-        {'name': 'adam nowak', 'phone': None, 'email': 'adam.nowak@outlook.com', 'birthday': '1973-1-26'},
-        {'name': 'andrzej nowak', 'phone': '998114469', 'email': None, 'birthday': '1993-4-2'},
-        # {'name': 'adam kowalski', 'phone': '550483921', 'email': 'adam.kowalski@outlook.com', 'birthday': '1966-3-3'},
-        # {'name': 'jan kamiński', 'phone': '222035333', 'email': 'jan.kamiński@yahoo.com', 'birthday': '1981-5-3'},
-        # {'name': 'tomasz kamiński', 'phone': '070003125', 'email': 'tomasz.kamiński@outlook.com', 'birthday': '1991-7-16'},
-        # {'name': 'jan wójcik', 'phone': '821817242', 'email': 'jan.wójcik@outlook.com', 'birthday': '1990-3-19'},
-        # {'name': 'jan kowalczyk', 'phone': '949533885', 'email': 'jan.kowalczyk@yahoo.com', 'birthday': '1994-7-24'},
-        # {'name': 'piotr kowalczyk', 'phone': '860425088', 'email': 'piotr.kowalczyk@outlook.com', 'birthday': '1994-10-22'},
-        # {'name': 'adam kowalski', 'phone': '929106345', 'email': 'adam.kowalski@outlook.com', 'birthday': '1997-5-3'},
-        # {'name': 'tomasz kamiński', 'phone': '425074571', 'email': 'tomasz.kamiński@gmail.com', 'birthday': '1997-3-21'},
-        # {'name': 'jan nowak', 'phone': '433071736', 'email': 'jan.nowak@yahoo.com', 'birthday': '1965-7-16'},
-        # {'name': 'tomasz kowalczyk', 'phone': '172823343', 'email': 'tomasz.kowalczyk@outlook.com', 'birthday': '1965-6-26'},
-        # {'name': 'adam kowalski', 'phone': '445123820', 'email': 'adam.kowalski@gmail.com', 'birthday': '1974-6-25'},
-        # {'name': 'adam kowalczyk', 'phone': '129125052', 'email': 'adam.kowalczyk@yahoo.com', 'birthday': '1987-5-10'},
-        # {'name': 'andrzej wójcik', 'phone': '981967451', 'email': 'andrzej.wójcik@yahoo.com', 'birthday': '1992-1-5'},
-        # {'name': 'andrzej kowalski', 'phone': '336976595', 'email': 'andrzej.kowalski@outlook.com', 'birthday': '1966-12-13'},
-        # {'name': 'tomasz kowalczyk', 'phone': '172712416', 'email': 'tomasz.kowalczyk@yahoo.com', 'birthday': '1991-5-26'},
-        # {'name': 'adam kowalczyk', 'phone': '358341124', 'email': 'adam.kowalczyk@outlook.com', 'birthday': '1966-5-18'},
+        {'name': 'Zbyszek Kowalski', 'phone': '606505404', 'email': 'zbyszek.kowalski@gmail.com', 'birthday': '1990-5-20'},
+        {'name': 'Rychu Nowak', 'phone': '546859652', 'email': 'rychu.nowak@gmail.com', 'birthday': '1995-3-26'},
+        # {'name': 'Jan', 'last name': 'Wójcik', 'phone': '524835658', 'email': 'jan.wójcik@gmail.com', 'birthday': '5 9 1965'},
+        # {'name': 'Adam', 'last name': 'Kowalczyk', 'phone': '044175272', 'email': 'adam.kowalczyk@yahoo.com', 'birthday': '20 9 1985'},
+        # {'name': 'Tomasz', 'last name': 'Wójcik', 'phone': '523544638', 'email': 'tomasz.wójcik@yahoo.com', 'birthday': '3 8 1973'},
+        # {'name': 'Tomasz', 'last name': 'Kowalczyk', 'phone': '346595089', 'email': 'tomasz.kowalczyk@yahoo.com', 'birthday': '18 7 1978'},
+        # {'name': 'Andrzej', 'last name': 'Kowalski', 'phone': '270767747', 'email': 'andrzej.kowalski@yahoo.com', 'birthday': '6 8 1968'},
+        # {'name': 'Adam', 'last name': 'Nowak', 'phone': '587868953', 'email': 'adam.nowak@outlook.com', 'birthday': '1 7 1985'},
+        # {'name': 'Adam', 'last name': 'Kowalski', 'phone': '603277494', 'email': 'adam.kowalski@yahoo.com', 'birthday': '17 4 1961'},
+        # {'name': 'Tomasz', 'last name': 'Wójcik', 'phone': '114714793', 'email': 'tomasz.wójcik@outlook.com', 'birthday': '5 8 1985'},
+        # {'name': 'Andrzej', 'last name': 'Wójcik', 'phone': '819552896', 'email': 'andrzej.wójcik@outlook.com', 'birthday': '24 7 1964'},
+        # {'name': 'Andrzej', 'last name': 'Kamiński', 'phone': '497654652', 'email': 'andrzej.kamiński@gmail.com', 'birthday': '3 10 1982'},
+        # {'name': 'Adam', 'last name': 'Nowak', 'phone': '133258442', 'email': 'adam.nowak@outlook.com', 'birthday': '23 1 1980'},
+        # {'name': 'Tomasz', 'last name': 'Wójcik', 'phone': '313774876', 'email': 'tomasz.wójcik@yahoo.com', 'birthday': '1 1 1962'},
+        # {'name': 'Jan', 'last name': 'Wójcik', 'phone': '096489389', 'email': 'jan.wójcik@outlook.com', 'birthday': '4 4 1991'},
+        # {'name': 'Piotr', 'last name': 'Kamiński', 'phone': '809172250', 'email': 'piotr.kamiński@outlook.com', 'birthday': '25 8 1963'},
+        # {'name': 'Adam', 'last name': 'Nowak', 'phone': '491249850', 'email': 'adam.nowak@outlook.com', 'birthday': '16 5 1965'},
+        # {'name': 'Jan', 'last name': 'Kamiński', 'phone': '818690456', 'email': 'jan.kamiński@yahoo.com', 'birthday': '20 7 1995'},
+        # {'name': 'Jan', 'last name': 'Kowalski', 'phone': '441151946', 'email': 'jan.kowalski@gmail.com', 'birthday': '30 3 1986'},
+        # {'name': 'Piotr', 'last name': 'Kowalczyk', 'phone': '506499840', 'email': 'piotr.kowalczyk@outlook.com', 'birthday': '16 5 1962'}
         ]
     
     for person in random_contacts:
@@ -48,9 +48,8 @@ def test_contacts(address_book: AddressBook):
         address_book.contacts[person['name']].add_birthday(person['birthday'])
     
     for contact_name in address_book.contacts:
-        print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
-        print(f'Phone: {address_book.contacts[contact_name].phone.value}', end="  ")
-        print(f'Birthday: {address_book.contacts[contact_name].birthday.value}')
+        print(f'Name: {address_book.contacts[contact_name].name.value}')
+        print(f'Name: {address_book.contacts[contact_name].phone.value}')
       
 
 def add_phone():
@@ -129,7 +128,7 @@ def add_contact():
                 print(f"Contact {name} was added.")
 
 def delete_contact():
-    name = input("Enter the contact's name and surname: ")
+    name = input("Enter the contact's name and surname you'd like to delete: ")
     if name in address_book.contacts:
         address_book.contacts.pop(name)
         print(f'Contact {name} deleted.')
@@ -138,30 +137,6 @@ def delete_contact():
 
 def unknown_command():
     print('Unknown command')
-
-def set_birthday():
-    name = input("Enter the contact's name and surename: ").lower()
-    if name in address_book.contacts:
-        if not address_book.contacts[name].birthday.value:
-            while True:
-                year = input("Enter the contact's year of birth: ")
-                month = input("Enter the contact's month of birth: ")
-                day = input("Enter the contact's day of birth: ")
-                try:
-                    year = int(year)
-                    month = int(month)
-                    day = int(day)
-                    date = datetime(year, month, day)
-                    birthday_to_add = date.strftime('%Y-%m-%d')
-                    break
-                except ValueError:
-                    print("Invalid data. Please enter a valid date.")
-            address_book.contacts[name].add_birthday(birthday_to_add)
-            print(f"Birthday date ({birthday_to_add}) added to contact {name}")
-        else:
-            print(f"Contact {name} already has birthday date set to {address_book.contacts[name].birthday.value}.")
-    else:
-        print("Contact not found.")
 
 def days_to_birthday():
     for contact_name in address_book.contacts:
@@ -186,7 +161,7 @@ def input_parser():
     'change phone': change_phone_num,
     # 'show contact': show_contact,
     'delete phone': delete_phone,
-    'add birthday' : set_birthday,
+    # 'add birthday' : set_birthday,
     'birthday': days_to_birthday,
     'show all': show_all,
     'find contact' : find_contact,
