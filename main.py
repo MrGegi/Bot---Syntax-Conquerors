@@ -32,10 +32,10 @@ def test_contacts(address_book: AddressBook):
 
     random_contacts = [
         # {'name': 'NAME', 'phone': 'PHONE', 'email': 'EMAIL', 'birthday': 'BIRTHDAY', "address": "ADDRESS"},
-        {'name': 'zbyszek kowalski', 'phone': '606505404', 'email': 'zbyszek.kowalski@gmail.com', 'birthday': '1990-5-20'},
-        {'name': 'rychu nowak', 'phone': '546859652', 'email': 'rychu.nowak@gmail.com', 'birthday': None},
-        {'name': 'adam nowak', 'phone': None, 'email': 'adam.nowak@outlook.com', 'birthday': '1973-1-26'},
-        {'name': 'andrzej nowak', 'phone': '998114469', 'email': None, 'birthday': '1993-4-2'},
+        {'name': 'zbyszek kowalski', 'phone': '606505404', 'email': 'zbyszek.kowalski@gmail.com', 'birthday': '1990-5-20', 'address': 'Sosnowiec ul. Sloneczna 32/1'},
+        {'name': 'rychu nowak', 'phone': '546859652', 'email': 'rychu.nowak@gmail.com', 'birthday': None, 'address': None},
+        # {'name': 'adam nowak', 'phone': None, 'email': 'adam.nowak@outlook.com', 'birthday': '1973-1-26'},
+        # {'name': 'andrzej nowak', 'phone': '998114469', 'email': None, 'birthday': '1993-4-2'},
         # {'name': 'adam kowalski', 'phone': '550483921', 'email': 'adam.kowalski@outlook.com', 'birthday': '1966-3-3'},
         # {'name': 'jan kamiński', 'phone': '222035333', 'email': 'jan.kamiński@yahoo.com', 'birthday': '1981-5-3'},
         # {'name': 'tomasz kamiński', 'phone': '070003125', 'email': 'tomasz.kamiński@outlook.com', 'birthday': '1991-7-16'},
@@ -59,6 +59,7 @@ def test_contacts(address_book: AddressBook):
         address_book.contacts[person['name']].add_phone(person['phone'])
         address_book.contacts[person['name']].add_email(person['email'])
         address_book.contacts[person['name']].add_birthday(person['birthday'])
+        address_book.contacts[person['name']].add_address(person['address'])
 
     # for contact_name in address_book.contacts:
     #     print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
@@ -97,7 +98,8 @@ def find_contact():
         print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
         print(f'Phone: {address_book.contacts[contact_name].phone.value}', end="  ")
         print(f'Birthday: {address_book.contacts[contact_name].birthday.value}', end="  ")
-        print(f'Email: {address_book.contacts[contact_name].email.value}')
+        print(f'Email: {address_book.contacts[contact_name].email.value}', end="  ")
+        print(f'Address: {address_book.contacts[contact_name].address.value}')
     else:
         print("Contact not found.")
 
@@ -174,7 +176,7 @@ def days_to_birthday():
 def show_all():
     width = 154
     print("\n+" + "-" * width + "+")
-    print('|{:^30}|{:^30}|{:^30}|{:^30}|{:^30}|'.format("NAME", "PHONE", "EMAIL", "BIRHDAY", "ADDRESS"))
+    print('|{:^30}|{:^30}|{:^30}|{:^30}|{:^30}|'.format("NAME", "PHONE", "EMAIL", "BIRTHDAY", "ADDRESS"))
     print("+" + "-" * width + "+")
     for contact_name in address_book.contacts:
         contact = address_book.contacts[contact_name]
@@ -222,6 +224,41 @@ def delete_email():
     address_book.contacts[name].remove_email()
     print(f'Email deleted')
 
+def add_address():
+    name = input("Enter the contact's name and surname: ")
+    if not name in address_book.contacts:
+        print(f'There is no contact {name}')
+        return
+    address = input("Enter the address: ")
+    try:
+        address_book.contacts[name].add_address(address)
+        if address_book.contacts[name].address.value:
+            print(f"{address} was added to contact {name}.")
+    except:
+        return
+    
+def change_address():
+    name = input("Enter the contact's name and surname: ")
+    if not name in address_book.contacts:
+        print(f'There is no contact {name}')
+        return
+    if not address_book.contacts[name].address.value:
+        print(f"Contact {name} doesnt have a email yet. However we can proceed.")
+    address = input("Enter the address: ")
+    try:
+        address_book.contacts[name].add_address(address)
+        if address_book.contacts[name].address.value == address:
+            print(f"{address} was changed for contact {name}.")
+    except:
+        return
+    
+def delete_address():
+    name = input("Enter the contact's name and surname: ")
+    if not name in address_book.contacts:
+        print(f'There is no contact {name}')
+        return
+    address_book.contacts[name].remove_address()
+    print(f'Address deleted')
 
 def add_note():
     note = input("Enter the note text: ")
@@ -266,6 +303,9 @@ def input_parser():
     'add email': add_email,
     'change email': change_email,
     'delete email': delete_email,
+    'add address': add_address,
+    'change address': change_address,
+    'delete address': delete_address,
     'show all': show_all,
     'find contact' : find_contact,
     'save': save_to_file,

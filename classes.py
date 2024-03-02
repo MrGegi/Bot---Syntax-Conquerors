@@ -45,13 +45,10 @@ class Contact():
         self.email = Email(email)
         
     def add_address(self, address):
-        self.address = Address(address).value
+        self.address = Address(address)
 
-    def remove_address(self):
-        self.address = ''
-
-    def change_address(self, address):
-        self.address = Address(address).value
+    def remove_address(self, address = None):
+        self.address = Address(address)
     
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
@@ -101,7 +98,11 @@ class Phone(Field):
 
 class Address(Field):
     @Field.value.setter
-    def value(self, address: str):
+    def value(self, address):
+        if address:
+            if len(address) > 40:
+                print('Adress can be 30 characters long')
+                raise ValueError
         self.internal_value = address
 
 class Email(Field): 
