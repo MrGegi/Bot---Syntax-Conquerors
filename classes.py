@@ -19,24 +19,13 @@ class Contact():
         self.birthday = Birthday(birthday)
         
     def add_phone(self, phone):
-        try:
-            self.phone = Phone(phone)
-            # print(self.phone)
-            return True
-        except ValueError as e:
-            print(e)
-            return False
+        self.phone = Phone(phone)       
         
-    def delete_phone(self):
-        self.phone = None   
+    def delete_phone(self, phone=None):
+        self.phone = Phone(phone)   
 
     def change_phone(self, new_phone):
-        try:
-            self.phone = Phone(new_phone)
-            return True
-        except ValueError as e:
-            print(e)
-            return False
+        self.phone = Phone(new_phone) 
         
     def add_email(self, email):
         self.email = Email(email)
@@ -64,7 +53,6 @@ class Contact():
             elif today > upcoming_birthday_date:
                 upcoming_birthday_date = datetime(today.year + 1, birthday_date.month, birthday_date.day)
             delta = upcoming_birthday_date - today
-            # print(delta)
             return delta.days + 1
         else:
             return None
@@ -95,7 +83,8 @@ class Phone(Field):
         if number:
             number = number.strip()
             if not number.isdigit() or len(number) != 9:
-                raise ValueError("Number must be 9 digits long and contain digits only.")
+                print("Number must be 9 digits long and contain digits only.")
+                raise ValueError
             self.internal_value = number[0:3]+'-'+number[3:6]+'-'+number[6:]
 
 class Address(Field):

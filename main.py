@@ -69,7 +69,7 @@ def test_contacts(address_book: AddressBook):
         address_book.contacts[person['name']].add_address(person['address'])
     
 def add_contact():    
-    name = input("Enter the contact's name and surname: ")
+    name = input("Enter the contact's name and surname: ").lower()
     if name in address_book.contacts:
         print("A contact with this name already exists.")
     else:
@@ -81,7 +81,7 @@ def add_contact():
                 print(f"Contact {name} was added.")
 
 def delete_contact():
-    name = input("Enter the contact's name and surname you'd like to delete: ")
+    name = input("Enter the contact's name and surname you'd like to delete: ").lower()
     if name in address_book.contacts:
         address_book.contacts.pop(name)
         print(f'Contact {name} deleted.')
@@ -89,31 +89,35 @@ def delete_contact():
         print(f'There is no contact {name}')
 
 def add_phone():
-    name = input("Enter the contact's name and surename: ")
-    phone = input("Enter the phone number: ")
-    if name in address_book.contacts:
+    name = input("Enter the contact's name and surname: ").lower()
+    if not name in address_book.contacts:
+        print(f'There is no contact {name}')
+        return
+    phone = input("Enter phone number: ")
+    try:
+        address_book.contacts[name].add_phone(phone)
         if address_book.contacts[name].phone.value:
-            print(f"A phone number already exists for the contact {name}.")
-        elif address_book.contacts[name].add_phone(phone):
-            print(f"Phone number: {phone} added to contact {name}.")
-        else:
-            print("Failed to add phone number.")
-    else:
-        print("Contact not found.")
+            print(f"{phone} was added to contact {name}.")
+    except:
+        return
 
 def change_phone_num():
-    name = input("Enter the contact's name and surename: ")
+    name = input("Enter the contact's name and surename: ").lower()
+    if not name in address_book.contacts:
+        print(f'There is no contact {name}')
+        return
+    if not address_book.contacts[name].phone.value:
+        print(f"Contact {name} doesnt have a phone number yet. However we can proceed.")
     new_phone = input("Enter the new phone number: ")
-    if name in address_book.contacts:
-        if address_book.contacts[name].change_phone(new_phone):
-            print(f"Phone number changed for {name}.")
-        else:
-            print("Failed to change phone number.")
-    else:
-        print("Contact not found.")
+    try:
+        address_book.contacts[name].add_phone(new_phone)
+        if address_book.contacts[name].phone.value == new_phone[0:3] + '-' + new_phone[3:6] + '-' + new_phone[6:]:
+            print(f"Number was changed for contact {name}.")
+    except:
+        return
 
 def delete_phone():
-    name = input("Enter the contact's name and surename: ")
+    name = input("Enter the contact's name and surename: ").lower()
     if name in address_book.contacts:
         address_book.contacts[name].delete_phone()
         print(f"Phone number deleted for {name}.")
@@ -121,7 +125,7 @@ def delete_phone():
         print("Contact not found.")
 
 def add_email():
-    name = input("Enter the contact's name and surname: ")
+    name = input("Enter the contact's name and surname: ").lower()
     if not name in address_book.contacts:
         print(f'There is no contact {name}')
         return
@@ -134,7 +138,7 @@ def add_email():
         return
     
 def change_email():
-    name = input("Enter the contact's name and surname: ")
+    name = input("Enter the contact's name and surname: ").lower()
     if not name in address_book.contacts:
         print(f'There is no contact {name}')
         return
@@ -149,7 +153,7 @@ def change_email():
         return
     
 def delete_email():
-    name = input("Enter the contact's name and surname: ")
+    name = input("Enter the contact's name and surname: ").lower()
     if not name in address_book.contacts:
         print(f'There is no contact {name}')
         return
@@ -226,7 +230,7 @@ def days_to_birthday():
     print("+" + "-" * width + "+\n")
 
 def add_address():
-    name = input("Enter the contact's name and surname: ")
+    name = input("Enter the contact's name and surname: ").lower()
     if not name in address_book.contacts:
         print(f'There is no contact {name}')
         return
@@ -242,7 +246,7 @@ def add_address():
         return
     
 def change_address():
-    name = input("Enter the contact's name and surname: ")
+    name = input("Enter the contact's name and surname: ").lower()
     if not name in address_book.contacts:
         print(f'There is no contact {name}')
         return
@@ -260,7 +264,7 @@ def change_address():
         return
     
 def delete_address():
-    name = input("Enter the contact's name and surname: ")
+    name = input("Enter the contact's name and surname: ").lower()
     if not name in address_book.contacts:
         print(f'There is no contact {name}')
         return
