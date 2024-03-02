@@ -45,8 +45,8 @@ def test_contacts(address_book: AddressBook):
     for person in random_contacts:
         address_book.add_contact(person['name'])
         address_book.contacts[person['name']].add_phone(person['phone'])
-        address_book.contacts[person['name']].add_birthday(person['birthday'])
         address_book.contacts[person['name']].add_email(person['email'])
+        address_book.contacts[person['name']].add_birthday(person['birthday'])
 
     for contact_name in address_book.contacts:
         print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
