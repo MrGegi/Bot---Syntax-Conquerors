@@ -22,7 +22,8 @@ def input_error(func):
             return func(*args, **kwargs)
         except Exception as raised_exception:
             line_number = (lambda traceback: traceback.tb_lineno if not traceback.tb_next else traceback.tb_next.tb_lineno)(raised_exception.__traceback__)
-            return f"Unhandled exception >> Line:{line_number} Type:{type(raised_exception).__name__} Str:{str(raised_exception)}"
+            print(f"Unhandled exception >> Line:{line_number} Type:{type(raised_exception).__name__} Str:{str(raised_exception)}")
+            return 
     return gracefull_error_handling
 
 def test_contacts(address_book: AddressBook):  
