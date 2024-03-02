@@ -38,26 +38,26 @@ def test_contacts(address_book: AddressBook):
     """Function fills up addres book with random contacts for debugging purposes"""
 
     random_contacts = [
-        {'name': 'adam wójcik', 'phone': '206947535', 'email': 'adam.wojcik@yahoo.com', 'birthday': '1981-5-12', 'address': 'sosnowiec ladna 57/10'},
-        {'name': 'tomasz kowalczyk', 'phone': '521861174', 'email': 'tomasz.kowalczyk@outlook.com', 'birthday': '1966-6-5', 'address': 'sosnowiec sloneczna 57/10'},
-        {'name': 'jan kowalczyk', 'phone': None, 'email': 'jan.kowalczyk@outlook.com', 'birthday': '1960-9-9', 'address': 'radom polna 57/10'},
+        {'name': 'adam wójcik', 'phone': '206947535', 'email': 'adam.wojcik@yahoo.com', 'birthday': '1981-3-2', 'address': 'sosnowiec ladna 57/10'},
+        {'name': 'tomasz kowalczyk', 'phone': '521861174', 'email': 'tomasz.kowalczyk@outlook.com', 'birthday': '1966-3-3', 'address': 'sosnowiec sloneczna 57/10'},
+        {'name': 'jan kowalczyk', 'phone': None, 'email': 'jan.kowalczyk@outlook.com', 'birthday': '1960-3-11', 'address': 'radom polna 57/10'},
         {'name': 'andrzej kowalski', 'phone': '065754408', 'email': None, 'birthday': '1983-11-21', 'address': 'warszawa ladna 57/10'},
         {'name': 'tomasz nowak', 'phone': '046952319', 'email': 'tomasz.nowak@yahoo.com', 'birthday': None, 'address': 'sosnowiec kolorowa 57/10'},
-        # {'name': 'adam kamiński', 'phone': '659435166', 'email': 'adam.kaminski@gmail.com', 'birthday': '1968-3-26', 'address': None},
-        # {'name': 'piotr nowak', 'phone': '678910629', 'email': 'piotr.nowak@yahoo.com', 'birthday': '1971-3-24', 'address': 'poznan 13/3'},
-        # {'name': 'adam kowalski', 'phone': '324844741', 'email': 'adam.kowalski@outlook.com', 'birthday': '1991-3-4', 'address': 'krakow 26/10'},
-        # {'name': 'adam kamiński', 'phone': '453802562', 'email': 'adam.kaminski@yahoo.com', 'birthday': '1980-9-22', 'address': 'warszawa 76/18'},
-        # {'name': 'tomasz kowalczyk', 'phone': '164015881', 'email': 'tomasz.kowalczyk@outlook.com', 'birthday': '2002-1-3', 'address': 'sosnowiec 74/10'},
-        # {'name': 'jan kowalczyk', 'phone': '915881994', 'email': 'jan.kowalczyk@yahoo.com', 'birthday': '1964-3-23', 'address': 'sosnowiec 100/11'},
-        # {'name': 'andrzej nowak', 'phone': '529363681', 'email': 'andrzej.nowak@gmail.com', 'birthday': '1999-2-8', 'address': 'krakow 13/1'},
-        # {'name': 'andrzej kowalski', 'phone': '771463826', 'email': 'andrzej.kowalski@yahoo.com', 'birthday': '1966-12-22', 'address': 'warszawa 18/2'},
-        # {'name': 'adam kowalczyk', 'phone': '635549242', 'email': 'adam.kowalczyk@gmail.com', 'birthday': '1993-3-19', 'address': 'sosnowiec 25/12'},
-        # {'name': 'tomasz kowalczyk', 'phone': '623143519', 'email': 'tomasz.kowalczyk@gmail.com', 'birthday': '1977-12-6', 'address': 'sosnowiec 37/19'},
-        # {'name': 'jan kowalski', 'phone': '483958195', 'email': 'jan.kowalski@outlook.com', 'birthday': '1972-4-17', 'address': 'krakow 84/10'},
-        # {'name': 'jan kowalski', 'phone': '039342693', 'email': 'jan.kowalski@outlook.com', 'birthday': '1981-5-3', 'address': 'poznan 97/17'},
-        # {'name': 'andrzej kamiński', 'phone': '718624235', 'email': 'andrzej.kaminski@yahoo.com', 'birthday': '1973-1-14', 'address': 'gdansk 42/6'},
-        # {'name': 'tomasz kowalczyk', 'phone': '052130035', 'email': 'tomasz.kowalczyk@gmail.com', 'birthday': '1964-8-14', 'address': 'krakow 17/6'},
-        # {'name': 'andrzej kowalczyk', 'phone': '087189332', 'email': 'andrzej.kowalczyk@outlook.com', 'birthday': '1967-3-27', 'address': 'gdansk 11/1'},
+        {'name': 'adam kamiński', 'phone': '659435166', 'email': 'adam.kaminski@gmail.com', 'birthday': '1968-3-26', 'address': None},
+        {'name': 'piotr nowak', 'phone': '678910629', 'email': 'piotr.nowak@yahoo.com', 'birthday': '1971-3-24', 'address': 'poznan 13/3'},
+        {'name': 'adam kowalski', 'phone': '324844741', 'email': 'adam.kowalski@outlook.com', 'birthday': '1991-3-4', 'address': 'krakow 26/10'},
+        {'name': 'piotr kamiński', 'phone': '453802562', 'email': 'adam.kaminski@yahoo.com', 'birthday': '1980-9-22', 'address': 'warszawa 76/18'},
+        {'name': 'tomasz adamek', 'phone': '164015881', 'email': 'tomasz.kowalczyk@outlook.com', 'birthday': '2002-1-3', 'address': 'sosnowiec 74/10'},
+        {'name': 'piotr kowalczyk', 'phone': '915881994', 'email': 'jan.kowalczyk@yahoo.com', 'birthday': '1964-3-23', 'address': 'sosnowiec 100/11'},
+        {'name': 'andrzej nowak', 'phone': '529363681', 'email': 'andrzej.nowak@gmail.com', 'birthday': '1999-2-8', 'address': 'krakow 13/1'},
+        {'name': 'sebastian kowalski', 'phone': '771463826', 'email': 'andrzej.kowalski@yahoo.com', 'birthday': '1966-12-22', 'address': 'warszawa 18/2'},
+        {'name': 'adam kowalczyk', 'phone': '635549242', 'email': 'adam.kowalczyk@gmail.com', 'birthday': '1993-3-19', 'address': 'sosnowiec 25/12'},
+        {'name': 'tomasz siekierka', 'phone': '623143519', 'email': 'tomasz.kowalczyk@gmail.com', 'birthday': '1977-12-6', 'address': 'sosnowiec 37/19'},
+        {'name': 'jan kowalski', 'phone': '483958195', 'email': 'jan.kowalski@outlook.com', 'birthday': '1972-4-17', 'address': 'krakow 84/10'},
+        {'name': 'leszek kowalski', 'phone': '039342693', 'email': 'jan.kowalski@outlook.com', 'birthday': '1981-5-3', 'address': 'poznan 97/17'},
+        {'name': 'andrzej kamiński', 'phone': '718624235', 'email': 'andrzej.kaminski@yahoo.com', 'birthday': '1973-1-14', 'address': 'gdansk 42/6'},
+        {'name': 'tomasz socha', 'phone': '052130035', 'email': 'tomasz.kowalczyk@gmail.com', 'birthday': '1964-8-14', 'address': 'krakow 17/6'},
+        {'name': 'andrzej kowalczyk', 'phone': '087189332', 'email': 'andrzej.kowalczyk@outlook.com', 'birthday': '1967-3-27', 'address': 'gdansk 11/1'},
     ]
 
     for person in random_contacts:
@@ -65,7 +65,7 @@ def test_contacts(address_book: AddressBook):
         address_book.contacts[person['name']].add_phone(person['phone'])
         address_book.contacts[person['name']].add_email(person['email'])
         address_book.contacts[person['name']].add_birthday(person['birthday'])
-        address_book.contacts[person['name']].add_address(person['address'].title())
+        address_book.contacts[person['name']].add_address(person['address'])
 
     # for contact_name in address_book.contacts:
     #     print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
@@ -130,7 +130,7 @@ def save_to_file():
     print('File has been saved')
 
 def end_program():
-    save_to_file()
+    # save_to_file()
     print('Goodbye')
 
 def add_contact():    
@@ -183,16 +183,48 @@ def set_birthday():
         print("Contact not found.")
 
 def days_to_birthday():
-    width = 92
+    width = 123
     print("\n+" + "-" * width + "+")
-    print('|{:^30}|{:^30}|{:^30}|'.format("NAME", "BIRTHDAY", "DAYS TO BIRTHDAY"))
+    print('|{:^30}|{:^30}|{:^30}|{:^30}|'.format("NAME", "BIRTHDAY", "DAYS TO BIRTHDAY", "UPCOMING"))
     print("+" + "-" * width + "+")
+    
     for contact_name in address_book.contacts:
         contact = address_book.contacts[contact_name]
-        format_value = lambda x: x if x is not None else "---"
-        print('|{:^30}'.format(format_value(contact.name.value.title())), end="")
-        print('|{:^30}'.format(format_value(contact.birthday.value)), end="")
-        print('|{:^30}|'.format(format_value(contact.days_to_birthday)), end="\n")
+        if contact.birthday.value and contact.days_to_birthday < 31:
+            format_value = lambda x: x if x is not None else "---"
+            print('|{:^30}'.format(format_value(contact.name.value.title())), end="")
+            print('|{:^30}'.format(format_value(contact.birthday.value)), end="")
+            print('|{:^30}'.format(format_value(contact.days_to_birthday)), end="")
+
+            days_to_birthday = contact.days_to_birthday
+            
+            if contact.birthday.value:
+                birthday_date = datetime.strptime(contact.birthday.value, "%Y-%m-%d")
+                today = datetime.today()
+                next_birthday = datetime(today.year, birthday_date.month, birthday_date.day)
+                
+                if today > next_birthday:
+                    next_birthday = datetime(today.year + 1, birthday_date.month, birthday_date.day)
+                
+                days_from_beginning_of_week = (today.weekday() - 7) % 7
+                
+                if days_to_birthday == 0:
+                    print('|{:^30}|'.format("Today"), end="\n")
+                elif days_to_birthday == 1:
+                    print('|{:^30}|'.format("Tomorrow"), end="\n")
+                elif days_to_birthday < 7 - days_from_beginning_of_week:
+                    print('|{:^30}|'.format("This week"), end="\n")
+                elif days_to_birthday < 14 - days_from_beginning_of_week:
+                    print('|{:^30}|'.format("Next week"), end="\n")
+                elif next_birthday.month == today.month:
+                    print('|{:^30}|'.format("This month"), end="\n")
+                elif (today.month + 1) % 12 == next_birthday.month % 12:
+                    print('|{:^30}|'.format("Next month"), end="\n")
+                else:
+                    print('|{:^30}|'.format("---"), end="\n")
+            else:
+                print('|{:^30}|'.format("---"), end="\n")
+            
     print("+" + "-" * width + "+\n")
 
 def show_all():

@@ -59,10 +59,13 @@ class Contact():
             today = datetime.today()
             birthday_date = datetime.strptime(self.birthday.value, "%Y-%m-%d")
             upcoming_birthday_date = datetime(today.year, birthday_date.month, birthday_date.day)
-            if today > upcoming_birthday_date:
+            if today.date() == upcoming_birthday_date.date():
+                return 0
+            elif today > upcoming_birthday_date:
                 upcoming_birthday_date = datetime(today.year + 1, birthday_date.month, birthday_date.day)
             delta = upcoming_birthday_date - today
-            return delta.days
+            # print(delta)
+            return delta.days + 1
         else:
             return None
 
@@ -98,6 +101,10 @@ class Phone(Field):
 class Address(Field):
     @Field.value.setter
     def value(self, address: str):
+        if address:
+            if len(address) > 30:
+                raise ValueError('Address should not exceed 30 characters.')
+            address = address.title()
         self.internal_value = address
 
 class Email(Field): 
