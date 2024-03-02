@@ -22,9 +22,13 @@ def input_error(func):
         try:
             return func(*args, **kwargs)
         except Exception as raised_exception:
-            line_number = (lambda traceback: traceback.tb_lineno if not traceback.tb_next else traceback.tb_next.tb_lineno)(raised_exception.__traceback__)
-            print(f"Unhandled exception >> Line:{line_number} Type:{type(raised_exception).__name__} Str:{str(raised_exception)}")
-            return 
+            if isinstance(raised_exception, ValueError) and str(raised_exception) == "class_email:setter-regex_format_error":
+                print("Wrong email format!")
+                return
+            else:
+                line_number = (lambda traceback: traceback.tb_lineno if not traceback.tb_next else traceback.tb_next.tb_lineno)(raised_exception.__traceback__)
+                print(f"Unhandled exception >> Line:{line_number} Type:{type(raised_exception).__name__} Str:{str(raised_exception)}")
+                return 
     return gracefull_error_handling
 
 @input_error
@@ -32,15 +36,15 @@ def test_contacts(address_book: AddressBook):
     """Function fills up addres book with random contacts for debugging purposes"""
 
     random_contacts = [
-        {'name': 'adam wójcik', 'phone': '206947535', 'email': 'adam.wójcik@yahoo.com', 'birthday': '1981-5-12', 'address': 'sosnowiec 57/10'},
+        {'name': 'adam wójcik', 'phone': '206947535', 'email': 'adam.wojcik@yahoo.com', 'birthday': '1981-5-12', 'address': 'sosnowiec 57/10'},
         {'name': 'tomasz kowalczyk', 'phone': '521861174', 'email': 'tomasz.kowalczyk@outlook.com', 'birthday': '1966-6-5', 'address': 'krakow 42/8'},
         {'name': 'jan kowalczyk', 'phone': None, 'email': 'jan.kowalczyk@outlook.com', 'birthday': '1960-9-9', 'address': 'warszawa 51/9'},
         {'name': 'andrzej kowalski', 'phone': '065754408', 'email': None, 'birthday': '1983-11-21', 'address': 'warszawa 37/16'},
         {'name': 'tomasz nowak', 'phone': '046952319', 'email': 'tomasz.nowak@yahoo.com', 'birthday': None, 'address': 'krakow 33/7'},
-        {'name': 'adam kamiński', 'phone': '659435166', 'email': 'adam.kamiński@gmail.com', 'birthday': '1968-3-26', 'address': None},
+        # {'name': 'adam kamiński', 'phone': '659435166', 'email': 'adam.kaminski@gmail.com', 'birthday': '1968-3-26', 'address': None},
         # {'name': 'piotr nowak', 'phone': '678910629', 'email': 'piotr.nowak@yahoo.com', 'birthday': '1971-3-24', 'address': 'poznan 13/3'},
         # {'name': 'adam kowalski', 'phone': '324844741', 'email': 'adam.kowalski@outlook.com', 'birthday': '1991-3-4', 'address': 'krakow 26/10'},
-        # {'name': 'adam kamiński', 'phone': '453802562', 'email': 'adam.kamiński@yahoo.com', 'birthday': '1980-9-22', 'address': 'warszawa 76/18'},
+        # {'name': 'adam kamiński', 'phone': '453802562', 'email': 'adam.kaminski@yahoo.com', 'birthday': '1980-9-22', 'address': 'warszawa 76/18'},
         # {'name': 'tomasz kowalczyk', 'phone': '164015881', 'email': 'tomasz.kowalczyk@outlook.com', 'birthday': '2002-1-3', 'address': 'sosnowiec 74/10'},
         # {'name': 'jan kowalczyk', 'phone': '915881994', 'email': 'jan.kowalczyk@yahoo.com', 'birthday': '1964-3-23', 'address': 'sosnowiec 100/11'},
         # {'name': 'andrzej nowak', 'phone': '529363681', 'email': 'andrzej.nowak@gmail.com', 'birthday': '1999-2-8', 'address': 'krakow 13/1'},
@@ -49,7 +53,7 @@ def test_contacts(address_book: AddressBook):
         # {'name': 'tomasz kowalczyk', 'phone': '623143519', 'email': 'tomasz.kowalczyk@gmail.com', 'birthday': '1977-12-6', 'address': 'sosnowiec 37/19'},
         # {'name': 'jan kowalski', 'phone': '483958195', 'email': 'jan.kowalski@outlook.com', 'birthday': '1972-4-17', 'address': 'krakow 84/10'},
         # {'name': 'jan kowalski', 'phone': '039342693', 'email': 'jan.kowalski@outlook.com', 'birthday': '1981-5-3', 'address': 'poznan 97/17'},
-        # {'name': 'andrzej kamiński', 'phone': '718624235', 'email': 'andrzej.kamiński@yahoo.com', 'birthday': '1973-1-14', 'address': 'gdansk 42/6'},
+        # {'name': 'andrzej kamiński', 'phone': '718624235', 'email': 'andrzej.kaminski@yahoo.com', 'birthday': '1973-1-14', 'address': 'gdansk 42/6'},
         # {'name': 'tomasz kowalczyk', 'phone': '052130035', 'email': 'tomasz.kowalczyk@gmail.com', 'birthday': '1964-8-14', 'address': 'krakow 17/6'},
         # {'name': 'andrzej kowalczyk', 'phone': '087189332', 'email': 'andrzej.kowalczyk@outlook.com', 'birthday': '1967-3-27', 'address': 'gdansk 11/1'},
     ]
