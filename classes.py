@@ -38,6 +38,12 @@ class Contact():
             print(e)
             return False
         
+    def add_email(self, email):
+        self.email = Email(email)
+
+    def remove_email(self, email=None):
+        self.email = Email(email)
+        
     def add_address(self, address):
         self.address = Address(address).value
 
@@ -100,21 +106,15 @@ class Address(Field):
 
 class Email(Field): 
     @Field.value.setter
-    def email(self, email):
-        
-        """Sprawdzenie czy format maila jest prawidłowy"""
-
-        patern_email = r"^([A-Za-z0-9]+ |[A-Za-z0-9][A-Za-z0-9\.\_]+[A-Za-z0-9])@([A-Za-z0-9]+|[A-Za-z0-9\_\-]+[A-Za-z0-9])\.([a-z]{,3}|[a-z]{3}\.[a-z]{2})$"
-        result = re.findall(patern_email,email)
-
-        if result != []:
-            end_text = 'Adress mail has correct format.'
-            self.__name  = email
-        else:
-            end_text = "Wrong mail format!"
-        print(end_text)
-        # print(result)
-        return
+    def value(self, email):
+        if email:
+            """Check email format"""
+            patern_email = r"^([A-Za-z0-9]+ |[A-Za-z0-9][A-Za-z0-9\.\_]+[A-Za-z0-9])@([A-Za-z0-9]+|[A-Za-z0-9\_\-]+[A-Za-z0-9])\.([a-z]{,3}|[a-z]{3}\.[a-z]{2})$"
+            result = re.findall(patern_email,email)
+            if result == []:
+                print('Wrong mail format!')
+                raise ValueError
+            self.internal_value = email
 
 class Birthday(Field):
     @Field.value.setter
