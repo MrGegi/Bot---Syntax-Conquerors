@@ -51,8 +51,8 @@ def test_contacts(address_book: AddressBook):
     for contact_name in address_book.contacts:
         print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
         print(f'Phone: {address_book.contacts[contact_name].phone.value}', end="  ")
-        print(f'Birthday: {address_book.contacts[contact_name].birthday.value}', end="  ")
-        print(f'Email: {address_book.contacts[contact_name].email.value}')
+        print(f'Birthday: {address_book.contacts[contact_name].email.value}', end="  ")
+        print(f'Email: {address_book.contacts[contact_name].birthday.value}')
       
 
 def add_phone():
