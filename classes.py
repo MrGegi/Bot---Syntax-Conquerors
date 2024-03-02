@@ -124,7 +124,7 @@ class Birthday(Field):
 class Notebook(UserDict):
     num_of_notes = 0
 
-    def add_note(self, note):
+    def add_note(self, note, tags):
         try:
             Notebook.num_of_notes += 1
             while True:
@@ -133,7 +133,7 @@ class Notebook(UserDict):
                 else:
                     break
             self.num_of_note = Notebook.num_of_notes
-            self.data[self.num_of_note] = Note(note).internal_value
+            self.data[self.num_of_note] = [Note(note).internal_value, Tags(tags).internal_value]
             return True
         
         except ValueError as e:
@@ -142,9 +142,32 @@ class Notebook(UserDict):
         
     def show_notes(self):
         all_notes = ''
-        for num_of_note, note in self.data.items():
-            all_notes += f'Number of note: {str(num_of_note):<2} Note: {str(note)}\n'
+        for num_of_note, note_and_tags in self.data.items():
+            note = note_and_tags[0]
+            tags = note_and_tags[1]
+            str_tags = ''
+            for tag in tags:
+                str_tags += f'{tag}; '
+            all_notes += f'Number of note: {str(num_of_note):<2} Note: {str(note)} Tags: {str_tags}\n'
         return all_notes
+    
+    def search_note_by_tags(self, searched_tags):
+        searched_tags = Tags(searched_tags).internal_value
+        finded_notes = ''
+        for num_of_note, note_and_tags in self.data.items():
+            note = note_and_tags[0]
+            tags = note_and_tags[1]
+            
+            if searched_tags <= tags:
+                str_tags = ''
+                for tag in tags:
+                    str_tags += f'{tag}; '
+                finded_notes += f'Number of note: {str(num_of_note):<2} Note: {str(note)} Tags: {str_tags}\n'
+                
+        if finded_notes == '':
+            return f'Notes not find'
+        else:
+            return finded_notes
     
     def edit_note(self, num_of_note):
         if num_of_note not in str(self.data.keys()):
@@ -153,7 +176,8 @@ class Notebook(UserDict):
         else:
             try:
                 note = input('Enter new note text: ')
-                self.data[num_of_note] = Note(note).internal_value
+                tags = input("Enter new tags: ")
+                self.data[int(num_of_note)] = [Note(note).internal_value, Tags(tags).internal_value]
                 return True
             
             except ValueError as e:
@@ -180,8 +204,15 @@ class Notebook(UserDict):
     
 class Note(Field):
     @Field.value.setter
-    
     def value(self, note):
         if note == '':
             raise ValueError("Note must include any characters")
         self.internal_value = note
+
+class Tags(Field):
+    @Field.value.setter
+    def value(self, tags:str):
+        tags = tags.lower()
+        tags = re.split(r'[^0-9a-z]', tags)
+        tags = set(filter(lambda tag: tag.isalnum(), tags))
+        self.internal_value = tags

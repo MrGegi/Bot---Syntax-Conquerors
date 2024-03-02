@@ -247,14 +247,17 @@ def remove_note():
         num_of_note = input('Enter number of note or write "all" to remove all notes: ')
         address_book.notebook.remove_note(num_of_note)
 
-
 def add_note():
     note = input("Enter the note text: ")
-    address_book.notebook.add_note(note)
-    # tag = input("Enter tags")
+    tags = input("Enter tags: ")
+    address_book.notebook.add_note(note, tags)
 
 def show_notes():
     print('List of notes: \n', address_book.notebook.show_notes())
+
+def search_note_by_tags():
+    searched_tags = input("Enter tags: ")
+    print(address_book.notebook.search_note_by_tags(searched_tags))
 
 def edit_note():
     if not address_book.notebook.data:
@@ -281,6 +284,7 @@ def input_parser():
     'delete contact': delete_contact,
     'add note': add_note,
     'show notes':show_notes,
+    'search note': search_note_by_tags,
     'edit note': edit_note,
     'remove note': remove_note,
     'add phone': add_phone,
