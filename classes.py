@@ -5,6 +5,7 @@ from datetime import datetime
 class AddressBook(UserDict):
     def __init__(self):
         self.contacts = {}
+        self.notebook = Notebook()
 
     def add_contact(self, name):
         self.contacts[name] = Contact(name)
@@ -20,6 +21,7 @@ class Contact():
     def add_phone(self, phone):
         try:
             self.phone = Phone(phone)
+            print(self.phone)
             return True
         except ValueError as e:
             print(e)
@@ -44,17 +46,6 @@ class Contact():
 
     def change_address(self, address):
         self.address = Address(address).value
-
-
-    def add_notebook(self, note):
-        self.note = Notebook(note).value
-
-    def remove_notebook(self):
-        self.note = ''
-
-    def change_notebook(self, note):
-        self.note = Notebook(note).value
-    
     
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
@@ -130,13 +121,62 @@ class Birthday(Field):
     def value(self, input_value: str):
         self.internal_value = input_value
 
-class Notebook(Field):
-    @Field.value.setter
-    def value(self, note: str):
-        self.internal_value = note
-    
-class Note():
-    pass
+class Notebook(UserDict):
+    num_of_notes = 0
 
-class Tag():
-    pass
+    def add_note(self, note):
+        try:
+            Notebook.num_of_notes += 1
+            self.num_of_note = Notebook.num_of_notes
+            self.data[self.num_of_note] = Note(note).internal_value
+            return True
+        
+        except ValueError as e:
+            print(e)
+            return False
+        
+    def show_notes(self):
+        all_notes = ''
+        for num_of_note, note in self.data.items():
+            all_notes += f'Number of note: {str(num_of_note):<2} Note: {str(note)}\n'
+        return all_notes
+    
+    def edit_note(self, num_of_note):
+        if num_of_note not in str(self.data.keys()):
+            print('Number of note doesn\'t exists')
+            return False
+        else:
+            try:
+                note = input('Enter new note text: ')
+                self.data[self.num_of_note] = Note(note).internal_value
+                return True
+            
+            except ValueError as e:
+                print(e)
+                return False
+            
+    def remove_note(self, num_of_note):
+        if num_of_note == 'all':
+            self.data.clear()
+            return True
+    
+        elif num_of_note not in str(self.data.keys()):
+            print('Number of note doesn\'t exists')
+            return False
+        else:
+            self.data.pop(int(num_of_note))
+            return True
+
+    def remove_all_notes(self):
+        self.note = ''
+
+    def change_notebook(self, note):
+        self.note = Notebook(note).value
+    
+class Note(Field):
+    @Field.value.setter
+    
+    def value(self, note):
+        if note == '':
+            raise ValueError("Note must include any characters")
+        self.internal_value = note
