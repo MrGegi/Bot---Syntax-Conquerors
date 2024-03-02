@@ -94,11 +94,18 @@ def change_phone_num():
 def find_contact():
     contact_name = input("Enter the contact's name and surename: ")
     if contact_name in address_book.contacts:
-        print(f'Name: {address_book.contacts[contact_name].name.value}', end="  ")
-        print(f'Phone: {address_book.contacts[contact_name].phone.value}', end="  ")
-        print(f'Birthday: {address_book.contacts[contact_name].birthday.value}', end="  ")
-        print(f'Email: {address_book.contacts[contact_name].email.value}', end="  ")
-        print(f'Address: {address_book.contacts[contact_name].address.value}')
+        width = 154
+        print("\n+" + "-" * width + "+")
+        print('|{:^30}|{:^30}|{:^30}|{:^30}|{:^30}|'.format("NAME", "PHONE", "EMAIL", "BIRTHDAY", "ADDRESS"))
+        print("+" + "-" * width + "+")
+        contact = address_book.contacts[contact_name]
+        format_value = lambda x: x if x is not None else "---"
+        print('|{:^30}'.format(format_value(contact.name.value.title())), end="")
+        print('|{:^30}'.format(format_value(contact.phone.value)), end="")
+        print('|{:^30}'.format(format_value(contact.email.value)), end="")
+        print('|{:^30}'.format(format_value(contact.birthday.value)), end="")
+        print('|{:^30}|'.format(format_value(contact.address.value)), end="\n")
+        print("+" + "-" * width + "+\n")
     else:
         print("Contact not found.")
 
@@ -180,7 +187,7 @@ def show_all():
     for contact_name in address_book.contacts:
         contact = address_book.contacts[contact_name]
         format_value = lambda x: x if x is not None else "---"
-        print('|{:^30}'.format(format_value(contact.name.value)), end="")
+        print('|{:^30}'.format(format_value(contact.name.value.title())), end="")
         print('|{:^30}'.format(format_value(contact.phone.value)), end="")
         print('|{:^30}'.format(format_value(contact.email.value)), end="")
         print('|{:^30}'.format(format_value(contact.birthday.value)), end="")
