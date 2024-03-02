@@ -251,7 +251,7 @@ def input_parser():
     'add phone': add_phone,
     'change phone': change_phone_num,
     'delete phone': delete_phone,
-    # 'add birthday' : set_birthday,
+    'add birthday' : set_birthday,
     'birthday': days_to_birthday,
     'add email': add_email,
     'change email': change_email,

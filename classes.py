@@ -93,10 +93,10 @@ class Name(Field):
 class Phone(Field):
     @Field.value.setter
     def value(self, number):
-        if not number.strip().isdigit():
-            raise ValueError("Number can contain digits only.")
-        if len(number) != 9:
-            raise ValueError("Number must be 9 digits long.")
+        if number:
+            number = number.strip()
+            if not number.isdigit() or len(number) != 9:
+                raise ValueError("Number must be 9 digits long and contain digits only.")
         self.internal_value = number
 
 class Address(Field):
