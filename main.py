@@ -1,7 +1,8 @@
 from classes import *
 import pickle
+from utilities import *
 
-address_book = AddressBook()
+address_book = load_from_file()
 LOGO = """
 @@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@     @@@  @@@ @@@ @@@ 
 @@@     @@@  @@@          @@@          @@@  @@@              @@@      @@@     @@@  @@@ @   @@@      @@@     
@@ -110,16 +111,6 @@ def save_to_file():
     with open('bot_save.bin', "wb") as fh:
         pickle.dump(address_book, fh)
     print('File has been saved')
-
-
-def load_from_file():
-    try:
-        with open('bot_save.bin',"rb") as fh:
-            address_book = pickle.load(fh)
-            print('The adress_book has been loaded from file')
-    except FileNotFoundError:
-        print("File with address_book doesn't exist yet!")
-    return address_book
 
 def end_program():
     save_to_file()
@@ -279,7 +270,6 @@ def input_parser():
 
 def main():
     print(LOGO)
-    # address_book = load_from_file()
     test_contacts(address_book)
     while True:
         function_to_execute = input_parser()
