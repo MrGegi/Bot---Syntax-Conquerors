@@ -302,16 +302,16 @@ def search_note_by_tags():
 def show_all():
     width = 154
     print("\n+" + "-" * width + "+")
-    print('|{:^30}|{:^30}|{:^30}|{:^30}|{:^30}|'.format("NAME", "PHONE", "EMAIL", "BIRTHDAY", "ADDRESS"))
+    print('|{:^30}|{:^13}|{:^35}|{:^12}|{:^60}|'.format("NAME", "PHONE", "EMAIL", "BIRTHDAY", "ADDRESS"))
     print("+" + "-" * width + "+")
     for contact_name in address_book.contacts:
         contact = address_book.contacts[contact_name]
         format_value = lambda x: x if x is not None else "---"
         print('|{:^30}'.format(format_value(contact.name.value.title())), end="")
-        print('|{:^30}'.format(format_value(contact.phone.value)), end="")
-        print('|{:^30}'.format(format_value(contact.email.value)), end="")
-        print('|{:^30}'.format(format_value(contact.birthday.value)), end="")
-        print('|{:^30}|'.format(format_value(contact.address.value)), end="\n")
+        print('|{:^13}'.format(format_value(contact.phone.value)), end="")
+        print('|{:^35}'.format(format_value(contact.email.value)), end="")
+        print('|{:^12}'.format(format_value(contact.birthday.value)), end="")
+        print('|{:^60}|'.format(format_value(contact.address.value)), end="\n")
     print("+" + "-" * width + "+\n")
 
 def find_contact():
@@ -319,15 +319,15 @@ def find_contact():
     if contact_name in address_book.contacts:
         width = 154
         print("\n+" + "-" * width + "+")
-        print('|{:^30}|{:^30}|{:^30}|{:^30}|{:^30}|'.format("NAME", "PHONE", "EMAIL", "BIRTHDAY", "ADDRESS"))
+        print('|{:^30}|{:^13}|{:^35}|{:^12}|{:^60}|'.format("NAME", "PHONE", "EMAIL", "BIRTHDAY", "ADDRESS"))
         print("+" + "-" * width + "+")
         contact = address_book.contacts[contact_name]
         format_value = lambda x: x if x is not None else "---"
         print('|{:^30}'.format(format_value(contact.name.value.title())), end="")
-        print('|{:^30}'.format(format_value(contact.phone.value)), end="")
-        print('|{:^30}'.format(format_value(contact.email.value)), end="")
-        print('|{:^30}'.format(format_value(contact.birthday.value)), end="")
-        print('|{:^30}|'.format(format_value(contact.address.value)), end="\n")
+        print('|{:^13}'.format(format_value(contact.phone.value)), end="")
+        print('|{:^35}'.format(format_value(contact.email.value)), end="")
+        print('|{:^12}'.format(format_value(contact.birthday.value)), end="")
+        print('|{:^60}|'.format(format_value(contact.address.value)), end="\n")
         print("+" + "-" * width + "+\n")
     else:
         print("Contact not found.")
