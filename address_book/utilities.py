@@ -1,5 +1,5 @@
 import pickle
-from .classes import AddressBook
+from classes import AddressBook
 import json
 
 def load_default_contacts(address_book: AddressBook, exists = False):
