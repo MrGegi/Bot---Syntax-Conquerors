@@ -58,7 +58,7 @@ The bot only accepts commends presented below:
 
 
 
-THE BOT ACCEPTS COMMANDS:
+_____________________________________________THE BOT ACCEPTS COMMANDS_____________________________________________:
 
  1.  'add contact'
  2.  'delete contact'
