@@ -154,13 +154,13 @@ find contact -  using this command, the bot will display information that has be
 
 sort folder -   using this command, the bot sort files in the folder selected byt the user by selected 
                 file extension. To do this, please enter in commend line "sort folder" and then press ENTER. 
-                Then enter the path to the folder which you would like to sort and confirm by pressing the ENTER bottom. (Exaple for file's path : C:\Users\KUsername\Desktop\Mess). 
+                Then enter the path to the folder which you would like to sort and confirm by pressing the ENTER bottom. (Exaple for file's path : C:\Users\Username\Desktop\Mess). 
 
 save -          using this command, the bot saves the contact table in the "bot_save.bin" file. To do this,
                 type "save" on the command line and then press ENTER.
 
-exit -          za pomocą tej komendy bot kończy pracę zapisuje tabelę kontaktów w pliku „bot_save.bin”.
-                Aby to zrobić, wpisz w wierszu poleceń „exit”, a następnie naciśnij ENTER.
+exit -          using this command, the bot finishes its work and saves the contact table in the "bot_save.bin" 
+                file. To do this, type "exit" at the command prompt and then press ENTER.
 
 help -           using this command, the bot will display a list of accepted commands.
                  To do this, type "help" at the command line and then press ENTER.
