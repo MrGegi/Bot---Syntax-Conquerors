@@ -1,10 +1,14 @@
 import pickle
 from .classes import AddressBook
 import json
+import os
 
 def load_default_contacts(address_book: AddressBook, exists = False):
     if not exists:
-        with open("default_contacts.json", "r") as rff:
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        json_path = os.path.join(dir_path, "default_contacts.json")
+
+        with open(json_path, "r") as rff:
             random_contacts =  json.load(rff)
         for person in random_contacts:
             address_book.add_contact(person['name'])
