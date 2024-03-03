@@ -1,9 +1,8 @@
-from setuptools import setup, find_namespace_packages
-
+from setuptools import setup
 setup(
     name='Osobisty_asystent',
     version='1.0',
-    packages=find_namespace_packages(),
+    packages=['address_book'],
     entry_points={
         'console_scripts': [
             'personal-assistant = address_book.main:main'
