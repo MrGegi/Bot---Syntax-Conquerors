@@ -3,7 +3,6 @@ from utilities import *
 from sorting_module import main_sorting_folder
 import pickle
 import os
-import json
 
 LOGO = """
 @@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@     @@@  @@@ @@@ @@@ 
@@ -42,6 +41,9 @@ def add_phone():
     if not name in address_book.contacts:
         print(f'There is no contact {name}')
         return
+    if address_book.contacts[name].phone.value:
+        print(f'Contact have a phone number already. To change an existing number use "change phone" command.')
+        return
     phone = input("Enter phone number: ")
     try:
         address_book.contacts[name].add_phone(phone)
@@ -77,6 +79,9 @@ def add_email():
     name = input("Enter the contact's name and surname: ").lower()
     if not name in address_book.contacts:
         print(f'There is no contact {name}')
+        return
+    if address_book.contacts[name].email.value:
+        print(f'Contact have an email already. To change an existing email use "change email" command.')
         return
     email = input("Enter the email: ")
     try:

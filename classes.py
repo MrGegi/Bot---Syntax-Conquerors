@@ -91,8 +91,8 @@ class Address(Field):
     @Field.value.setter
     def value(self, address: str):
         if address:
-            if len(address) > 30:
-                raise ValueError('Address should not exceed 30 characters.')
+            if len(address) > 56:
+                raise ValueError('Address should not exceed 56 characters.')
             address = address.title()
         self.internal_value = address
 
