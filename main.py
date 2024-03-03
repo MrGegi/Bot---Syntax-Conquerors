@@ -316,7 +316,7 @@ def show_all():
 
 def find_contact():
     contact_name = input("Enter the contact's name and surename: ")
-    if contact_name in address_book.contacts:
+    if contact_name.lower() in address_book.contacts:
         width = 154
         print("\n+" + "-" * width + "+")
         print('|{:^30}|{:^30}|{:^30}|{:^30}|{:^30}|'.format("NAME", "PHONE", "EMAIL", "BIRTHDAY", "ADDRESS"))
