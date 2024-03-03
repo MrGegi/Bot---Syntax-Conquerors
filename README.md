@@ -1,4 +1,4 @@
-TO START :
+________________________________________________TO START______________________________________________________ :
 
 1. Open command line (cmd ).
 2. Write in teminal: cd Bot---Syntax-Conquerors\Osobisty_asystent
