@@ -16,6 +16,7 @@ def main_sorting_folder(path_to_folder):
     create_ordered_directories(LIST_OF_DIR)
     sort_files_by_ext(path_to_folder, path_to_folder)
     deleting_empties_dirs(path_to_folder)
+    print(f"Folder: {path_to_folder} has been sorted.")
 
 def create_ordered_directories(list_of_dir):
     for dir in list_of_dir:

@@ -5,8 +5,6 @@ import pickle
 import os
 import json
 
-address_book = load_from_file()
-
 LOGO = """
 @@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@ @@@ @@@  @@@     @@@  @@@ @@@ @@@ 
 @@@     @@@  @@@          @@@          @@@  @@@              @@@      @@@     @@@  @@@ @   @@@      @@@     
@@ -17,35 +15,8 @@ LOGO = """
                                                                                    by Syntax Conquerors
 """
 
-# def input_error(func):
-#     """
-#     Use as decorator @input_error before function to gracefully handle raised exceptions.
-#     By default, if the raised error is unknown it will gracefully return last __traceback__ line number, exception type and it's string.
-#     """
-#     def gracefull_error_handling(*args, **kwargs):
-#         try:
-#             return func(*args, **kwargs)
-#         except Exception as raised_exception:
-#             if isinstance(raised_exception, ValueError) and str(raised_exception) == "class_email:setter-regex_format_error":
-#                 print("Wrong email format!")
-#                 return
-#             else:
-#                 line_number = (lambda traceback: traceback.tb_lineno if not traceback.tb_next else traceback.tb_next.tb_lineno)(raised_exception.__traceback__)
-#                 print(f"Unhandled exception >> Line:{line_number} Type:{type(raised_exception).__name__} Str:{str(raised_exception)}")
-#                 return 
-#     return gracefull_error_handling
+address_book = load_from_file()
 
-# @input_error
-def load_default_contacts(address_book: AddressBook):    
-    with open("default_contacts.json", "r") as rff:
-        random_contacts =  json.load(rff)
-    for person in random_contacts:
-        address_book.add_contact(person['name'])
-        address_book.contacts[person['name']].add_phone(person['phone'])
-        address_book.contacts[person['name']].add_email(person['email'])
-        address_book.contacts[person['name']].add_birthday(person['birthday'])
-        address_book.contacts[person['name']].add_address(person['address'])
-    
 def add_contact():    
     name = input("Enter the contact's name and surname: ").lower()
     if name in address_book.contacts:
@@ -381,7 +352,6 @@ def input_parser():
 def main():
     print(LOGO)
     print('Type "help" to get a command list.')
-    load_default_contacts(address_book)
     while True:
         function_to_execute = input_parser()
         try:
