@@ -16,7 +16,7 @@ An explanation of all the commands the bot accepts can be found in MANUAL presen
 
 
 
-_________________________________________GENERAL BOT DESCRIPTION__________________________________________
+_________________________________________GENERAL BOT DESCRIPTION_________________________________________
 
 The project is a console assistant bot that recognizes commands entered from the keyboard and reacts in accordance with the entered command.
 
@@ -168,4 +168,4 @@ help -           using this command, the bot will display a list of accepted com
                  To do this, type "help" at the command line and then press ENTER.
 
 
-_________________________________________HAVE FUN WITH THE BOT!___________________________________________________
+_________________________________________HAVE FUN WITH THE BOT!________________________________________________
