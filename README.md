@@ -168,4 +168,4 @@ help -           using this command, the bot will display a list of accepted com
                  To do this, type "help" at the command line and then press ENTER.
 
 
-_________________________________________HAVE FUN WITH THE BOT!________________________________________________
+_________________________________________HAVE FUN WITH THE BOT!___________________________________________
