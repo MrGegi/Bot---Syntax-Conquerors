@@ -347,14 +347,21 @@ def end_program():
     save_to_file()
     print('Goodbye')
 
-def accepted_commands(commands):
+def accepted_commands(commands: dict, col = 4):
+    width = 20 * col + col - 1
+    c = 1
+    print("\n+" + "-" * width + "+")
     for command in commands.keys():
-        print(f"   {command}")
+        if c < col:            
+            print("|{:^20}".format(command), end="")
+            c += 1
+        else:
+            print("|{:^20}|".format(command), end="\n")
+            c = 1
+    print("+" + "-" * width + "+\n")
 
-def unknown_command(commands: dict):
-    print("\nUnknown command! Please choose one from the list provided below:\n")
-    for command in commands.keys():
-        print(f"   {command}")
+def unknown_command():
+    print("\nUnknown command! Please type 'help' to get the list of available commands.")
 
 def input_parser():
     """Functions runs in a while loop, takes input from user and returns apropiate functions
@@ -391,7 +398,7 @@ def input_parser():
     elif command in commands:
         return commands[command]  
     else:
-        return unknown_command(commands)
+        return unknown_command
 
 def main():
     print(LOGO)
