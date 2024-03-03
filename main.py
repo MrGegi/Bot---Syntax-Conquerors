@@ -347,7 +347,7 @@ def end_program():
     save_to_file()
     print('Goodbye')
 
-def accepted_commands(commands: dict, col = 3):
+def accepted_commands(commands: dict, col = 4):
     width = 20 * col + col - 1
     c = 1
     print("\n+" + "-" * width + "+")
