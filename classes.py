@@ -74,7 +74,7 @@ class Name(Field):
     @Field.value.setter
     def value (self, name):
         if not name:
-            raise ValueError("Name field cannot be empty!")       
+            raise ValueError("Name is a mandatory field and cannot be empty!")       
         self.internal_value = name.lower()
 
 class Phone(Field):
@@ -104,8 +104,8 @@ class Email(Field):
             patern_email = r"^([A-Za-z0-9]+ |[A-Za-z0-9][A-Za-z0-9\.\_]+[A-Za-z0-9])@([A-Za-z0-9]+|[A-Za-z0-9\_\-]+[A-Za-z0-9])\.([a-z]{,3}|[a-z]{3}\.[a-z]{2})$"
             result = re.findall(patern_email,email)
             if result == []:
-                # print('Wrong mail format!')
-                raise ValueError("Wrong email format!")
+                print('Wrong email format!')
+                raise ValueError
         self.internal_value = email
 
 class Birthday(Field):
