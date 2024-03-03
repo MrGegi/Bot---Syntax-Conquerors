@@ -293,7 +293,9 @@ def sort_folder():
     os.chdir(current_path)
 
 def save_to_file():
-    with open('bot_save.bin', "wb") as fh:
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    save_path = os.path.join(dir_path, "bot_save.bin")
+    with open(save_path, "wb") as fh:
         pickle.dump(address_book, fh)
     print('File has been saved')
 
