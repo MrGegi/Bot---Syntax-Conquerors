@@ -347,7 +347,9 @@ def end_program():
     save_to_file()
     print('Goodbye')
 
-def accepted_commands(commands: dict, c = 1, col = 4, width = 83):
+def accepted_commands(commands: dict, col = 3):
+    width = 20 * col + col - 1
+    c = 1
     print("\n+" + "-" * width + "+")
     for command in commands.keys():
         if c < col:            
