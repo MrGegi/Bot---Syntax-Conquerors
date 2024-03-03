@@ -56,8 +56,6 @@ The bot checks whether the e-mail address entered into the contact book has the 
 
 The bot only accepts commends presented below:
 
-
-
 _____________________________________________THE BOT ACCEPTS COMMANDS_____________________________________________:
 
  1.  'add contact'
