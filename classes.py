@@ -74,7 +74,7 @@ class Name(Field):
     @Field.value.setter
     def value (self, name):
         if not name:
-            raise ValueError("class_Name-def_value:name_cannot_be_empty")       
+            raise ValueError("Name field cannot be empty!")       
         self.internal_value = name.lower()
 
 class Phone(Field):
@@ -105,7 +105,7 @@ class Email(Field):
             result = re.findall(patern_email,email)
             if result == []:
                 # print('Wrong mail format!')
-                raise ValueError("class_email:setter-regex_format_error")
+                raise ValueError("Wrong email format!")
         self.internal_value = email
 
 class Birthday(Field):
