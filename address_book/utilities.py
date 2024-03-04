@@ -20,7 +20,7 @@ def load_default_contacts(address_book: AddressBook, exists = False):
 
 def load_from_file():
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    save_path = os.path.join(dir_path, "bot_save.bin")
+    save_path = os.path.join(dir_path, "data_save.bin")
     try:
         with open(save_path,"rb") as fh:
             address_book = pickle.load(fh)
