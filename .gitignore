@@ -1,5 +1,6 @@
 #files to ignore
 bot_save.bin
+data_save.bin
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
