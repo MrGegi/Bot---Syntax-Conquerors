@@ -114,29 +114,39 @@ def delete_email():
     address_book.contacts[name].remove_email()
     print(f'Email deleted')
 
+def get_valid_date_input(prompt):
+    while True:
+        try:
+            year = int(input("\n" + prompt + " (year): "))
+            month = int(input(prompt + " (month): "))
+            day = int(input(prompt + " (day): "))
+            date = datetime(year, month, day).date()
+            today = datetime.now().date()
+            if date > today:
+                print("\nInvalid date. Please enter a date not further into the future than today.")
+            else:
+                return date.strftime('%Y-%m-%d')
+        except ValueError:
+            print("\nInvalid date. Please enter a valid date.")
+
 def set_birthday():
-    name = input("Enter the contact's name and surename: ").lower()
+    name = input("Enter the contact's name and surname: ").lower()
     if name in address_book.contacts:
-        if not address_book.contacts[name].birthday.value:
-            while True:
-                year = input("Enter the contact's year of birth: ")
-                month = input("Enter the contact's month of birth: ")
-                day = input("Enter the contact's day of birth: ")
-                try:
-                    year = int(year)
-                    month = int(month)
-                    day = int(day)
-                    date = datetime(year, month, day)
-                    birthday_to_add = date.strftime('%Y-%m-%d')
-                    break
-                except ValueError:
-                    print("Invalid data. Please enter a valid date.")
-            address_book.contacts[name].add_birthday(birthday_to_add)
-            print(f"Birthday date ({birthday_to_add}) added to contact {name}")
+        if address_book.contacts[name].birthday.value:
+            print(f"\nContact {name.title()} already has a birthday date set to {address_book.contacts[name].birthday.value}.")
+            edit_birthday = input("Do you want to edit the birthday date? (yes/no): ").lower()
+            if edit_birthday == "yes":
+                birthday_to_add = get_valid_date_input("Enter the new birthday date")
+                address_book.contacts[name].add_birthday(birthday_to_add)
+                print(f"\nNew birthday date ({birthday_to_add}) added to contact {name.title()}")
+            else:
+                print(f"\nBirthday date for {name.title()} remains unchanged.")
         else:
-            print(f"Contact {name} already has birthday date set to {address_book.contacts[name].birthday.value}.")
+            birthday_to_add = get_valid_date_input("Enter the contact's birthday date")
+            address_book.contacts[name].add_birthday(birthday_to_add)
+            print(f"\nBirthday date ({birthday_to_add}) added to contact {name.title()}")
     else:
-        print("Contact not found.")
+        print("\nContact not found.")
 
 def days_to_birthday():
     width = 123
