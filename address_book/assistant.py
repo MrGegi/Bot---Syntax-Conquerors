@@ -269,22 +269,24 @@ def show_all():
     print("+" + "-" * width + "+\n")
 
 def find_contact():
-    contact_name = input("Enter the contact's name and surename: ").lower()
-    if contact_name in address_book.contacts:
-        width = 154
-        print("\n+" + "-" * width + "+")
-        print('|{:^30}|{:^13}|{:^35}|{:^12}|{:^60}|'.format("NAME", "PHONE", "EMAIL", "BIRTHDAY", "ADDRESS"))
-        print("+" + "-" * width + "+")
-        contact = address_book.contacts[contact_name]
-        format_value = lambda x: x if x is not None else "---"
-        print('|{:^30}'.format(format_value(contact.name.value.title())), end="")
-        print('|{:^13}'.format(format_value(contact.phone.value)), end="")
-        print('|{:^35}'.format(format_value(contact.email.value)), end="")
-        print('|{:^12}'.format(format_value(contact.birthday.value)), end="")
-        print('|{:^60}|'.format(format_value(contact.address.value)), end="\n")
-        print("+" + "-" * width + "+\n")
-    else:
-        print("Contact not found.")
+    search_phrase = input("Enter the contact's name and surname: ").strip().lower()
+    width = 154
+    print("\n+" + "-" * width + "+")
+    print('|{:^30}|{:^13}|{:^35}|{:^12}|{:^60}|'.format("NAME", "PHONE", "EMAIL", "BIRTHDAY", "ADDRESS"))
+    print("+" + "-" * width + "+")
+    found = False
+    for name, contact in address_book.contacts.items():
+        if search_phrase in name:
+            found = True
+            format_value = lambda x: x if x is not None else "---"
+            print('|{:^30}'.format(format_value(contact.name.value.title())), end="")
+            print('|{:^13}'.format(format_value(contact.phone.value)), end="")
+            print('|{:^35}'.format(format_value(contact.email.value)), end="")
+            print('|{:^12}'.format(format_value(contact.birthday.value)), end="")
+            print('|{:^60}|'.format(format_value(contact.address.value)), end="\n")
+    if not found:
+        print("|{:^154}|".format("\"" + search_phrase + "\" not present in the address book."))
+    print("+" + "-" * width + "+\n")
 
 def sort_folder():
     current_path = os.getcwd()
