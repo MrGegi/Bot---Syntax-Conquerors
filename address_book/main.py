@@ -1,6 +1,6 @@
-from classes import *
-from utilities import *
-from sorting_module import main_sorting_folder
+from .classes import *
+from .utilities import *
+from .sorting_module import main_sorting_folder
 import pickle
 import os
 
