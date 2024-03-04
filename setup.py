@@ -5,7 +5,7 @@ setup(
     packages=['address_book'],
     entry_points={
         'console_scripts': [
-            'personal-assistant = address_book.main:main'
+            'personal-assistant = address_book.assistant:main'
         ]
     }
 )
