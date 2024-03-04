@@ -191,6 +191,7 @@ class Notebook(UserDict):
     def remove_note(self, num_of_note):
         if num_of_note == 'all':
             self.data.clear()
+            self.num_of_notes = 0
             return True
     
         elif num_of_note not in str(self.data.keys()):
