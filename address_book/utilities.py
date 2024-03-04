@@ -19,8 +19,10 @@ def load_default_contacts(address_book: AddressBook, exists = False):
     return address_book
 
 def load_from_file():
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    save_path = os.path.join(dir_path, "data_save.bin")
     try:
-        with open('bot_save.bin',"rb") as fh:
+        with open(save_path,"rb") as fh:
             address_book = pickle.load(fh)
             print('The adress_book has been loaded from file')
     except FileNotFoundError:

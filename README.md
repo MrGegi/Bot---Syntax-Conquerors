@@ -2,11 +2,11 @@ _____________________________________________TO START___________________________
 
 1. Open command line (cmd ).
 2. Write in teminal: cd Bot---Syntax-Conquerors\Osobisty_asystent
-3. Confirm by ENTER bottom.
+3. Confirm by ENTER button.
 4. Then write in terminal : pip install -e .
-5. Push the ENTER bottom.
+5. Push the ENTER button.
 6. Write in terminal:  personal-assistant
-7. Push the ENTER bottom.
+7. Push the ENTER button.
 
 
 Then you will be asked to enter the appropriate command from the list of commands that the bot accepts. To see them, type 'help' and push the ENTER bottom. Next write chosen by you commend, push the ENTER bottom and follow the instructions displayed by the bot. Remember about spaces where the bot requires!
@@ -20,7 +20,7 @@ _________________________________________GENERAL BOT DESCRIPTION________________
 
 The project is a console assistant bot that recognizes commands entered from the keyboard and reacts in accordance with the entered command.
 
-The the bot starts working it loads the list of contacts from the "bot_save.bin" file.
+The the bot starts working it loads the list of contacts from the "data_save.bin" file.
 
 The bot allows you to enter and save information such as: Name, Surname, phone number, e-mail address and date of birth into the contact list and notes.
 

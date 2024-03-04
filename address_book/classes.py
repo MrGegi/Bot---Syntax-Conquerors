@@ -190,6 +190,7 @@ class Notebook(UserDict):
             
     def remove_note(self, num_of_note):
         if num_of_note == 'all':
+            Notebook.num_of_notes = 0
             self.data.clear()
             return True
     

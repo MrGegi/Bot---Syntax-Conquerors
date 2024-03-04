@@ -269,22 +269,24 @@ def show_all():
     print("+" + "-" * width + "+\n")
 
 def find_contact():
-    contact_name = input("Enter the contact's name and surename: ").lower()
-    if contact_name in address_book.contacts:
-        width = 154
-        print("\n+" + "-" * width + "+")
-        print('|{:^30}|{:^13}|{:^35}|{:^12}|{:^60}|'.format("NAME", "PHONE", "EMAIL", "BIRTHDAY", "ADDRESS"))
-        print("+" + "-" * width + "+")
-        contact = address_book.contacts[contact_name]
-        format_value = lambda x: x if x is not None else "---"
-        print('|{:^30}'.format(format_value(contact.name.value.title())), end="")
-        print('|{:^13}'.format(format_value(contact.phone.value)), end="")
-        print('|{:^35}'.format(format_value(contact.email.value)), end="")
-        print('|{:^12}'.format(format_value(contact.birthday.value)), end="")
-        print('|{:^60}|'.format(format_value(contact.address.value)), end="\n")
-        print("+" + "-" * width + "+\n")
-    else:
-        print("Contact not found.")
+    search_phrase = input("Enter the contact's name and surname: ").strip().lower()
+    width = 154
+    print("\n+" + "-" * width + "+")
+    print('|{:^30}|{:^13}|{:^35}|{:^12}|{:^60}|'.format("NAME", "PHONE", "EMAIL", "BIRTHDAY", "ADDRESS"))
+    print("+" + "-" * width + "+")
+    found = False
+    for name, contact in address_book.contacts.items():
+        if search_phrase in name:
+            found = True
+            format_value = lambda x: x if x is not None else "---"
+            print('|{:^30}'.format(format_value(contact.name.value.title())), end="")
+            print('|{:^13}'.format(format_value(contact.phone.value)), end="")
+            print('|{:^35}'.format(format_value(contact.email.value)), end="")
+            print('|{:^12}'.format(format_value(contact.birthday.value)), end="")
+            print('|{:^60}|'.format(format_value(contact.address.value)), end="\n")
+    if not found:
+        print("|{:^154}|".format("\"" + search_phrase + "\" not present in the address book."))
+    print("+" + "-" * width + "+\n")
 
 def sort_folder():
     current_path = os.getcwd()
@@ -293,7 +295,9 @@ def sort_folder():
     os.chdir(current_path)
 
 def save_to_file():
-    with open('bot_save.bin', "wb") as fh:
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    save_path = os.path.join(dir_path, "data_save.bin")
+    with open(save_path, "wb") as fh:
         pickle.dump(address_book, fh)
     print('File has been saved')
 
@@ -336,9 +340,9 @@ def input_parser():
     'delete address': delete_address,
     'add note': add_note,
     'edit note': edit_note,
-    'remove note': remove_note,
+    'delete note': remove_note,
     'show notes':show_notes,
-    'search note': search_note_by_tags,
+    'find note': search_note_by_tags,
     'show all': show_all,
     'find contact' : find_contact,
     'sort folder': sort_folder,
